@@ -44,7 +44,6 @@
                                 <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
                             </form>
                         </td>
-
                     </tr>
                 @empty
 

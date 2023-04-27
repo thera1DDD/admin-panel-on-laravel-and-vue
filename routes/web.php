@@ -88,7 +88,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::patch('{test}',[\App\Http\Controllers\Admin\TestController::class, 'update'])->name('test.update');
         Route::delete('{test}',[\App\Http\Controllers\Admin\TestController::class, 'delete'])->name('test.delete');
         Route::get('/{id}',[\App\Http\Controllers\Admin\TestController::class, 'show'])->name('test.show');
-        Route::get('/get-model-records', [\App\Http\Controllers\Admin\TestController::class,'getRecords']);
+        Route::get('/models/{model}/records', [\App\Http\Controllers\Admin\TestController::class, 'getRecordsByType'])->name('records.by.type');
 
     });
 
@@ -120,6 +120,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::patch('{comment}',[\App\Http\Controllers\Admin\CommentController::class, 'update'])->name('comment.update');
         Route::delete('{comment}',[\App\Http\Controllers\Admin\CommentController::class, 'delete'])->name('comment.delete');
         Route::get('/{id}',[\App\Http\Controllers\Admin\CommentController::class, 'show'])->name('comment.show');
+        Route::get('/comments/{comment}/records', [\App\Http\Controllers\Admin\CommentController::class, 'getRecordsByType'])->name('records.by.type');
     });
 
 

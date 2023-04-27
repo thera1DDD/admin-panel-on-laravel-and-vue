@@ -71,8 +71,6 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-cogs"></i>
@@ -123,7 +121,6 @@
                                             </p>
                                         </a>
                                     </li>
-
                                     <li class="nav-item">
                                         <a href="{{ route('role.index') }}" class="nav-link">
                                             <i class="nav-icon fas fa-chalkboard"></i>
@@ -136,11 +133,16 @@
                                             <p>Permissions</p>
                                         </a>
                                     </li>
-
                                 <li class="nav-item">
                                     <a href="{{ route('user.index') }}" class="nav-link">
                                         <i class="nav-icon fas fa-chalkboard"></i>
                                         <p>Users</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('comment.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Comments</p>
                                     </a>
                                 </li>
                                     <li class="nav-item has-treeview">

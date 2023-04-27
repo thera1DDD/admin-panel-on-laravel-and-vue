@@ -18,13 +18,9 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Number</th>
-                    <th>Course</th>
-                    <th>Main Image</th>
-                    <th>Slug</th>
-                    <th>Test</th>
+                    <th>Text</th>
+                    <th>User</th>
+                    <th>Model</th>
                     <th>Date Posted</th>
                     <th>Action</th>
                 </tr>
@@ -35,7 +31,7 @@
                         <td>{{ $comment->id }}</td>
                         <td>{{ $comment->text }}</td>
                         <td>{{ $comment->user->name }}</td>
-                        <td>{{ $comment->number }}</td>
+                        <td>{{ $comment->commentable_type }}</td>
                         <td>{{ $comment->created_at }}</td>
                         <td>
                             <a style="width: 66px"  href="{{ route('comment.edit', $comment->id) }}" class="btn btn-sm btn-warning">Edit</a>

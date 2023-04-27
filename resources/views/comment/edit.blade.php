@@ -1,64 +1,100 @@
 @extends('layouts.admin')
 
 @section('title')
-    Edit Module
+    Update Comment
 @endsection
 @section('content')
-    <!-- Content Header (Page header) -->
-
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <form action="{{route('module.update',$module->id)}}" method="post" enctype="multipart/form-data">
-                    @method('patch')
-                    @csrf
-                    <label for="name">Name</label>
-                    <div class="form-group">
-                        <input type="text" value="{{ $module->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
-                    </div>
-                    <label for="description">Description</label>
-                    <div class="form-group">
-                        <input type="text" value="{{ $module->description ?? old('description') }}" name="description" class="form-control" placeholder="Description">
-                    </div>
-                    <label for="number">Number</label>
-                    <div class="form-group">
-                        <input type="text" value="{{ $module->number ?? old('number') }}" name="number" class="form-control" placeholder="Number">
-                    </div>
-                    <div class="form-group">
-                        <label for="main_image">Main Image</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input name="main_image" type="file" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Загрузка</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="courses_id">Course</label>
-                        <select  name="courses_id"  id="courses_id"  class="form-control select2" data-placeholder="Language" style="width: 100%;">
-                            @foreach($courses as $course)
-                                <option value="{{$course->id}}">{{$course->name}}</option>
-                            @endforeach()
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Slug</label>
-                        <input type="text" value="{{ $module->slug ?? old('slug') }}" name="slug" class="form-control" placeholder="slug">
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Редактировать" >
-                    </div>
-                </form>
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Update Comment</h3>
+            <div class="card-tools">
+                <a href="{{ route('comment.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Comment</a>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        </div>
+        <form method="POST" action="{{ route('comment.update',$comment->id) }}">
+            @method('patch')
+            @csrf
+            <div class="form-group">
+                <label for="name">Text</label>
+                <textarea  type="text" name="text"  id="text" class="form-control @error('text') is-invalid @enderror"  required placeholder="Comment" >{{$comment->text}} </textarea>
+                @error('text')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+            </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="users_id">User</label>
+                <select  class="form-control select2" name="users_id">
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}" {{ $user->id == $comment->users_id ? 'selected' : '' }}>
+                            {{ $user->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('user_id')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Model type</label>
+                <select  name="commentable_type"  id="commentable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
+                        @if($comment->commentable_type == "App\Models\Course")
+                        <option value="Course">Course</option>
+                        <option value="Module">Module</option>
+                        @else
+                        <option value="Module">Module</option>
+                        <option value="Course">Course</option>
+                        @endif
+                </select>
+                @error('commentable_type')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="commentable_id">Records</label>
+                <select name="commentable_id" id="commentable_id" class="form-control select2" style="width: 100%;">
+                    @foreach($recordsOfModel as $record)
+                        <option value="{{ $record->id }}" {{ $record->id == $comment->commentable_id ? 'selected' : '' }}>
+                            {{ $record->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('commentable_id')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+                @enderror
+            </div>
+
+            <button class="btn btn-primary"  type="submit">Submit</button>
+        </form>
+    </div>
+
 @endsection
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#commentable_type').on('change', function() {
+            var type = $(this).val();
+            $.ajax({
+                url: '{{ route("records.by.type", ":type") }}'.replace(':type', type),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var options = '';
+                    $.each(data, function(index, record) {
+                        options += '<option value="' + record.id + '">' + record.name + '</option>';
+                    });
+                    $('#commentable_id').html(options);
+                }
+            });
+        });
+    });
+</script>
+

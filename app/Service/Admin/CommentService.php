@@ -13,12 +13,27 @@ use Illuminate\Support\Facades\Storage;
 
 class CommentService extends Controller
 {
-    public function store($data){
-
-        Comment::firstOrCreate($data);
+    public function store(\App\Http\Requests\Comment\StoreRequest $request){
+        $comment = new Comment();
+        $comment->text = $request->text;
+        $comment->users_id = $request->users_id;
+        $comment->commentable_id = $request->commentable_id;
+        $commentable_id = $request->commentable_id;
+        $commentable_type = "App\Models\\" . ucfirst($request->commentable_type);//поменять
+        $model = $commentable_type::findOrFail($commentable_id);
+        $comment->commentable()->associate($model);
+        $comment->save();
     }
-    public function update($data,Comment $comment){
 
-        $comment->update($data);
+
+    public function update($request,Comment $comment){
+        $comment->text = $request->text;
+        $comment->users_id = $request->users_id;
+        $comment->commentable_id = $request->commentable_id;
+        $commentable_id = $request->commentable_id;
+        $commentable_type = "App\Models\\" .$request->commentable_type;
+        $model = $commentable_type::findOrFail($commentable_id);
+        $comment->commentable()->associate($model);
+        $comment->update();
     }
 }

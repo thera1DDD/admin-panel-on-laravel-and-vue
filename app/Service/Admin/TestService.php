@@ -16,19 +16,18 @@ class TestService extends Controller
 {
     public function store(\App\Http\Requests\Test\StoreRequest $request){
 
-         $testable_id = $request->testable_id;
-         $module = Module::find($testable_id);
-         $test = new Test(['name'=>$request->name]);
-         $test->testable()->associate($module);
-         $test->save();
-
-
+        $test = new Test();
+        $test->name = $request->name;
+        $test->testable_id = $request->testable_id;
+        $testable_id = $request->testable_id;
+        $testable_type = "App\Models\\" . ucfirst($request->testable_type);
+        $model = $testable_type::findOrFail($testable_id);
+        $test->testable()->associate($model);
+        $test->save();
     }
 
     public function update(\App\Http\Requests\Test\UpdateRequest $request,Test $test ){
         $data = $request->validated();
         $test->update($data);
     }
-
-
 }

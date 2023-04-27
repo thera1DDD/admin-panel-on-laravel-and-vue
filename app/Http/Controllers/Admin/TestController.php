@@ -29,11 +29,6 @@ class TestController extends Controller
    }
 
    public function store(StoreRequest $request){
-       Route::get('/get-model-records', function(Request $request) {
-           $testableType = $request->input('testable_type');
-           $modelRecords = Model::where('testable_type', $testableType)->get();
-           return $modelRecords;
-       });
         $this->testService->store($request);
         return redirect()->route('test.index')->with('success','Test created');
    }
@@ -73,6 +68,13 @@ class TestController extends Controller
         // Получить записи выбранной модели
         $records = DB::table($nameModel)->get();
         return response()->json(['records' => $records]);
+    }
+
+    public function getRecordsByType($type)
+    {
+        $model = "App\Models\\" . ucfirst($type);
+        $records = $model::all();
+        return response()->json($records);
     }
 
 }

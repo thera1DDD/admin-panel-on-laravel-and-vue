@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Storage;
 class CourseService extends Controller
 {
     public function store($data){
-
-
         Course::firstOrCreate($data);
     }
 
