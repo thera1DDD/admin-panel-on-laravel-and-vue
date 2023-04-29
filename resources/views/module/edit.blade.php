@@ -44,8 +44,10 @@
                         <label for="courses_id">Course</label>
                         <select  name="courses_id"  id="courses_id"  class="form-control select2" data-placeholder="Language" style="width: 100%;">
                             @foreach($courses as $course)
-                                <option value="{{$course->id}}">{{$course->name}}</option>
-                            @endforeach()
+                                <option value="{{ $course->id }}" {{ $course->id == $module->courses_id ? 'selected' : '' }}>
+                                    {{ $course->name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">

@@ -24,7 +24,6 @@ Create Permission
                 @enderror
             </div>
         </div>
-
         <div class="card-footer">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create Permission</button>
         </div>

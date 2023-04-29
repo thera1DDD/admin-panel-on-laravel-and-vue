@@ -25,13 +25,13 @@
             <div class="form-group">
                 <label for="name">Model type</label>
                 <select  name="testable_type"  id="testable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
-                    <option value="module">Module</option>
-                    <option value="course">Course</option>
+                    <option value="Module">Module</option>
+                    <option value="Course">Course</option>
                 </select>
                 @error('testable_type')
                 <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
             <div class="form-group">

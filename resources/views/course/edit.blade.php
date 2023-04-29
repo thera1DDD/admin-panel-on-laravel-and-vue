@@ -36,7 +36,9 @@
                         <label for="name">Language</label>
                         <select  name="languages_id"  id="languages_id"  class="form-control select2" data-placeholder="Language" style="width: 100%;">
                             @foreach($languages as $language)
-                                <option value="{{$language->id ?? old('language_id') }}">{{$language->name ?? old('language.name')}}</option>
+                                <option value="{{$language->id }}" {{$language->id == $course->languages_id ? 'selected' : ''}}>
+                                    {{$language->name }}
+                                </option>
                             @endforeach()
                         </select>
                     </div>

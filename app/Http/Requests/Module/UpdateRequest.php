@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
             'description' =>'required|string',
             'number' =>'required',
             'courses_id' => 'required',
-            'main_image'=>'required',
+            'main_image'=>'nullable',
             'slug' => 'nullable',
         ];
     }

@@ -7,10 +7,8 @@ use App\Http\Requests\Comment\StoreRequest;
 use App\Http\Requests\Comment\UpdateRequest;
 use App\Models\Comment;
 use App\Models\Module;
-use App\Models\Question;
 use App\Models\User;
-use App\Service\Admin\CommentService;
-use Illuminate\Http\Request;
+use App\Service\CommentService;
 
 class CommentController extends Controller
 {
@@ -27,10 +25,7 @@ class CommentController extends Controller
         return view('comment.create',compact('comments','users','records'));
     }
 
-    public function store(\App\Http\Requests\Comment\StoreRequest $request){
-        $this->commentService->store($request);
-        return redirect()->route('comment.index')->with('success','Comment created');
-    }
+    //ajax request
     public function getRecordsByType($type)
     {
         $model = "App\Models\\" .$type;
@@ -50,8 +45,14 @@ class CommentController extends Controller
     }
 
     public function update(UpdateRequest $request,Comment $comment){
-        $this->commentService->update($request,$comment);
+        $data = $request->validated();
+        $this->commentService->update($data,$comment);
         return redirect()->route('comment.index')->with('success','Comment updated');
+    }
+    public function store(StoreRequest $request){
+        $data = $request->validated();
+        $this->commentService->store($data);
+        return redirect()->route('comment.index')->with('success','Comment created');
     }
 
     public function delete(Comment $comment){

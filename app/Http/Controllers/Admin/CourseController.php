@@ -7,14 +7,11 @@ use App\Http\Requests\Course\StoreRequest;
 use App\Http\Requests\Course\UpdateRequest;
 use App\Models\Course;
 use App\Models\Language;
-use App\Service\Admin\CourseService;
+use App\Service\CourseService;
 use App\Traits\ImageUploadTrait;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
-
 
     use ImageUploadTrait;
     protected $courseService;
@@ -43,7 +40,11 @@ class CourseController extends Controller
 
 
     public function update(UpdateRequest  $request, Course $course){
-        $this->courseService->update($request,$course);
+        $data = $request->validated();
+        if($data['main_image']!==null){
+            $this->uploadImage($data['main_image'],'/images/courses', false,'public');
+        }
+        $this->courseService->update($course,$data);
         return redirect()->route('course.index')->with('success','Course updated');
     }
 
@@ -59,42 +60,4 @@ class CourseController extends Controller
         $course->delete();
         return redirect()->route('course.index')->with('success','Course deleted');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public function getAll(){
-//        $courses = Course::latest()->get();
-//        $courses->transform(function($course){
-//            $course->module = $course->getModulNames()->first();
-//            return $course;
-//        });
-//
-//        return response()->json([
-//            'users' => $courses
-//        ], 200);
-//
-//
-//    }
 }

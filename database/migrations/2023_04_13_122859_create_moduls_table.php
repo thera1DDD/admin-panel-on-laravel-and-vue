@@ -28,7 +28,6 @@ class CreateModulsTable extends Migration
                 ->index()
                 ->constrained('courses')
                 ->onDelete('cascade');
-
         });
     }
 

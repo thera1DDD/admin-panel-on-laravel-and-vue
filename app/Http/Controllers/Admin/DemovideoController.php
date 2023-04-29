@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Video\StoreRequest;
-use App\Models\Demovideo;
+use App\Http\Requests\Demovideo\StoreRequest;
+use App\Http\Requests\Demovideo\UpdateRequest;
 use App\Models\Course;
-use App\Service\Admin\DemovideoService;
-use Illuminate\Http\Request;
+use App\Models\Demovideo;
+use App\Service\DemovideoService;
 use Illuminate\Support\Facades\Storage;
 
 class DemovideoController extends Controller
@@ -30,8 +30,12 @@ class DemovideoController extends Controller
         return view('demovideo.create',compact('demovideos','courses'));
     }
 
-    public function update(\App\Http\Requests\Demovideo\UpdateRequest  $request, Demovideo $demovideo){
-        $this->demovideoService->update($request,$demovideo);
+    public function update(UpdateRequest $request, Demovideo $demovideo){
+        $data = $request->validated();
+        if(isset($data['video_file'])){
+            $data['video_file'] = Storage::disk('public')->put('/demovideo',$data['video_file']);
+        }
+        $this->demovideoService->update($demovideo,$data);
         return redirect()->route('demovideo.index')->with('success','Demovideo updated');
     }
 
@@ -45,9 +49,9 @@ class DemovideoController extends Controller
         return redirect()->route('demovideo.index')->with('success','Demovideo deleted');
     }
 
-    public function store(\App\Http\Requests\Demovideo\StoreRequest $request)
-    {
-        $this->demovideoService->store($request);
+    public function store(StoreRequest $request)
+    {   $data = $request->validated();
+        $this->demovideoService->store($data);
         return redirect()->route('demovideo.index')->with('success','Demovideo created');
     }
 

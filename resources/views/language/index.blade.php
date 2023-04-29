@@ -41,7 +41,7 @@ Languages
                         </td>
                     </tr>
                 @empty
-                    <tr>No Result Found</tr>
+
                 @endforelse
             </tbody>
         </table>

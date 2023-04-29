@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Language\StoreRequest;
 use App\Http\Requests\Language\UpdateRequest;
 use App\Models\Language;
-use App\Service\Admin\LanguageService;
-use Illuminate\Http\Request;
+use App\Service\LanguageService;
 
 class LanguageController extends Controller
 {
@@ -30,7 +29,8 @@ class LanguageController extends Controller
 
 
     public function store(StoreRequest $request){
-        $this->languageService->store($request);
+        $data = $request->validated();
+        $this->languageService->store($data);
         return redirect()->route('language.index')->with('success','Language created');
     }
 
@@ -46,8 +46,9 @@ class LanguageController extends Controller
     }
 
 
-    public function update(UpdateRequest  $request, Language $language){
-        $this->languageService->update($request,$language);
+    public function update(UpdateRequest $request, Language $language){
+        $data = $request->validated();
+        $this->languageService->update($data,$language);
         return redirect()->route('language.index')->with('success','Language updated');
     }
 }

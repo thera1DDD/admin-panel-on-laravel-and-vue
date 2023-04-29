@@ -5,14 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Test\StoreRequest;
 use App\Http\Requests\Test\UpdateRequest;
-use App\Models\Answer;
 use App\Models\Module;
 use App\Models\Question;
 use App\Models\Test;
-use App\Service\Admin\TestService;
+use App\Service\TestService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Lexer\TokenEmulator\ReadonlyTokenEmulator;
 
 class TestController extends Controller
 {
@@ -23,15 +21,19 @@ class TestController extends Controller
         $this->testService = $testService;
     }
 
+    public function getRecordsByType($type)
+    {
+        $model = "App\Models\\" . ucfirst($type);
+        $records = $model::all();
+        return response()->json($records);
+    }
+
     public function index(){
        $tests = Test::all();
        return view('test.index',compact('tests'));
    }
 
-   public function store(StoreRequest $request){
-        $this->testService->store($request);
-        return redirect()->route('test.index')->with('success','Test created');
-   }
+
 
    public function create(){
         $modules = Module::all();
@@ -44,37 +46,25 @@ class TestController extends Controller
         return view('test.show', compact('questions'));
    }
     public function edit(Test $test){
-        $modules = Module::all();
-        return view('test.edit',compact('test','modules'));
+        $recordsOfModel = $test->testable_type::all();
+        return view('test.edit',compact('test','recordsOfModel'));
     }
     public function delete(Test $test){
         $test->delete();
         return redirect()->route('test.index')->with('success','Test deleted');
     }
-    public function update(UpdateRequest  $request, Test $test){
-        $this->testService->update($request,$test);
-        return redirect()->route('test.index')->with('success','Test updated');
+
+    public function store(StoreRequest $request){
+        $data = $request->validated();
+        $this->testService->store($data);
+        return redirect()->route('test.index')->with('success','Test created');
+    }
+    public function update(UpdateRequest $request,Test $test){
+        $data = $request->validated();
+        $this->testService->update($data,$test);
+        return redirect()->route('test.index')->with('success','Comment updated');
     }
 
-    public function getRecords(Request $request)
-    {
-        $modelName = $request->input('testable_type');
-        if($modelName == "App\Models\Modules"){
-            $nameModel = 'modules';
-        }
-        else if($modelName == "App\Models\Courses"){
-            $nameModel = 'courses';
-        }
-        // Получить записи выбранной модели
-        $records = DB::table($nameModel)->get();
-        return response()->json(['records' => $records]);
-    }
 
-    public function getRecordsByType($type)
-    {
-        $model = "App\Models\\" . ucfirst($type);
-        $records = $model::all();
-        return response()->json($records);
-    }
 
 }

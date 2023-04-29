@@ -7,12 +7,13 @@ use App\Http\Requests\Module\StoreRequest;
 use App\Http\Requests\Module\UpdateRequest;
 use App\Models\Course;
 use App\Models\Module;
-use App\Service\Admin\ModuleService;
-use Illuminate\Support\Facades\Storage;
+use App\Service\ModuleService;
+use App\Traits\ImageUploadTrait;
 
 class ModuleController extends Controller
 {
 
+    use ImageUploadTrait;
     protected $moduleService;
 
     public function __construct(ModuleService $moduleService)
@@ -26,20 +27,25 @@ class ModuleController extends Controller
     }
 
     public function store(StoreRequest $request){
-        $this->moduleService->store($request);
+        $data = $request->validated();
+        $this->uploadImage($data['main_image'],'/images/modules', false,'public');
+        $this->moduleService->store($data);
         return redirect()->route('module.index')->with('success','Module created');
     }
 
     public function create(){
-        $modules = Module::all();
-        $courses = Course::all();
+        $modules = Module::all(); $courses = Course::all();
         return view('module.create',compact('modules','courses'));
     }
 
 
     public function update(UpdateRequest  $request, Module $module){
-        $this->moduleService->update($request,$module);
-        return redirect()->route('module.index')->with('success','Module updated');
+        $data = $request->validated();
+        if($request->main_image!==null){
+            $this->uploadImage($data['main_image'],'/images/modules', false,'public');
+        }
+        $this->moduleService->update($module,$data);
+        return redirect()->route('course.index')->with('success','Course updated');
     }
 
     public function edit(Module $module){

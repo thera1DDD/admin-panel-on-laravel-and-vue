@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'modules_id'=> 'required',
-            'video_file' => 'required|mimetypes:video/mp4,video/avi|max:1000000'
+            'video_file' => 'nullable|mimetypes:video/mp4,video/avi|max:1000000'
         ];
     }
 }

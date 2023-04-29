@@ -22,18 +22,7 @@
             </span>
                 @enderror
             </div>
-            <div class="form-group">
-                <label for="name">Model type</label>
-                <select  name="commentable_type"  id="commentable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
-                    <option value="module">Module</option>
-                    <option value="course">Course</option>
-                </select>
-                @error('commentable_type')
-                <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-                @enderror
-            </div>
+
             <div class="form-group">
                 <label for="users_id">User</label>
                 <select name="users_id"  id="users_id" class="form-control select2" data-placeholder="Выберите Пользователя" style="width: 100%;">
@@ -45,6 +34,18 @@
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Model type</label>
+                <select  name="commentable_type"  id="commentable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
+                    <option value="Module">Module</option>
+                    <option value="Course">Course</option>
+                </select>
+                @error('commentable_type')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
                 @enderror
             </div>
             <div class="form-group">

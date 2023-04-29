@@ -23,7 +23,6 @@
             </span>
                 @enderror
             </div>
-
             <div class="form-group">
                 <label for="users_id">User</label>
                 <select  class="form-control select2" name="users_id">

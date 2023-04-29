@@ -7,8 +7,7 @@ use App\Http\Requests\Answer\StoreRequest;
 use App\Http\Requests\Answer\UpdateRequest;
 use App\Models\Answer;
 use App\Models\Question;
-use App\Service\Admin\AnswerService;
-use Illuminate\Http\Request;
+use App\Service\AnswerService;
 
 class AnswerController extends Controller
 {

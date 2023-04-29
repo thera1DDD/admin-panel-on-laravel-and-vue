@@ -7,8 +7,7 @@ use App\Http\Requests\Video\StoreRequest;
 use App\Http\Requests\Video\UpdateRequest;
 use App\Models\Module;
 use App\Models\Video;
-use App\Service\Admin\VideoService;
-use Illuminate\Http\Request;
+use App\Service\VideoService;
 use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
@@ -26,8 +25,12 @@ class VideoController extends Controller
 
 
     public function update(UpdateRequest  $request, Video $video){
-        $this->videoService->update($request,$video);
-        return redirect()->route('video.index')->with('success','Video updated');
+        $data = $request->validated();
+        if(isset($data['video_file'])){
+            $data['video_file'] = Storage::disk('public')->put('/video',$data['video_file']);
+        }
+        $this->videoService->update($data,$video);
+        return redirect()->route('video.index')->with('success','Video created');
 
     }
 
@@ -43,8 +46,8 @@ class VideoController extends Controller
 
 
     public function store(StoreRequest $request)
-    {
-        $this->videoService->store($request);
+    {   $data = $request->validated();
+        $this->videoService->store($data);
         return redirect()->route('video.index')->with('success','Video created');
     }
 
