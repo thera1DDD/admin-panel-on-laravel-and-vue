@@ -1,5 +1,8 @@
     <?php
 
+    use Composer\Util\Http\Response;
+    use Facade\FlareClient\Stacktrace\File;
+    use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Route;
 
     /*
@@ -89,7 +92,6 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('{test}',[\App\Http\Controllers\Admin\TestController::class, 'delete'])->name('test.delete');
         Route::get('/{id}',[\App\Http\Controllers\Admin\TestController::class, 'show'])->name('test.show');
         Route::get('/models/{model}/records', [\App\Http\Controllers\Admin\TestController::class, 'getRecordsByType'])->name('records.by.type');
-
     });
 
     Route::group(['prefix' => 'question'], function (){
@@ -121,6 +123,18 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('{comment}',[\App\Http\Controllers\Admin\CommentController::class, 'delete'])->name('comment.delete');
         Route::get('/{id}',[\App\Http\Controllers\Admin\CommentController::class, 'show'])->name('comment.show');
         Route::get('/comments/{comment}/records', [\App\Http\Controllers\Admin\CommentController::class, 'getRecordsByType'])->name('records.by.type');
+    });
+
+    Route::group(['prefix' => 'photo'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\PhotoController::class, 'index'])->name('photo.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\PhotoController::class, 'create'])->name('photo.create');
+        Route::post('/',[\App\Http\Controllers\Admin\PhotoController::class, 'store'])->name('photo.store');
+        Route::get('/{photo}/edit',[\App\Http\Controllers\Admin\PhotoController::class, 'edit'])->name('photo.edit');
+        Route::patch('{photo}',[\App\Http\Controllers\Admin\PhotoController::class, 'update'])->name('photo.update');
+        Route::delete('{photo}',[\App\Http\Controllers\Admin\PhotoController::class, 'delete'])->name('photo.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\PhotoController::class, 'show'])->name('photo.show');
+        Route::get('/photos/{photo}/records', [\App\Http\Controllers\Admin\PhotoController::class, 'getRecordsByType'])->name('records.by.type');
+
     });
 
 

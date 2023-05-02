@@ -17,8 +17,9 @@ class CreatePhotosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('photoable_id')->nullable();
             $table->string('photoable_type')->nullable();
-            $table->string('filename');
+            $table->string('filename')->nullable();
             $table->integer('status')->default('1');
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

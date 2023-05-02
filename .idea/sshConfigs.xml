@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig authType="PASSWORD" host="daglangs.beget.tech" id="c1dae94f-e1de-4758-9f94-d5bfeda46c78" port="22" nameFormat="DESCRIPTIVE" username="daglangs_tagir" useOpenSSHConfig="true" />
+      <sshConfig authType="PASSWORD" host="daglangs.beget.tech" id="35196347-5b57-4766-9c0f-161f3fb0cb44" port="22" nameFormat="DESCRIPTIVE" username="daglangs_tagir" useOpenSSHConfig="true" />
     </configs>
   </component>
 </project>

@@ -41,7 +41,7 @@ class CourseController extends Controller
 
     public function update(UpdateRequest  $request, Course $course){
         $data = $request->validated();
-        if($data['main_image']!==null){
+        if(isset($request->main_image)){
             $this->uploadImage($data['main_image'],'/images/courses', false,'public');
         }
         $this->courseService->update($course,$data);

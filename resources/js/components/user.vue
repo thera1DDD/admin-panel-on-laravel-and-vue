@@ -169,7 +169,7 @@ export default {
             loading: false,
             editMode: false,
             load: true,
-            img: 'http://localhost:8000/img/signup.ico',
+            img: '/img/signup.ico',
             user: {},
             users: [],
             roles: [],
