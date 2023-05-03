@@ -10,6 +10,7 @@
 
             <div class="card-tools">
                 <a href="{{ route('answer.index') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> See all answers</a>
+                <a href="{{ route('answer.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new answer</a>
             </div>
         </div>
         <!-- /.card-header -->

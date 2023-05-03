@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Model type</label>
-                <select  name="photoable_type"  id="photoable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
+                <select name="photoable_type"  id="photoable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
                         @if($photo->photoable_type == "App\Models\Course")
                         <option value="Course">Course</option>
                         <option value="Module">Module</option>

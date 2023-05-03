@@ -137,6 +137,27 @@ Route::group(['middleware' => 'auth'], function() {
 
     });
 
+    Route::group(['prefix' => 'word'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\WordController::class, 'index'])->name('word.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\WordController::class, 'create'])->name('word.create');
+        Route::post('/',[\App\Http\Controllers\Admin\WordController::class, 'store'])->name('word.store');
+        Route::get('/{word}/edit',[\App\Http\Controllers\Admin\WordController::class, 'edit'])->name('word.edit');
+        Route::patch('{word}',[\App\Http\Controllers\Admin\WordController::class, 'update'])->name('word.update');
+        Route::delete('{word}',[\App\Http\Controllers\Admin\WordController::class, 'delete'])->name('word.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\WordController::class, 'show'])->name('word.show');
+
+    });
+
+    Route::group(['prefix' => 'translate'], function (){
+        Route::get('{id}',[\App\Http\Controllers\Admin\TranslateController::class, 'index'])->name('translate.index');
+        Route::get('{id}/create',[\App\Http\Controllers\Admin\TranslateController::class, 'create'])->name('translate.create');
+        Route::post('/',[\App\Http\Controllers\Admin\TranslateController::class, 'store'])->name('translate.store');
+        Route::get('/{translate}/edit',[\App\Http\Controllers\Admin\TranslateController::class, 'edit'])->name('translate.edit');
+        Route::patch('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'update'])->name('translate.update');
+        Route::delete('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'delete'])->name('translate.delete');
+    });
+
+
 
 
 

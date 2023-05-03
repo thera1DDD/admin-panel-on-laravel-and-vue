@@ -31,9 +31,10 @@ class PhotoController extends Controller
     }
 
     public function index(){
-       $photos = Photo::all();
-       return view('photo.index',compact('photos'));
-   }
+        $photos = Photo::all();
+//      $recordsOfmodel = $photos->photoable_type::all()->where($photos->id,'=',$photos->photable_id);
+        return view('photo.index',compact('photos'));
+    }
 
    public function create(){
         $modules = Module::all();$records = Module::all();
@@ -50,7 +51,9 @@ class PhotoController extends Controller
     }
     public function store(StoreRequest $request){
         $data = $request->validated();
-        $this->uploadImage($data['filename'],'/images/photos',false,'public');
+        if(isset($data['filename'])){
+            $this->uploadImage($data['filename'],'/images/photos',false,'public');
+        }
         $this->photoService->store($data);
         return redirect()->route('photo.index')->with('success','Photo created');
     }

@@ -41,6 +41,7 @@
                 <select  name="commentable_type"  id="commentable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
                     <option value="Module">Module</option>
                     <option value="Course">Course</option>
+                    <option value="Video">Video</option>
                 </select>
                 @error('commentable_type')
                 <span class="invalid-feedback" role="alert">
