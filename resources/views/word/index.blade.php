@@ -1,26 +1,36 @@
 @extends('layouts.admin')
 
 @section('title')
-Words
+Слова
 @endsection
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Word</h3>
-
+        <h3 class="card-title">Слова</h3>
+        <form action="{{route('word.search')}}" method="GET">
+            <div class="input-group">
+                <div class="form-outline">
+                    <input type="query" id="form1" class="form-control">
+                </div>
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
         <div class="card-tools">
-            <a href="{{ route('word.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new word</a>
+            <a href="{{ route('word.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить новое слово </a>
         </div>
     </div>
+
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Word</th>
-                    <th>Date Posted</th>
-                    <th>Action</th>
+                    <th>Слово</th>
+                    <th>Дата создания</th>
+                    <th>Действие</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +55,6 @@ Words
                         </td>
                     </tr>
                 @empty
-
                 @endforelse
             </tbody>
         </table>

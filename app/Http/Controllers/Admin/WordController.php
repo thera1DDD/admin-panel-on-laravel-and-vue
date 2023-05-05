@@ -9,6 +9,7 @@ use App\Models\Translate;
 use App\Models\Word;
 use App\Service\WordService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WordController extends Controller
 {
@@ -21,6 +22,7 @@ class WordController extends Controller
     {
         $words = Word::all();
         return view('word.index',compact('words'));
+
     }
 
 
@@ -45,10 +47,21 @@ class WordController extends Controller
         return redirect()->route('word.index')->with('success','Word deleted');
     }
 
-
     public function update(UpdateRequest $request, Word $word){
         $data = $request->validated();
         $this->wordService->update($data,$word);
         return redirect()->route('word.index')->with('success','Word updated');
+    }
+
+    public function search(Request $request){
+        if(isset($_GET['query']))
+        {
+            $search_text = $_GET['query'];
+            $searched_data = DB::table('')->where('Name','LIKE','%'.$search_text.'%');
+            return view('word.index',['searched_data'=>$searched_data]);
+        }
+        else{
+            return view('search');
+        }
     }
 }

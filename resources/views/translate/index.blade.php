@@ -8,7 +8,7 @@
         <div class="card-header">
             <h3 class="card-title">Перевод</h3>
             <div class="card-tools">
-                <a href="{{ route('translate.create',$words_id)}}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new word</a>
+                <a href="{{ route('translate.create',$words_id)}}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить новый перевод</a>
             </div>
         </div>
         <!-- /.card-header -->

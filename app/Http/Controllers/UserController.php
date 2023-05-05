@@ -199,7 +199,6 @@ class UserController extends Controller
 
     public function postPassword(Request $request){
 
-
         return redirect()->back()->with('success', 'Password has been Changed Successfully');
     }
 

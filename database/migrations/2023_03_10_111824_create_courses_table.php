@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->string('main_image')->nullable();
             $table->string('slug');
+            $table->integer('hours');
             $table->integer('status')->default(1);
             $table->integer('sort')->default(500);
             $table->foreignId('languages_id')

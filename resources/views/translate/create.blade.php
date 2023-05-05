@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Добавить перевод
+     Перевод
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
@@ -17,7 +17,7 @@
                     @csrf
                     <label for="name">Слово</label>
                     <div class="form-group">
-                        <select name="words_id"  id="words_id" class="form-control select2" data-placeholder="Выберите word" style="width: 100%;">
+                        <select name="words_id"  id="words_id" class="form-control select2" data-placeholder="Выберите слово" style="width: 100%;">
                             <option value="{{$word->id}}">{{$word->name}}</option>
                         </select>
                         @error('words_id')
@@ -48,7 +48,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Create" >
+                        <input type="submit" class="btn btn-primary" value="Добавить" >
                     </div>
                 </form>
             </div>
