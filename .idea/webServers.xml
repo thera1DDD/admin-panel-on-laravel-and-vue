@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4e4edf74-632d-4773-8a3c-d5bc3ece9b0d" name="TestServer" url="http://daglangs.beget.tech">
+        <fileTransfer host="daglangs.beget.tech" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="a5440c2d-7dbc-40fc-95d5-b541c162c95c" name="TestServerSSH" url="http://daglangs.beget.tech">
+        <fileTransfer accessType="SFTP" host="daglangs.beget.tech" port="22" sshConfigId="35196347-5b57-4766-9c0f-161f3fb0cb44" sshConfig="daglangs_tagir@daglangs.beget.tech:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

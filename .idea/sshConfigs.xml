@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="daglangs.beget.tech" id="35196347-5b57-4766-9c0f-161f3fb0cb44" port="22" nameFormat="DESCRIPTIVE" username="daglangs_tagir" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>
