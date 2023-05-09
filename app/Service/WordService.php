@@ -13,4 +13,8 @@ class WordService extends Controller
     public function update($data,Word $word){
         $word->update($data);
     }
+
+    public function index(){
+
+    }
 }

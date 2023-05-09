@@ -6,16 +6,9 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Слова</h3>
-        <form action="{{route('word.search')}}" method="GET">
-            <div class="input-group">
-                <div class="form-outline">
-                    <input type="query" id="form1" class="form-control">
-                </div>
-                <button type="button" class="btn btn-primary">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+        <form action="{{ url()->current() }}" method="GET">
+            <input type="text" name="query" placeholder="Поиск...">
+            <button type="submit">Найти/Очистить</button>
         </form>
         <div class="card-tools">
             <a href="{{ route('word.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить новое слово </a>
@@ -34,6 +27,7 @@
                 </tr>
             </thead>
             <tbody>
+            @if(count($words) > 0)
                 @forelse ($words as $word)
                     <tr>
                         <td>{{ $word->id }}</td>
@@ -56,6 +50,7 @@
                     </tr>
                 @empty
                 @endforelse
+            @endif
             </tbody>
         </table>
     </div>

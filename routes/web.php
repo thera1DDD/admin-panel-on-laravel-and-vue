@@ -178,6 +178,16 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/{id}',[\App\Http\Controllers\Admin\StatController::class, 'show'])->name('stat.show');
     });
 
+    Route::group(['prefix' => 'task'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\TaskController::class, 'index'])->name('task.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\TaskController::class, 'create'])->name('task.create');
+        Route::post('/',[\App\Http\Controllers\Admin\TaskController::class, 'store'])->name('task.store');
+        Route::get('/{task}/edit',[\App\Http\Controllers\Admin\TaskController::class, 'edit'])->name('task.edit');
+        Route::patch('{task}',[\App\Http\Controllers\Admin\TaskController::class, 'update'])->name('task.update');
+        Route::delete('{task}',[\App\Http\Controllers\Admin\TaskController::class, 'delete'])->name('task.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\TaskController::class, 'show'])->name('task.show');
+    });
+
 
 
 

@@ -18,11 +18,15 @@ class WordController extends Controller
     {
         $this->wordService = $wordService;
     }
-    public function index()
+    public function index(Request $request)
     {
-        $words = Word::all();
-        return view('word.index',compact('words'));
-
+        $words = Word::query();
+        if ($request->has('query')) {
+            $query = $request->input('query');
+            $words->where('name', 'like', "%{$query}%");
+        }
+        $words = $words->get();
+        return view('word.index', ['words' => $words]);
     }
 
 
@@ -53,15 +57,5 @@ class WordController extends Controller
         return redirect()->route('word.index')->with('success','Word updated');
     }
 
-    public function search(Request $request){
-        if(isset($_GET['query']))
-        {
-            $search_text = $_GET['query'];
-            $searched_data = DB::table('')->where('Name','LIKE','%'.$search_text.'%');
-            return view('word.index',['searched_data'=>$searched_data]);
-        }
-        else{
-            return view('search');
-        }
-    }
+
 }

@@ -40,7 +40,9 @@
                         <label for="modules_id">Module</label>
                         <select  name="modules_id"  id="modules_id"  class="form-control select2" data-placeholder="Module" style="width: 100%;">
                             @foreach($modules as $module)
-                                <option value="{{$module->id}}">{{$module->name}}</option>
+                                <option value="{{ $module->id }}" {{ $module->id == $video->modules_id ? 'selected' : '' }}>
+                                    {{ $module->name }}
+                                </option>
                             @endforeach()
                         </select>
                     </div>

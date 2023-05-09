@@ -45,7 +45,7 @@ class ModuleController extends Controller
             $this->uploadImage($data['main_image'],'/images/modules', false,'public');
         }
         $this->moduleService->update($module,$data);
-        return redirect()->route('course.index')->with('success','Course updated');
+        return redirect()->route('module.index')->with('success','Module updated');
     }
 
     public function edit(Module $module){
