@@ -188,6 +188,16 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/{id}',[\App\Http\Controllers\Admin\TaskController::class, 'show'])->name('task.show');
     });
 
+    Route::group(['prefix' => 'upgrade'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\UpgradeController::class, 'index'])->name('upgrade.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\UpgradeController::class, 'create'])->name('upgrade.create');
+        Route::post('/',[\App\Http\Controllers\Admin\UpgradeController::class, 'store'])->name('upgrade.store');
+        Route::get('/{upgrade}/edit',[\App\Http\Controllers\Admin\UpgradeController::class, 'edit'])->name('upgrade.edit');
+        Route::patch('{upgrade}',[\App\Http\Controllers\Admin\UpgradeController::class, 'update'])->name('upgrade.update');
+        Route::delete('{upgrade}',[\App\Http\Controllers\Admin\UpgradeController::class, 'delete'])->name('upgrade.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\UpgradeController::class, 'show'])->name('upgrade.show');
+    });
+
 
 
 

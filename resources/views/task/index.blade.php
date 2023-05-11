@@ -19,6 +19,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Слово</th>
+                    <th>Название задания</th>
+                    <th>Описание</th>
                     <th>Модуль</th>
                     <th>Date Posted</th>
                     <th>Action</th>
@@ -29,6 +31,8 @@
                     <tr>
                         <td>{{ $task->id }}</td>
                         <td>{{ $task->word }}</td>
+                        <td>{{ $task->name }}</td>
+                        <td>{{ $task->description }}</td>
                         <td>{{ $task->module->name }}</td>
                         <td>{{ $task->created_at }}</td>
                         <td>

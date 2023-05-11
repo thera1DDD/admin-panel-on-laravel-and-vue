@@ -21,6 +21,24 @@
                         <input type="text" value="{{ $task->word ?? old('word') }}" name="word" class="form-control" placeholder="Word">
                     </div>
                     <div class="form-group">
+                        <label for="name">Название</label>
+                        <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{$task->name}}" required placeholder="Слово">
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Описание</label>
+                        <input type="text" name="description" id="description" class="form-control @error('description') is-invalid @enderror" value="{{$task->description}}" required placeholder="Слово">
+                        @error('description')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="name">Модуль</label>
                         <select name="modules_id"  id="modules_id" class="form-control select2" data-placeholder="Выберите task" style="width: 100%;">
                             @foreach($modules as $module)

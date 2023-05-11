@@ -22,6 +22,7 @@ class DemovideoController extends Controller
     public function  index(){
         $demovideos = Demovideo::all();
         return view('demovideo.index',compact('demovideos'));
+
     }
 
     public function create(){

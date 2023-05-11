@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Task;
+namespace App\Http\Requests\Upgrade;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'modules_id' => 'nullable',
-            'word' => 'required',
-            'description' => 'required',
-            'name' => 'nullable'
+            'text' => 'required',
+            'header' => 'required',
+            'version'=>'nullable',
         ];
     }
 }

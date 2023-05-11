@@ -24,6 +24,24 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="name">Описание</label>
+                <input type="text" name="description" id="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" required placeholder="Описание">
+                @error('description')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Название</label>
+                <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Название">
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="modules_id">Модуль</label>
                 <select name="modules_id"  id="modules_id" class="form-control select2" style="width: 100%;">
                     @foreach($modules as $module)
@@ -37,8 +55,6 @@
                 @enderror
             </div>
         </div>
-
-
         <div class="card-footer">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create Language</button>
         </div>

@@ -25,7 +25,9 @@ class StoreRequest extends FormRequest
     {
         return [
             'modules_id' => 'nullable',
-            'word' => 'nullable',
+            'word' => 'required',
+            'description' => 'required',
+            'name' => 'nullable'
         ];
     }
 }
