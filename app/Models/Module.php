@@ -17,4 +17,10 @@ class Module extends Model
     public function test(){
         return $this->morphMany(Test::class,'testable');
     }
+
+    public function video()
+    {
+        return $this->hasMany(Video::class, 'modules_id');
+    }
 }
+

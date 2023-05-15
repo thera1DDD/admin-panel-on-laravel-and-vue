@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Language\StoreRequest;
 use App\Http\Requests\Language\UpdateRequest;
@@ -31,6 +32,7 @@ class LanguageController extends Controller
     public function store(StoreRequest $request){
         $data = $request->validated();
         $this->languageService->store($data);
+
         return redirect()->route('language.index')->with('success','Language created');
     }
 

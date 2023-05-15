@@ -27,7 +27,6 @@ class CourseController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
-        $this->uploadImage($data['main_image'],'/images/courses', false,'public');
         $this->courseService->store($data);
         return redirect()->route('course.index')->with('success','Course created');
     }

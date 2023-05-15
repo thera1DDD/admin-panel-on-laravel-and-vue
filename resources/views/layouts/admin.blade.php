@@ -181,6 +181,18 @@
                                         <p>Обновления</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('log.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Логи</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('teacher.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Учителя</p>
+                                    </a>
+                                </li>
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link active">
                                             <i class="nav-icon fas fa-cogs"></i>

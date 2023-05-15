@@ -15,5 +15,14 @@ class Course extends Model
         return $this->belongsTo(Language::class,'languages_id','id');
     }
 
+    public function demovideo()
+    {
+        return $this->hasMany(Demovideo::class, 'courses_id');
+    }
+
+    public function module()
+    {
+        return $this->hasMany(Module::class, 'courses_id');
+    }
 
 }

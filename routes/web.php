@@ -199,6 +199,27 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
 
+    Route::group(['prefix' => 'log'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\LogController::class, 'index'])->name('log.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\LogController::class, 'create'])->name('log.create');
+        Route::post('/',[\App\Http\Controllers\Admin\LogController::class, 'store'])->name('log.store');
+        Route::get('/{log}/edit',[\App\Http\Controllers\Admin\LogController::class, 'edit'])->name('log.edit');
+        Route::patch('{log}',[\App\Http\Controllers\Admin\LogController::class, 'update'])->name('log.update');
+        Route::delete('{log}',[\App\Http\Controllers\Admin\LogController::class, 'delete'])->name('log.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\LogController::class, 'show'])->name('log.show');
+    });
+
+    Route::group(['prefix' => 'teacher'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\TeacherController::class, 'index'])->name('teacher.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\TeacherController::class, 'create'])->name('teacher.create');
+        Route::post('/',[\App\Http\Controllers\Admin\TeacherController::class, 'store'])->name('teacher.store');
+        Route::get('/{teacher}/edit',[\App\Http\Controllers\Admin\TeacherController::class, 'edit'])->name('teacher.edit');
+        Route::patch('{teacher}',[\App\Http\Controllers\Admin\TeacherController::class, 'update'])->name('teacher.update');
+        Route::delete('{teacher}',[\App\Http\Controllers\Admin\TeacherController::class, 'delete'])->name('teacher.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\TeacherController::class, 'show'])->name('teacher.show');
+    });
+
+
 
 
 

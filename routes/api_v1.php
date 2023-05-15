@@ -17,5 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 
+
 });
-Route::get('/get-model-records', [\App\Http\Controllers\Admin\TestController::class,'getRecords']);
+Route::get('/getAllCourses', [\App\Http\Controllers\API\V1\CourseController::class,'getAll']);
+
+
