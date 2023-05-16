@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Test;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DemovideoResource extends JsonResource
+class TestResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,15 +14,10 @@ class DemovideoResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        return[
             'id'=>$this->id,
             'name'=>$this->name,
-            'description'=>$this->description,
-            'video_file'=>$this->video_file,
-            'status'=>$this->status,
-            'sort'=>$this->sort,
-            'course'
-
+            'question'=> QuestionResource::collection($this->whenLoaded('question'))
         ];
     }
 }

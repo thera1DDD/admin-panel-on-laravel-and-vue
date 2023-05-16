@@ -11,7 +11,6 @@ class Course extends Model
     protected $guarded = false;
 
     public function language(){
-
         return $this->belongsTo(Language::class,'languages_id','id');
     }
 

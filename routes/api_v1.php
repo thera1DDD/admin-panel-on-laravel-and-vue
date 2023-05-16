@@ -19,6 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 });
+//вывод всех курсов с демовидео
 Route::get('/getAllCourses', [\App\Http\Controllers\API\V1\CourseController::class,'getAll']);
+//вывод курса по id
+Route::get('/courses/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'show']);
+//вывод всех учителей
+Route::get('/getAllTeachers', [\App\Http\Controllers\API\V1\TeacherController::class,'getAll']);
+//вывод всех тестов
+Route::get('/getAllTests', [\App\Http\Controllers\API\V1\TestController::class,'getAll']);
+//вывод тестов с вопросами
+Route::get('/getTestWithQuestions/{id}', [\App\Http\Controllers\API\V1\TestController::class,'getWithQuestions']);
+
 
 

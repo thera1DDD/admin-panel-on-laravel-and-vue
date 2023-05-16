@@ -11,7 +11,12 @@ class Test extends Model
     protected $guarded = false;
 
     public function testable(){
-
-       return $this->morphTo();
+        return $this->morphTo();
     }
+
+    public function question(){
+        return $this->hasMany(Question::class,'tests_id');
+    }
+
+
 }
