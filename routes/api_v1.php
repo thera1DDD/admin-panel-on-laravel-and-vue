@@ -28,7 +28,7 @@ Route::get('/getAllTeachers', [\App\Http\Controllers\API\V1\TeacherController::c
 //вывод всех тестов
 Route::get('/getAllTests', [\App\Http\Controllers\API\V1\TestController::class,'getAll']);
 //вывод тестов с вопросами
-Route::get('/getTestWithQuestions/{id}', [\App\Http\Controllers\API\V1\TestController::class,'getWithQuestions']);
+Route::get('/getTest/{id}', [\App\Http\Controllers\API\V1\TestController::class,'show']);
 
 
 
