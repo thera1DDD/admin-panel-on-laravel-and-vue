@@ -17,6 +17,4 @@ class TestController extends Controller
         $test = Test::findOrFail($id)->with('question')->first();
         return new TestResource($test);
     }
-
-
 }
