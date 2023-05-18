@@ -22,5 +22,10 @@ class Module extends Model
     {
         return $this->hasMany(Video::class, 'modules_id');
     }
+
+    public function task()
+    {
+        return $this->hasMany(Task::class, 'modules_id');
+    }
 }
 

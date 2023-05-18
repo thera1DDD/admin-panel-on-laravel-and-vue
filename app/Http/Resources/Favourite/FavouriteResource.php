@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Test;
+namespace App\Http\Resources\Favourite;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AnswerResource extends JsonResource
+class FavouriteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,8 @@ class AnswerResource extends JsonResource
     public function toArray($request)
     {
         return[
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'is_correct'=>$this->is_correct
+            'course'=>  new CourseResource($this->whenLoaded('course')),
+            'user'=>  new UserResource($this->whenLoaded('user')),
         ];
     }
 }

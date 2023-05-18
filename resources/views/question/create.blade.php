@@ -8,7 +8,7 @@ Create Question
     <div class="card-header">
         <h3 class="card-title">Add new Question</h3>
         <div class="card-tools">
-            <a href="{{ route('question.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Question</a>
+            <a href="{{ route('question.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Questions</a>
         </div>
     </div>
     <form method="POST" action="{{ route('question.store') }}" enctype="multipart/form-data">
@@ -26,9 +26,9 @@ Create Question
             <div class="form-group">
                 <label for="name">Test</label>
                 <select name="tests_id"  id="tests_id" class="form-control select2" data-placeholder="Выберите тест" style="width: 100%;">
-                    @foreach($tests as $test)
-                        <option value="{{$test->id}}">{{$test->name}}</option>
-                    @endforeach()
+                        <option value="{{ $tests->id }}">
+                            {{ $tests->name }}
+                        </option>
                 </select>
                 @error('tests_id')
                 <span class="invalid-feedback" role="alert">

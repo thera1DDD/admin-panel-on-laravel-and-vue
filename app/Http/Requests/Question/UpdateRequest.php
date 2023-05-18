@@ -25,7 +25,6 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'tests_id' => 'required',
         ];
     }
 }

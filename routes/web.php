@@ -96,7 +96,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'question'], function (){
         Route::get('/',[\App\Http\Controllers\Admin\QuestionController::class, 'index'])->name('question.index');
-        Route::get('/create',[\App\Http\Controllers\Admin\QuestionController::class, 'create'])->name('question.create');
+        Route::get('{id}/create',[\App\Http\Controllers\Admin\QuestionController::class, 'create'])->name('question.create');
         Route::post('/',[\App\Http\Controllers\Admin\QuestionController::class, 'store'])->name('question.store');
         Route::get('/{question}/edit',[\App\Http\Controllers\Admin\QuestionController::class, 'edit'])->name('question.edit');
         Route::patch('{question}',[\App\Http\Controllers\Admin\QuestionController::class, 'update'])->name('question.update');
@@ -106,7 +106,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'answer'], function (){
         Route::get('/',[\App\Http\Controllers\Admin\AnswerController::class, 'index'])->name('answer.index');
-        Route::get('/create',[\App\Http\Controllers\Admin\AnswerController::class, 'create'])->name('answer.create');
+        Route::get('{id}/create',[\App\Http\Controllers\Admin\AnswerController::class, 'create'])->name('answer.create');
         Route::post('/',[\App\Http\Controllers\Admin\AnswerController::class, 'store'])->name('answer.store');
         Route::get('/{answer}/edit',[\App\Http\Controllers\Admin\AnswerController::class, 'edit'])->name('answer.edit');
         Route::patch('{answer}',[\App\Http\Controllers\Admin\AnswerController::class, 'update'])->name('answer.update');

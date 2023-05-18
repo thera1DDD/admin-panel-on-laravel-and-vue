@@ -1,16 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Answers of test
+    Ответы к вопросу
 @endsection
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Answers</h3>
+            <h3 class="card-title">Ответы</h3>
 
             <div class="card-tools">
-                <a href="{{ route('answer.index') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> See all answers</a>
-                <a href="{{ route('answer.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new answer</a>
+                <a href="{{ route('answer.create',$id) }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить ответ</a>
             </div>
         </div>
         <!-- /.card-header -->
@@ -19,9 +18,10 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Answer</th>
-                <th>Correct</th>
-                <th>Date</th>
+                <th>Ответ</th>
+                <th>Корректность</th>
+                <th>Дата создания</th>
+                <th>Действие</th>
             </tr>
             </thead>
             <tbody>
@@ -36,12 +36,12 @@
                     @endif
                     <td>{{ $answer->created_at }}</td>
                     <td>
-                        <a style="width: 66px"  href="{{ route('answer.edit', $answer->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a style="width: 110px"  href="{{ route('answer.edit', $answer->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                         <br>
                         <form action="{{route('answer.delete',$answer->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
+                            <input style="width: 110px;"  type="submit" value="Delete" class="btn btn-danger">
                         </form>
                     </td>
                 </tr>

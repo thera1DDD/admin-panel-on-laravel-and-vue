@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Course;
+namespace App\Http\Resources\Favourite;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ModuleResource extends JsonResource
+class CourseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,11 +19,6 @@ class ModuleResource extends JsonResource
             'name'=>$this->name,
             'main_image'=>$this->main_image,
             'sort'=>$this->sort,
-            'number'=>$this->number,
-            'test' => TestResource::collection($this->test),
-            'video' => VideoResource::collection($this->video),
-            'task' => TaskResource::collection($this->task),
-
         ];
     }
 }

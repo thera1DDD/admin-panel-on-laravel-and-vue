@@ -24,18 +24,16 @@ class QuestionController extends Controller
         return view('question.index',compact('questions'));
     }
 
-    public function create(){
-       $tests = Test::all();
+    public function create($id){
+       $tests = Test::findOrfail($id);
        return view('question.create',compact('tests'));
     }
-
 
     public function store(StoreRequest $request){
         $data = $request->validated();
         $this->questionService->store($data);
-        return redirect()->route('question.index')->with('success','Question created');
+        return redirect()->route('test.show',$data['tests_id'])->with('success','Question created');
     }
-
 
     public function edit(Question $question){
         $tests = Test::all();
@@ -45,16 +43,16 @@ class QuestionController extends Controller
     public function update(UpdateRequest $request,Question $question){
         $data = $request->validated();
         $this->questionService->update($data,$question);
-        return redirect()->route('question.index')->with('success','Question updated');
+        return redirect()->route('test.show',$question['tests_id'])->with('success','Question updated');
     }
 
     public function delete(Question $question){
         $question->delete();
-        return redirect()->route('question.index')->with('success','Question deleted');
+        return redirect()->route('test.show',$question['tests_id'])->with('success','Question deleted');
     }
     public function show($id){
         $question = Question::findOrFail($id);
         $answers = Answer::all()->where('questions_id','==',$question->id);
-        return view('question.show', compact('answers'));
+        return view('question.show', compact('answers','id'));
     }
 }

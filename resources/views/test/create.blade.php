@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 
 @section('title')
-    Create Test
+    Добавить тест
 @endsection
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Add new Test</h3>
+            <h3 class="card-title">Добавить новый тест</h3>
             <div class="card-tools">
-                <a href="{{ route('test.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Test</a>
+                <a href="{{ route('test.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> Посмотреть все тесты</a>
             </div>
         </div>
         <form method="POST" action="{{ route('test.store') }}">
             @csrf
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Название</label>
                 <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Название">
                 @error('name')
                 <span class="invalid-feedback" role="alert">
@@ -23,10 +23,10 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Model type</label>
+                <label for="name">Источник</label>
                 <select  name="testable_type"  id="testable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
-                    <option value="Module">Module</option>
-                    <option value="Course">Course</option>
+                    <option value="Module">Модули</option>
+                    <option value="Course">Курсы</option>
                 </select>
                 @error('testable_type')
                 <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="testable_id">Records</label>
+                <label for="testable_id">Записи источника</label>
                 <select name="testable_id" id="testable_id" class="form-control select2" style="width: 100%;">
                     @foreach($modules as $module)
                         <option value="{{$module->id}}">{{$module->name}}</option>
@@ -47,7 +47,6 @@
             </span>
                 @enderror
             </div>
-
             <button class="btn btn-primary"  type="submit">Submit</button>
         </form>
     </div>

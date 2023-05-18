@@ -43,7 +43,7 @@ class TestController extends Controller
    public function show($id){
         $test = Test::findOrFail($id);
         $questions = Question::all()->where('tests_id','==',$test->id);
-        return view('test.show', compact('questions'));
+        return view('test.show', compact('questions','id'));
    }
     public function edit(Test $test){
         $recordsOfModel = $test->testable_type::all();
@@ -62,7 +62,7 @@ class TestController extends Controller
     public function update(UpdateRequest $request,Test $test){
         $data = $request->validated();
         $this->testService->update($data,$test);
-        return redirect()->route('test.index')->with('success','Comment updated');
+        return redirect()->route('test.index')->with('success','Test updated');
     }
 
 

@@ -38,19 +38,6 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="name">Question</label>
-                        <select name="questions_id"  id="questions_id" class="form-control select2" data-placeholder="Выберите answer" style="width: 100%;">
-                            @foreach($questions as $question)
-                                <option value="{{$question->id}}">{{$question->name}}</option>
-                            @endforeach()
-                        </select>
-                        @error('questions_id')
-                        <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Редактировать" >
                     </div>
                 </form>

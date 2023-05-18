@@ -19,15 +19,15 @@ class AnswerController extends Controller
     {
         $this->answerService = $answerService;
     }
-    public function create(){
-        $questions = Question::all();
-        return view('answer.create',compact('questions'));
+    public function create($id){
+        $question = Question::findOrfail($id);
+        return view('answer.create',compact('question'));
     }
 
     public function store(StoreRequest $request){
         $data = $request->validated();
         $this->answerService->store($data);
-        return redirect()->route('answer.index')->with('success','Answer created');
+        return redirect()->route('question.show',$data['questions_id'])->with('success','Answer created');
     }
 
     public function edit(Answer $answer){
@@ -43,11 +43,11 @@ class AnswerController extends Controller
     public function update(UpdateRequest $request,Answer $answer){
         $data = $request->validated();
         $this->answerService->update($data,$answer);
-        return redirect()->route('answer.index')->with('success','Answer updated');
+        return redirect()->route('question.show',$answer['questions_id'])->with('success','Answer updated');
     }
 
     public function delete(Answer $answer){
         $answer->delete();
-        return redirect()->route('answer.index')->with('success','Answer deleted');
+        return redirect()->route('question.show',$answer['questions_id'])->with('success','Answer deleted');
     }
 }
