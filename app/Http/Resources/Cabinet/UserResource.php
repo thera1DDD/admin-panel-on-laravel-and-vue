@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Course;
+namespace App\Http\Resources\Cabinet;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CourseResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,14 +17,12 @@ class CourseResource extends JsonResource
         return[
             'id'=>$this->id,
             'name'=>$this->name,
-            'main_image'=>$this->main_image,
+            'surname'=>$this->surname,
+            'patronymic'=>$this->patronymic,
             'sort'=>$this->sort,
-            'totalVideos' => $this->totalVideos ?? null,
-            'totalTests' => $this->totalTests ?? null,
-            'totalTasks' => $this->totalTasks ?? null,
-            'totalExam'=>$this->totalExam,
-            'module' => SingleModuleResource::collection($this->whenLoaded('module')),
-
+            'phone'=>$this->phone,
+            'email'=>$this->email,
+            'photo'=>$this->photo
         ];
     }
 }

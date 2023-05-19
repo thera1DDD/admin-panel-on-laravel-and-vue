@@ -24,4 +24,8 @@ class Course extends Model
         return $this->hasMany(Module::class, 'courses_id');
     }
 
+    public function test(){
+        return $this->morphMany(Test::class,'testable');
+    }
+
 }

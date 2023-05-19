@@ -20,10 +20,9 @@ class ModuleResource extends JsonResource
             'main_image'=>$this->main_image,
             'sort'=>$this->sort,
             'number'=>$this->number,
-            'test' => TestResource::collection($this->test),
-            'video' => VideoResource::collection($this->video),
-            'task' => TaskResource::collection($this->task),
-
+            'test' => TestResource::collection($this->whenLoaded('test')),
+            'video' => VideoResource::collection($this->whenLoaded('video')),
+            'task' => TaskResource::collection($this->whenLoaded('task')),
         ];
     }
 }

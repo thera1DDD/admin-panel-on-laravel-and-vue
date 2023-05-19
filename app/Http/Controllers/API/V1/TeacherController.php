@@ -14,6 +14,5 @@ class TeacherController extends Controller
         $teachers = Teacher::with('user',)->get();
         return TeacherResource::collection($teachers);
     }
-
-
 }
+
