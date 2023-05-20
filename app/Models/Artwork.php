@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Artwork extends Model
 {
-    use HasFactory;
+    protected $table = 'artworks';
+    protected $guarded = false;
+
+    public function language(){
+        return $this->belongsTo(Language::class,'languages_id','id');
+    }
 }

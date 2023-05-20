@@ -53,6 +53,12 @@ Route::get('/getDictionaryWords/{dictionaryType}', [\App\Http\Controllers\API\V1
 //вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
 Route::get('/translate/{dictionaryType}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
 //
+//вывод всех книг с их языком
+Route::get('/getAllBooks', [\App\Http\Controllers\API\V1\ArtworkController::class,'getAll']);
+//
+//вывод книги по Id
+Route::get('/book/{id}', [\App\Http\Controllers\API\V1\ArtworkController::class,'show']);
+//
 
 
 

@@ -17,10 +17,15 @@ class CreateArtworksTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('path');
+            $table->string('filename');
             $table->integer('sort')->default(500)->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
+            $table->foreignId('languages_id')
+                ->nullable()
+                ->index()
+                ->constrained('languages')
+                ->onDelete('cascade');
         });
     }
 

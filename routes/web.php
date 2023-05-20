@@ -219,6 +219,16 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/{id}',[\App\Http\Controllers\Admin\TeacherController::class, 'show'])->name('teacher.show');
     });
 
+    Route::group(['prefix' => 'artwork'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\ArtworkController::class, 'index'])->name('artwork.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\ArtworkController::class, 'create'])->name('artwork.create');
+        Route::post('/',[\App\Http\Controllers\Admin\ArtworkController::class, 'store'])->name('artwork.store');
+        Route::get('/{artwork}/edit',[\App\Http\Controllers\Admin\ArtworkController::class, 'edit'])->name('artwork.edit');
+        Route::patch('{artwork}',[\App\Http\Controllers\Admin\ArtworkController::class, 'update'])->name('artwork.update');
+        Route::delete('{artwork}',[\App\Http\Controllers\Admin\ArtworkController::class, 'delete'])->name('artwork.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\ArtworkController::class, 'show'])->name('artwork.show');
+    });
+
 
 
 
