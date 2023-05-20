@@ -19,13 +19,13 @@ use Illuminate\Http\Request;
 class DictionaryController extends MainApiController
 {
     public function getAll(string $dictionaryType){
-        if($dictionaryType=='lez-ru'){
+        if($dictionaryType == 'lez-ru'){
             return $this->getAllWords($dictionaryType,'Лезгинский');
         }
-        elseif ($dictionaryType=='avar-ru'){
+        elseif ($dictionaryType == 'avar-ru'){
             return $this->getAllWords($dictionaryType,'Аварский');
         }
-        elseif($dictionaryType=='ru-lez' || 'ru-avar'){
+        elseif($dictionaryType=='ru-lez' or $dictionaryType == 'ru-avar'){
             $words = Word::all();
             return WordResource::collection($words);
         }
@@ -46,6 +46,9 @@ class DictionaryController extends MainApiController
         }
         elseif ($dictionaryType == 'avar-ru'){
             return $this->translateBackward($dictionaryType,$id,'Аварский');
+        }
+        else{
+            return $this->error('wrong dictionary type',404);
         }
     }
 }

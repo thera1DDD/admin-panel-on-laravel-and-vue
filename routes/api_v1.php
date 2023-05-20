@@ -29,7 +29,9 @@ Route::get('/course/{id}', [\App\Http\Controllers\API\V1\CourseController::class
 //вывод модуля с видео, тестами, заданиями на странице прохождения курса
 Route::get('/module/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'moduleShow']);
 //
+//вывод курса со статистикой
 Route::get('/fullCourse/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'CourseWithStat']);
+//
 //вывод всех учителей
 Route::get('/getAllTeachers', [\App\Http\Controllers\API\V1\TeacherController::class,'getAll']);
 //
@@ -47,7 +49,11 @@ Route::get('/getCabinet/{id}', [\App\Http\Controllers\API\V1\UserController::cla
 //
 //вывод всех русских слов словаря
 Route::get('/getDictionaryWords/{dictionaryType}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getAll']);
+//
+//вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
 Route::get('/translate/{dictionaryType}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
+//
+
 
 
 

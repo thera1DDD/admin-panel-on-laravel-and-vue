@@ -16,7 +16,7 @@ class MainApiController extends Controller
 {
    use HttpResponse;
 
-//Word stuff
+//Dictionary stuff start
    public function translate(string $dictionaryType,int $id,$language){
        if($dictionaryType=='ru-lez'){
            $words = Translate::where('words_id',$id)->where('language',$language)->get();
@@ -28,7 +28,7 @@ class MainApiController extends Controller
            }
        }
        elseif($dictionaryType=='ru-avar'){
-           $words = Translate::where('words_id',$id)->where('language','Аварский')->get();
+           $words = Translate::where('words_id',$id)->where('language',$language)->get();
            if(isset($words)){
                return TranslateResource::collection($words);
            }
