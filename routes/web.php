@@ -146,6 +146,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('{word}',[\App\Http\Controllers\Admin\WordController::class, 'delete'])->name('word.delete');
         Route::get('/{id}',[\App\Http\Controllers\Admin\WordController::class, 'show'])->name('word.show');
         Route::get('/search',[\App\Http\Controllers\Admin\WordController::class, 'search'])->name('word.search');
+        Route::post('/upload',[\App\Http\Controllers\Admin\WordController::class, 'upload'])->name('word.upload');
+
 
     });
 

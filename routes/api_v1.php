@@ -50,6 +50,8 @@ Route::get('/getCabinet/{id}', [\App\Http\Controllers\API\V1\UserController::cla
 //вывод всех русских слов словаря
 Route::get('/getDictionaryWords/{dictionaryType}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getAll']);
 //
+//поиск по словам
+Route::get('/search/{dictionaryType}/{word}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getSearch']);
 //вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
 Route::get('/translate/{dictionaryType}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
 //

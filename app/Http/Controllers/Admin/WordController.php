@@ -10,6 +10,8 @@ use App\Models\Word;
 use App\Service\WordService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class WordController extends Controller
 {
@@ -27,6 +29,20 @@ class WordController extends Controller
         }
         $words = $words->get();
         return view('word.index', ['words' => $words]);
+    }
+    public function upload(Request $request)
+    {
+        $file = $request->file('excel_file');
+
+        Excel::import($file, function ($rows) {
+            foreach ($rows as $row) {
+                Word::create([
+                    'name' => $row['name'],
+                ]);
+            }
+        });
+
+        return redirect()->back()->with('success', 'Слова успешно импортированы.');
     }
 
 

@@ -12,6 +12,11 @@
         </form>
         <div class="card-tools">
             <a href="{{ route('word.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить новое слово </a>
+            <form action="{{ route('word.upload') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="excel_file" accept=".xlsx,.xls">
+                <button type="submit">Загрузить</button>
+            </form>
         </div>
     </div>
 

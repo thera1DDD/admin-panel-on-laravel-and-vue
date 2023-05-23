@@ -14,41 +14,43 @@ use App\Models\Teacher;
 use App\Models\Test;
 use App\Models\Translate;
 use App\Models\Word;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class DictionaryController extends MainApiController
 {
     public function getAll(string $dictionaryType){
-        if($dictionaryType == 'lez-ru'){
-            return $this->getAllWords($dictionaryType,'Лезгинский');
-        }
-        elseif ($dictionaryType == 'avar-ru'){
-            return $this->getAllWords($dictionaryType,'Аварский');
-        }
-        elseif($dictionaryType=='ru-lez' or $dictionaryType == 'ru-avar'){
-            $words = Word::all();
-            return WordResource::collection($words);
-        }
-        else{
-            return  $this->error('words not found',404);
+        switch ($dictionaryType){
+            case('lez-ru');
+                return $this->getAllWords('Лезгинский');
+            case('avar-ru');
+                return $this->getAllWords('Аварский');
+            case ('ru-lez' or 'ru-avar');
+                $words = Word::all();
+                 return WordResource::collection($words);
+            default: return  $this->error('dictionary not found',404);
         }
     }
 
     public function getTranslate(string $dictionaryType,int $id){
-        if($dictionaryType == 'ru-lez') {
-            return $this->translate($dictionaryType,$id,'Лезгинский');
-        }
-        elseif ($dictionaryType == 'ru-avar'){
-            return $this->translate($dictionaryType,$id,'Аварский');
-        }
-        if($dictionaryType == 'lez-ru'){
-            return $this->translateBackward($dictionaryType,$id,'Лезгинский');
-        }
-        elseif ($dictionaryType == 'avar-ru'){
-            return $this->translateBackward($dictionaryType,$id,'Аварский');
-        }
-        else{
-            return $this->error('wrong dictionary type',404);
+        return match ($dictionaryType) {
+            'ru-lez' => $this->translate($id,'Лезгинский'),
+                'ru-avar' => $this->translate(  $id,'Аварский'),
+                    'lez-ru' => $this->translateBackward($id,'Лезгинский'),
+                        'avar-ru' => $this->translateBackward($id,'Аварский') ,
+                             default => $this->error('wrong dictionary type', 404),
+        };
+    }
+
+    public function getSearch(string $dictionaryType, string $word){
+        switch ($dictionaryType){
+            case('lez-ru');
+                return $this->searchBackward($word,'Лезгинский');
+            case('avar-ru');
+                return $this->searchBackward($word,'Аварский');
+            case('ru-lez' || 'ru-avar');
+                return $this->search($word);
+            default: return  $this->error('dictionary not found',404);
         }
     }
 }

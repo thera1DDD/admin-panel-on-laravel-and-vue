@@ -17,53 +17,44 @@ class MainApiController extends Controller
    use HttpResponse;
 
 //Dictionary stuff start
-   public function translate(string $dictionaryType,int $id,$language){
-       if($dictionaryType=='ru-lez'){
-           $words = Translate::where('words_id',$id)->where('language',$language)->get();
-           if(isset($words)){
-               return TranslateResource::collection($words);
-           }
-           else{
-               return $this->error('there is no such a word',404);
-           }
+   public function translate(int $id,$language){
+       $words = Translate::where('words_id', $id)->where('language', $language)->get();
+       if (isset($words)) {
+           return TranslateResource::collection($words);
        }
-       elseif($dictionaryType=='ru-avar'){
-           $words = Translate::where('words_id',$id)->where('language',$language)->get();
-           if(isset($words)){
-               return TranslateResource::collection($words);
-           }
-           else{
-               return $this->error('there is no such a word',404);
-           }
-       }
-       else{
-           return $this->error('there is no such a dictionary',404);
+       else {
+           return $this->error('there is no such a word', 404);
        }
    }
 
-   public function translateBackward(string $dictionaryType,int $id,string $language){
-     if($dictionaryType=='lez-ru'){
+    public function search($word){
+        $words = Word::query();
+        if ($word) {
+            $data =  $words->where('name', 'like', "%{$word}%")->get();
+            return  WordResource::collection($data);
+        }
+    }
+    public function searchBackward($word,$language){
+        $translate = Translate::query();
+        if ($word) {
+            $data =  $translate->where('translate', 'like', "%{$word}%")->where('language',$language)->get();
+            return  TranslateResource::collection($data);
+        }
+    }
+
+   public function translateBackward(int $id,string $language){
        $translate = Translate::where('language',$language)->where('id',$id)->first();
-       return $translate->word->name;
-     }
-     elseif($dictionaryType=='avar-ru'){
-         $translate = Translate::where('language',$language)->where('id',$id)->first();
-         return $translate->word->name;
-     }
-   }
-
-   public function getAllWords($dictionaryType,$language){
-       if ($dictionaryType=='lez-ru'){
-           $translate = Translate::where('language','=',$language)->get();
-           return TranslateResource::collection($translate);
-       }
-       elseif ($dictionaryType=='avar-ru'){
-           $translate = Translate::where('language','=',$language)->get();
-           return TranslateResource::collection($translate);
+       if($translate){
+           return $translate->word->name;
        }
        else{
-           return $this->error('there is no such a dictionary',404);
+           return $this->error('there is no translate',404);
        }
    }
-//end Word stuff
+
+   public function getAllWords($language){
+       $translate = Translate::where('language','=',$language)->get();
+       return TranslateResource::collection($translate);
+   }
+//end Dictionary stuff
 }
