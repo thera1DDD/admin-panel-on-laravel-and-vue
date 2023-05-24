@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Moduls
+    Модули
 @endsection
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Moduls</h3>
+            <h3 class="card-title">Модули</h3>
 
             <div class="card-tools">
-                <a href="{{ route('module.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new modul</a>
+                <a href="{{ route('module.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавть новый моудль</a>
             </div>
         </div>
         <!-- /.card-header -->
@@ -18,15 +18,14 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Number</th>
-                    <th>Course</th>
-                    <th>Main Image</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Номер</th>
+                    <th>Курс</th>
+                    <th>Главное фото</th>
                     <th>Slug</th>
-                    <th>Test</th>
-                    <th>Date Posted</th>
-                    <th>Action</th>
+                    <th>Дата загрузки</th>
+                    <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,16 +38,15 @@
                         <td>{{ $module->course->name}}</td>
                         <td>{{ $module->main_image }}</td>
                         <td>{{ $module->slug }}</td>
-                        <td>{{ $module->test}}</td>
                         <td>{{ $module->created_at }}</td>
                         <td>
-                            <a style="width: 66px"  href="{{ route('module.edit', $module->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a style="width: 110px"  href="{{ route('module.edit', $module->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>
 
                             <form action="{{route('module.delete',$module->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
+                                <input style="width: 110px;"  type="submit" value="Удалить" class="btn btn-danger">
                             </form>
                         </td>
                     </tr>

@@ -15,6 +15,10 @@ class CreateStatsTable extends Migration
     {
         Schema::create('stats', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('courses_id')
+                ->index()
+                ->constrained('courses')
+                ->onDelete('cascade');
             $table->foreignId('passed_courses_id')
                 ->nullable()
                 ->index()

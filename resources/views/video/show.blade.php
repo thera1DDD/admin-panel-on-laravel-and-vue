@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Moduls
+    Воспроиздведение
 @endsection
 @section('content')
     <div class="card">

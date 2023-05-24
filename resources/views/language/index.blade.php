@@ -6,10 +6,10 @@ Languages
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Language</h3>
+        <h3 class="card-title">Язык</h3>
 
         <div class="card-tools">
-            <a href="{{ route('language.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new language</a>
+            <a href="{{ route('language.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить язык</a>
         </div>
     </div>
     <!-- /.card-header -->
@@ -18,9 +18,9 @@ Languages
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Date Posted</th>
-                    <th>Action</th>
+                    <th>Язык</th>
+                    <th>Дата загрузки</th>
+                    <th>Действие</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,13 +30,13 @@ Languages
                         <td>{{ $language->name }}</td>
                         <td>{{ $language->created_at }}</td>
                         <td>
-                            <a style="width: 66px" href="{{ route('language.edit', $language->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a style="width: 110px" href="{{ route('language.edit', $language->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>
 
                             <form action="{{route('language.delete',$language->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
+                                <input style="width: 110px;"  type="submit" value="Удалить" class="btn btn-danger">
                             </form>
                         </td>
                     </tr>

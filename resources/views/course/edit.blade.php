@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Edit Course
+    Редактировать курс
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,12 +16,12 @@
                 <form action="{{route('course.update',$course->id)}}" method="post" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
-                    <label for="name">Name</label>
+                    <label for="name">Название</label>
                     <div class="form-group">
                         <input type="text" value="{{ $course->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label for="name">Main Image</label>
+                        <label for="name">Главное фото</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input name="main_image" type="file" class="custom-file-input" id="exampleInputFile">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="name">Language</label>
+                        <label for="name">Язык</label>
                         <select  name="languages_id"  id="languages_id"  class="form-control select2" data-placeholder="Language" style="width: 100%;">
                             @foreach($languages as $language)
                                 <option value="{{$language->id }}" {{$language->id == $course->languages_id ? 'selected' : ''}}>

@@ -52,6 +52,7 @@ Route::get('/getDictionaryWords/{dictionaryType}', [\App\Http\Controllers\API\V1
 //
 //поиск по словам
 Route::get('/search/{dictionaryType}/{word}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getSearch']);
+//
 //вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
 Route::get('/translate/{dictionaryType}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
 //
@@ -60,6 +61,9 @@ Route::get('/getAllBooks', [\App\Http\Controllers\API\V1\ArtworkController::clas
 //
 //вывод книги по Id
 Route::get('/book/{id}', [\App\Http\Controllers\API\V1\ArtworkController::class,'show']);
+//
+//отметка пройденного материала
+Route::post('/postStat', [\App\Http\Controllers\API\V1\StatController::class,'postStat']);
 //
 
 

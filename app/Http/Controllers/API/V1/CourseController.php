@@ -8,6 +8,7 @@ use App\Http\Resources\Course\CourseResource;
 use App\Http\Resources\Course\ModuleResource;
 use App\Models\Course;
 use App\Models\Module;
+use App\Models\Stat;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Mod;
 
@@ -25,6 +26,9 @@ class CourseController extends MainApiController
     public function CourseWithStat($id)
     {
         $course = Course::find($id);
+        //получение количества просмотренных видео курса
+        $stat = Stat::where('courses_id',$id)->whereNotNull('passed_videos_id')->count();
+        //
         if (isset($course)) {
         $totalVideos = $course->module->flatMap(function ($module) {
             return $module->video;
@@ -41,7 +45,7 @@ class CourseController extends MainApiController
             $courseResource->totalTests = $totalTests;
             $courseResource->totalTasks = $totalTasks;
             $courseResource->totalExam = $totalExam;
-
+            $courseResource->passedVideos = $stat;
             return $courseResource;
         } else {
             return $this->error('Course not found', 404);

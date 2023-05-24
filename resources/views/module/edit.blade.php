@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Edit Module
+    Редактировать модуль
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,20 +16,20 @@
                 <form action="{{route('module.update',$module->id)}}" method="post" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
-                    <label for="name">Name</label>
+                    <label for="name">Название</label>
                     <div class="form-group">
                         <input type="text" value="{{ $module->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
                     </div>
-                    <label for="description">Description</label>
+                    <label for="description">Описание</label>
                     <div class="form-group">
                         <input type="text" value="{{ $module->description ?? old('description') }}" name="description" class="form-control" placeholder="Description">
                     </div>
-                    <label for="number">Number</label>
+                    <label for="number">Номер</label>
                     <div class="form-group">
                         <input type="text" value="{{ $module->number ?? old('number') }}" name="number" class="form-control" placeholder="Number">
                     </div>
                     <div class="form-group">
-                        <label for="main_image">Main Image</label>
+                        <label for="main_image">Главное фото</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input name="main_image" type="file" class="custom-file-input" id="exampleInputFile">
@@ -41,8 +41,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="courses_id">Course</label>
-                        <select  name="courses_id"  id="courses_id"  class="form-control select2" data-placeholder="Language" style="width: 100%;">
+                        <label for="courses_id">Курс</label>
+                        <select  name="courses_id"  id="courses_id"  class="form-control select2" style="width: 100%;">
                             @foreach($courses as $course)
                                 <option value="{{ $course->id }}" {{ $course->id == $module->courses_id ? 'selected' : '' }}>
                                     {{ $course->name }}

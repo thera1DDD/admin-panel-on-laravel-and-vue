@@ -1,21 +1,21 @@
 @extends('layouts.admin')
 
 @section('title')
-Create Course
+Добавить курс
 @endsection
 @section('content')
 <div class="card card-primary">
     <div class="card-header">
-        <h3 class="card-title">Add new Course</h3>
+        <h3 class="card-title">Добавить новый курс</h3>
         <div class="card-tools">
-            <a href="{{ route('course.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Courses</a>
+            <a href="{{ route('course.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> Посмотреть все курсы</a>
         </div>
     </div>
     <form method="POST" action="{{ route('course.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Название</label>
                 <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Название">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -24,7 +24,7 @@ Create Course
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Language</label>
+                <label for="name">Язык</label>
                 <select name="languages_id"  id="languages_id" class="form-control select2" data-placeholder="Выберите язык" style="width: 100%;">
                     @foreach($languages as $language)
                         <option value="{{$language->id}}">{{$language->name}}</option>
@@ -38,7 +38,7 @@ Create Course
             </div>
 
             <div class="form-group">
-                <label for="name">Main Image</label>
+                <label for="name">Главное фото</label>
                 <div class="input-group">
                     <div class="custom-file">
                         <input name="main_image" type="file" class="custom-file-input" id="exampleInputFile">
@@ -67,7 +67,7 @@ Create Course
         </div>
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Создать</button>
         </div>
     </form>
 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Edit Language
+    Редактировать язык
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,9 +16,9 @@
                 <form action="{{route('language.update',$language->id)}}" method="post" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
-                    <label for="name">Name</label>
+                    <label for="name">Язык</label>
                     <div class="form-group">
-                        <input type="text" value="{{ $language->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
+                        <input type="text" value="{{ $language->name ?? old('name') }}" name="name" class="form-control" placeholder="Язык">
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Редактировать" >

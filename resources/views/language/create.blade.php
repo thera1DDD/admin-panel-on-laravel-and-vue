@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
 @section('title')
-Create Languages
+    Добавить язык
 @endsection
 @section('content')
 <div class="card card-primary">
     <div class="card-header">
-        <h3 class="card-title">Add new Language</h3>
+        <h3 class="card-title">Добавить новый язык</h3>
         <div class="card-tools">
-            <a href="{{ route('language.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Language</a>
+            <a href="{{ route('language.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> Посмотреть все языки</a>
         </div>
     </div>
     <form method="POST" action="{{ route('language.store') }}">
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Language">
+                <label for="name">Язык</label>
+                <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Язык">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
