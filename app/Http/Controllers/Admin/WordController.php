@@ -32,6 +32,8 @@ class WordController extends Controller
         $words = $words->get();
         return view('word.index', ['words' => $words]);
     }
+
+
     public function import(ImportRequest $request)
     {
         $data = $request->validated();
