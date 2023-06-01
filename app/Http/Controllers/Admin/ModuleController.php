@@ -28,7 +28,9 @@ class ModuleController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
-        $this->uploadImage($data['main_image'],'/images/modules', false,'public');
+        if($request->hasFile('main_image')){
+            $data['main_image'] = $this->uploadImage($data['main_image'],'/images/modules', false,'public');
+        }
         $this->moduleService->store($data);
         return redirect()->route('module.index')->with('success','Module created');
     }
@@ -41,8 +43,8 @@ class ModuleController extends Controller
 
     public function update(UpdateRequest  $request, Module $module){
         $data = $request->validated();
-        if($request->main_image!==null){
-            $this->uploadImage($data['main_image'],'/images/modules', false,'public');
+        if($request->hasFile('main_image')){
+            $data['main_image'] = $this->uploadImage($data['main_image'],'/images/modules', false,'public');
         }
         $this->moduleService->update($module,$data);
         return redirect()->route('module.index')->with('success','Module updated');

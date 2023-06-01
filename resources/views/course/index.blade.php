@@ -20,9 +20,9 @@
                     <th>ID</th>
                     <th>Название</th>
                     <th>Язык</th>
-                    <th>Главное фото</th>
                     <th>Slug</th>
                     <th>Дата загрузки</th>
+                    <th>Главное фото</th>
                     <th>Действие</th>
                 </tr>
                 </thead>
@@ -32,9 +32,9 @@
                         <td>{{ $course->id }}</td>
                         <td>{{ $course->name }}</td>
                         <td>{{ $course->language->name}}</td>
-                        <td><a href="{{route('course.play', $course->id)}}">{{$course->main_image}}</a></td>
                         <td>{{ $course->slug }}</td>
                         <td>{{ $course->created_at }}</td>
+                        <td><img src="{{ getImage($course->main_image)}}" style="width: 200px"></td>
                         <td>
                             <a style="width: 110px" href="{{ route('course.edit', $course->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>
