@@ -20,51 +20,73 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 });
 
-//вывод всех курсов с демовидео в блоке "Ознакомьтесь с нашими курсами"
-Route::get('/getAllCourses', [\App\Http\Controllers\API\V1\CourseController::class,'getAll']);
-//
-//вывод курса по id
-Route::get('/course/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'show']);
-//
-//вывод модуля с видео, тестами, заданиями на странице прохождения курса
-Route::get('/module/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'moduleShow']);
-//
-//вывод курса со статистикой
-Route::get('/fullCourse/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'CourseWithStat']);
-//
-//вывод всех учителей
-Route::get('/getAllTeachers', [\App\Http\Controllers\API\V1\TeacherController::class,'getAll']);
-//
-//вывод всех тестов
-Route::get('/getAllTests', [\App\Http\Controllers\API\V1\TestController::class,'getAll']);
-//
-//вывод тестов по id
-Route::get('/getTest/{id}', [\App\Http\Controllers\API\V1\TestController::class,'show']);
-//
-//вывод избранного по id пользователя
-Route::get('/getFavourite/{id}', [\App\Http\Controllers\API\V1\FavouriteController::class,'show']);
-//
-//вывод пользователь по id
-Route::get('/getCabinet/{id}', [\App\Http\Controllers\API\V1\UserController::class,'show']);
-//
-//вывод всех русских слов словаря
-Route::get('/getDictionaryWords/{dictionaryType}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getAll']);
-//
-//поиск по словам
-Route::get('/search/{dictionaryType}/{word}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getSearch']);
-//
-//вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
-Route::get('/translate/{dictionaryType}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
-//
-//вывод всех книг с их языком
-Route::get('/getAllBooks', [\App\Http\Controllers\API\V1\ArtworkController::class,'getAll']);
-//
-//вывод книги по Id
-Route::get('/book/{id}', [\App\Http\Controllers\API\V1\ArtworkController::class,'show']);
-//
-//отметка пройденного материала
-Route::post('/postStat', [\App\Http\Controllers\API\V1\StatController::class,'postStat']);
-//
+Route::group(['prefix' => 'course'], function (){
+    //вывод всех курсов
+    Route::get('/all', [\App\Http\Controllers\API\V1\CourseController::class,'getAll']);
+    //
+    //вывод курса по id
+    Route::get('/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'show']);
+    //
+    //вывод курса со статистикой на странице прохождения курса
+    Route::get('/fullCourse/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'CourseWithStat']);
+    //
+});
+
+Route::group(['prefix' => 'module'], function (){
+    //вывод модуля с видео, тестами, заданиями на странице прохождения курса
+    Route::get('/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'moduleShow']);
+    //
+});
+Route::group(['prefix' => 'teacher'], function (){
+    //вывод всех учителей
+    Route::get('/all', [\App\Http\Controllers\API\V1\TeacherController::class,'getAll']);
+    //
+});
+Route::group(['prefix' => 'test'], function (){
+    //вывод всех тестов
+    Route::get('/all', [\App\Http\Controllers\API\V1\TestController::class,'getAll']);
+    //
+});
+Route::group(['prefix' => 'favourite'], function (){
+    //вывод всего избранного по id пользователя
+    Route::get('/getCabinet/{id}', [\App\Http\Controllers\API\V1\FavouriteController::class,'show']);
+    //
+    //вывод только данных пользователя по id
+    Route::get('/{id}', [\App\Http\Controllers\API\V1\UserController::class,'show']);
+    //
+});
+Route::group(['prefix' => 'dictionary'], function (){
+    //вывод всех слов по типу словаря ru-lez,ru-avar,lez-ru,avar-ru
+    Route::get('/all/{dictionaryType}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getAll']);
+    //
+    //поиск по словам
+    Route::get('/search/{dictionaryType}/{word}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getSearch']);
+    //
+    //вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
+    Route::get('/translate/{dictionaryType}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
+    //
+});
+
+Route::group(['prefix' => 'book'], function (){
+    //вывод всех книг с их языком
+    Route::get('/all', [\App\Http\Controllers\API\V1\ArtworkController::class,'getAll']);
+    //
+    //вывод книги по Id
+    Route::get('/book/{id}', [\App\Http\Controllers\API\V1\ArtworkController::class,'show']);
+    //
+});
+Route::group(['prefix' => 'stat'], function (){
+    //отметка пройденного материала(отметка зеленным)
+    //принимает   'passed_courses_id' => 'nullable|integer',
+    //            'passed_modules_id' => 'nullable',
+    //            'passed_videos_id' => 'nullable',
+    //            'users_id' => 'nullable',
+    Route::post('/postStat', [\App\Http\Controllers\API\V1\StatController::class,'postStat']);
+    //
+});
+
+
+
 
 
 
