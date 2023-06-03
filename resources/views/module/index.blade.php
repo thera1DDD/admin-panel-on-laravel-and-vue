@@ -36,7 +36,7 @@
                         <td>{{ $module->description }}</td>
                         <td>{{ $module->number }}</td>
                         <td>{{ $module->course->name}}</td>
-                        <td>{{ $module->main_image }}</td>
+                        <td><img src="{{ getImage($module->main_image)}}" style="width: 200px"></td>
                         <td>{{ $module->slug }}</td>
                         <td>{{ $module->created_at }}</td>
                         <td>

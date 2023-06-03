@@ -239,11 +239,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('permission', 'PermissionController');
     Route::resource('role', 'RoleController');
 
-Route::group(['middleware' => ['auth', 'role_or_permission:admin|create role|create permission']], function() {
-
-
-
-});
+//Route::group(['middleware' => ['auth', 'role_or_permission:admin|create role|create permission']], function() {
+//
+//
+//
+//});
 
 
 Auth::routes();

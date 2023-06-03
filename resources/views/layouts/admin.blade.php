@@ -199,33 +199,6 @@
                                         <p>Произведения</p>
                                     </a>
                                 </li>
-                                    <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link active">
-                                            <i class="nav-icon fas fa-cogs"></i>
-                                            <p>
-                                                Словарь
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="{{route('test.index')}}" class="nav-link">
-                                                    <i class="nav-icon fas fa-chalkboard"></i>
-                                                    <p>
-                                                        Русско-лезгинский
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{route('question.index')}}" class="nav-link">
-                                                    <i class="nav-icon fas fa-chalkboard"></i>
-                                                    <p>
-                                                        Русско-аварский
-                                                    </p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link active">
                                         <i class="nav-icon fas fa-cogs"></i>
