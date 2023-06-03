@@ -6,6 +6,7 @@ use App\Http\Controllers\API\MainApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Course\CourseResource;
 use App\Http\Resources\Course\ModuleResource;
+use App\Http\Resources\Course\SingleCourseResource;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\Stat;
@@ -16,11 +17,22 @@ class CourseController extends MainApiController
 {
     public function getAll(){
         $course = Course::with('demovideo')->get();
-        return CourseResource::collection($course);
+        if(isset($course)){
+            return CourseResource::collection($course);
+        }
+        else{
+            return $this->error('course not found',404);
+        }
+
     }
     public function show($id){
-        $course = Course::findOrFail($id);
-        return new CourseResource($course);
+        $course = Course::find($id);
+        if(isset($course)) {
+            return new SingleCourseResource($course);
+        }
+        else{
+            return $this->error('course not found',404);
+        }
     }
 
     public function CourseWithStat($id)
