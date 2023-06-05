@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 });
 
+
 Route::group(['prefix' => 'course'], function (){
     //вывод всех курсов
     Route::get('/all', [\App\Http\Controllers\API\V1\CourseController::class,'getAll']);
@@ -28,7 +29,7 @@ Route::group(['prefix' => 'course'], function (){
     Route::get('/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'show']);
     //
     //вывод курса со статистикой на странице прохождения курса
-    Route::get('/fullCourse/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'CourseWithStat']);
+    Route::get('/withProgress/{courseId}/{userId}', [\App\Http\Controllers\API\V1\CourseController::class,'courseWithProgress']);
     //
 });
 

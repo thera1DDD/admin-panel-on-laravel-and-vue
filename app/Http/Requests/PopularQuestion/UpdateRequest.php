@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Stat;
+namespace App\Http\Requests\PopularQuestion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,12 +24,9 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'passed_courses_id' => 'nullable|integer',
-            'passed_modules_id' => 'nullable|integer',
-            'passed_videos_id' => 'nullable|integer',
-            'passed_tasks_id' => 'nullable|integer',
-            'courses_id' => 'nullable|integer',
-            'users_id' => 'nullable|integer',
+            'question' => 'required|text',
+            'answer' => 'required',
+            'status'=>'nullable'
         ];
     }
 }

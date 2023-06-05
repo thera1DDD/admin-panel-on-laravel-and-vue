@@ -29,19 +29,20 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="passed_courses_id">Пройденный Курс</label>
-                <select name="passed_courses_id"  id="passed_courses_id" class="form-control select2" style="width: 100%;">
+                <label for="courses_id">Курс</label>
+                <select name="courses_id"  id="courses_id" class="form-control select2"  style="width: 100%;">
                     <option></option>
                     @foreach($courses as $course)
                         <option value="{{$course->id}}">{{$course->name}}</option>
                     @endforeach()
                 </select>
-                @error('passed_courses_id')
+                @error('courses_id')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </div>
+
             <div class="form-group">
                 <label for="passed_modules_id">Пройденный Модуль</label>
                 <select name="passed_modules_id"  id="passed_modules_id" class="form-control select2"  style="width: 100%;">
@@ -67,6 +68,34 @@
 
                 </select>
                 @error('passed_videos_id')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="passed_tasks_id">Пройденное задание</label>
+                <select name="passed_tasks_id"  id="passed_tasks_id" class="form-control select2" data-placeholder="Выберите Пользователя" style="width: 100%;">
+                    <option></option>
+                    @foreach($tasks as $task)
+                        <option value="{{$task->id}}">{{$task->name}}</option>
+                    @endforeach()
+                </select>
+                @error('passed_tasks_id')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="passed_courses_id">Пройденный Курс</label>
+                <select name="passed_courses_id"  id="passed_courses_id" class="form-control select2" style="width: 100%;">
+                    <option></option>
+                    @foreach($courses as $course)
+                        <option value="{{$course->id}}">{{$course->name}}</option>
+                    @endforeach()
+                </select>
+                @error('passed_courses_id')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

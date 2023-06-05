@@ -25,9 +25,10 @@ class StoreRequest extends FormRequest
     {
         return [
             'passed_courses_id' => 'nullable|integer',
-            'passed_modules_id' => 'nullable',
-            'passed_videos_id' => 'nullable',
-            'users_id' => 'nullable',
+            'passed_modules_id' => 'nullable|integer',
+            'passed_videos_id' => 'nullable|integer',
+            'passed_tasks_id' => 'nullable|integer',
+            'users_id' => 'nullable|integer',
         ];
     }
 }

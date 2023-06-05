@@ -18,11 +18,13 @@ class CreateFavouritesTable extends Migration
             $table->foreignId('courses_id')
                 ->nullable()
                 ->index()
-                ->constrained('courses');
+                ->constrained('courses')
+                ->onDelete('cascade');;
             $table->foreignId('users_id')
                 ->nullable()
                 ->index()
-                ->constrained('users');
+                ->constrained('users')
+                ->onDelete('cascade');
             $table->string('slug')->nullable();
             $table->integer('sort')->default(500);
             $table->timestamps();

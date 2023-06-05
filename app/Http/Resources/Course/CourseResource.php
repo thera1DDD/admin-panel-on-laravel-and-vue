@@ -22,8 +22,9 @@ class CourseResource extends JsonResource
             'totalVideos' => $this->totalVideos ?? null,
             'totalTests' => $this->totalTests ?? null,
             'totalTasks' => $this->totalTasks ?? null,
-            'passedVideos' => $this->passedVideos ?? null,
             'totalExam'=>$this->totalExam ?? null,
+            'passedVideos' => $this->passedVideos ?? null,
+            'passedTasks'=>$this->passedTasks ?? null,
             'module' => SingleModuleResource::collection($this->whenLoaded('module')),
 
         ];

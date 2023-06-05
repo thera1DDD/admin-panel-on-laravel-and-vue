@@ -23,4 +23,7 @@ class StatController extends MainApiController
         $stat = Stat::create($data);
         return $stat;
     }
+    public function getCourseStat($courseId, $userId){
+
+    }
 }

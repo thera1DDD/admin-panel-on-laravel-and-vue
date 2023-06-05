@@ -15,7 +15,8 @@ class CreateStatsTable extends Migration
     {
         Schema::create('stats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('courses_id')
+            $table->foreignId('courses_id') //для вывода прогресса под определённого курса
+                ->nullable()
                 ->index()
                 ->constrained('courses')
                 ->onDelete('cascade');
@@ -38,6 +39,11 @@ class CreateStatsTable extends Migration
                 ->nullable()
                 ->index()
                 ->constrained('users')
+                ->onDelete('cascade');
+            $table->foreignId('passed_tasks_id')
+                ->nullable()
+                ->index()
+                ->constrained('tasks')
                 ->onDelete('cascade');
             $table->datetime('passed_course_date')->nullable();
             $table->datetime('passed_module_date')->nullable();

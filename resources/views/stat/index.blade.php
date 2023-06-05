@@ -19,11 +19,13 @@
                 <tr>
                     <th>ID</th>
                     <th>Курс</th>
-                    <th>Модуль</th>
-                    <th>Видео</th>
                     <th>Пользователь</th>
-                    <th>Date Posted</th>
-                    <th>Action</th>
+                    <th>Пройденный Модуль</th>
+                    <th>Пройденное Задание</th>
+                    <th>Просмотренное Видео</th>
+                    <th>Пройденный Курс</th>
+                    <th>Дата создания</th>
+                    <th>Действие</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,9 +34,11 @@
                     <tr>
                         <td>{{ $stat->id }}</td>
                         <td>@if(isset($stat->course->name)){{ $stat->course->name }}@else{{''}}@endif</td>
-                        <td>@if(isset($stat->module->name)){{ $stat->module->name }}@else{{''}}@endif</td>
-                        <td>@if(isset($stat->video->name)){{ $stat->video->name }}@else{{''}}@endif</td>
                         <td>@if(isset($stat->user->name)){{ $stat->user->name }}@else{{''}}@endif</td>
+                        <td>@if(isset($stat->module->name)){{ $stat->module->name }}@else{{''}}@endif</td>
+                        <td>@if(isset($stat->task->name)){{ $stat->task->name }}@else{{''}}@endif</td>
+                        <td>@if(isset($stat->video->name)){{ $stat->video->name }}@else{{''}}@endif</td>
+                        <td>@if(isset($stat->course->name)){{ $stat->course->name }}@else{{''}}@endif</td>
                         <td>{{ $stat->created_at }}</td>
                         <td>
                             <a style="width: 66px" href="{{ route('stat.edit', $stat->id) }}" class="btn btn-sm btn-warning">Edit</a>
