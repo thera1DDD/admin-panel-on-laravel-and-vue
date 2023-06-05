@@ -42,7 +42,7 @@ class CourseController extends MainApiController
         $passed_videos = Stat::where('courses_id',$courseId)->where('users_id',$userId)->whereNotNull('passed_videos_id')->count();
         $passed_tasks = Stat::where('courses_id',$courseId)->where('users_id',$userId)->whereNotNull('passed_tasks_id')->count();
         //
-        if (isset($course)) {
+        if (isset($course,$passed_tasks,$passed_videos)){
         $totalVideos = $course->module->flatMap(function ($module) {
             return $module->video;
         })->count();
