@@ -231,6 +231,26 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/{id}',[\App\Http\Controllers\Admin\ArtworkController::class, 'show'])->name('artwork.show');
     });
 
+    Route::group(['prefix' => 'popularQuestion'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\PopularQuestionController::class, 'index'])->name('popularQuestion.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\PopularQuestionController::class, 'create'])->name('popularQuestion.create');
+        Route::post('/',[\App\Http\Controllers\Admin\PopularQuestionController::class, 'store'])->name('popularQuestion.store');
+        Route::get('/{popularQuestion}/edit',[\App\Http\Controllers\Admin\PopularQuestionController::class, 'edit'])->name('popularQuestion.edit');
+        Route::patch('{popularQuestion}',[\App\Http\Controllers\Admin\PopularQuestionController::class, 'update'])->name('popularQuestion.update');
+        Route::delete('{popularQuestion}',[\App\Http\Controllers\Admin\PopularQuestionController::class, 'delete'])->name('popularQuestion.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\PopularQuestionController::class, 'show'])->name('popularQuestion.show');
+    });
+    Route::group(['prefix' => 'category'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('category.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('category.create');
+        Route::post('/',[\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('category.store');
+        Route::get('/{category}/edit',[\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category.edit');
+        Route::patch('{category}',[\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category.update');
+        Route::delete('{category}',[\App\Http\Controllers\Admin\CategoryController::class, 'delete'])->name('category.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\CategoryController::class, 'show'])->name('category.show');
+    });
+
+
 
 
 

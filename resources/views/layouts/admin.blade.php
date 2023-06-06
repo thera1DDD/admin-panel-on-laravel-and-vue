@@ -199,6 +199,18 @@
                                         <p>Произведения</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('popularQuestion.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Популярные вопросы</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('category.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Категории</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link active">
                                         <i class="nav-icon fas fa-cogs"></i>

@@ -86,6 +86,16 @@ Route::group(['prefix' => 'stat'], function (){
     //
 });
 
+Route::group(['prefix' => 'popQuestion'], function (){
+    Route::get('/all', [\App\Http\Controllers\API\V1\PopularQuestionController::class,'getAll']);
+});
+
+Route::group(['prefix' => 'category'], function (){
+    Route::get('/all/{location}', [\App\Http\Controllers\API\V1\CategoryController::class,'getAll']);
+});
+
+
+
 
 
 

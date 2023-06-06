@@ -16,6 +16,7 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 class CourseController extends MainApiController
 {
     public function getAll(){
+
         $course = Course::with('demovideo')->get();
         if(isset($course)){
             return CourseResource::collection($course);

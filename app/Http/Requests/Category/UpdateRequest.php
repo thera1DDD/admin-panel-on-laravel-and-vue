@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\PopularQuestion;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,9 +24,8 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'question' => 'required',
-            'answer' => 'required',
-            'status'=>'nullable'
+            'name' => 'required|string',
+            'type' => 'required|string',
         ];
     }
 }
