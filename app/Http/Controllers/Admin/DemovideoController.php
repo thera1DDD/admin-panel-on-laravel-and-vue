@@ -33,6 +33,9 @@ class DemovideoController extends Controller
 
     public function update(UpdateRequest $request, Demovideo $demovideo){
         $data = $request->validated();
+        if($request->hasFile('poster')){
+            $data['poster'] = $this->uploadImage($data['poster'],'/images/demovideos', false,'public');
+        }
         if(isset($data['video_file'])){
             $data['video_file'] = Storage::disk('public')->put('/demovideo',$data['video_file']);
         }

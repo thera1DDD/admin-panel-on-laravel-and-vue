@@ -18,6 +18,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Местоположение</th>
+                    <th>Путь</th>
                     <th>Дата загрузки</th>
                     <th>Действие</th>
                 </tr>
@@ -27,6 +28,7 @@
                     <tr>
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->type }}</td>
+                        <td>{{ $category->path }}</td>
                         <td>{{ $category->created_at }}</td>
                         <td>
                             <a style="width: 110px" href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">Редактировать</a>

@@ -24,6 +24,15 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="name">Путь</label>
+                <input type="text" name="path"  id="path" class="form-control @error('path') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Название категории">
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="type">Местоположение</label>
                 <select  name="type" id="status" class="form-control select2" style="width: 100%;">
                     <option value="footer">Footer</option>
