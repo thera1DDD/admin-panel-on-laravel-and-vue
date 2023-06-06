@@ -17,6 +17,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Название</th>
                     <th>Местоположение</th>
                     <th>Путь</th>
                     <th>Дата загрузки</th>
@@ -27,6 +28,7 @@
                 @forelse ($categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
+                        <td>{{ $category->name }}</td>
                         <td>{{ $category->type }}</td>
                         <td>{{ $category->path }}</td>
                         <td>{{ $category->created_at }}</td>
