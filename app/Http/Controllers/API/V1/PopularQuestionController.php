@@ -18,8 +18,14 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 class PopularQuestionController extends MainApiController
 {
     public function getAll(){
+
         $popularQuestions = PopularQuestion::all();
-        return PopularQuestionResource::collection($popularQuestions);
+        if($popularQuestions){
+            return PopularQuestionResource::collection($popularQuestions);
+        }
+        else{
+            return $this->error('questions not found',404);
+        }
     }
 
 }

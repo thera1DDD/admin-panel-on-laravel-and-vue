@@ -18,7 +18,14 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 class CategoryController extends MainApiController
 {
     public function getAll($location){
+
         $category = Category::where('type','=',$location)->get();
-        return CategoryResource::collection($category);
+        if($category){
+            return CategoryResource::collection($category);
+        }
+        else{
+            return $this->error('not found',404);
+        }
+
     }
 }
