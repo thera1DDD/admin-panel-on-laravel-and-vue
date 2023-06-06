@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
             'name' => 'required',
             'description' => 'nullable',
             'courses_id'=> 'required',
-            'video_file' => 'nullable|mimetypes:video/mp4,video/avi|max:1000000'
+            'video_file' => 'required'
         ];
     }
 }

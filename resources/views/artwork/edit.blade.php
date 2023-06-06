@@ -50,6 +50,23 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="documentType">Тип документа</label>
+                        <select  name="documentType"  id="status" class="form-control select2" style="width: 100%;">
+                            @if($artwork->documentType == 'book')
+                                <option value="book">Книга</option>
+                                <option value="document">Документ</option>
+                            @else
+                                <option value="document">Документ</option>
+                                <option value="book">Книга</option>
+                            @endif
+                        </select>
+                        @error('status')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="filename">Файл</label>
                         <div class="input-group">
                             <div class="custom-file">

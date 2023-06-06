@@ -22,6 +22,7 @@
                     <th>Описание</th>
                     <th>Файл</th>
                     <th>Язык</th>
+                    <th>Тип Файла</th>
                     <th>Действие</th>
                     <th>Дата создания</th>
                 </tr>
@@ -34,6 +35,7 @@
                         <td>{{ $artwork->description }}</td>
                         <td>{{ $artwork->filename }}</td>
                         <td>{{ $artwork->language->name ?? 'None'}}</td>
+                        <td>@if($artwork->documentType=='book'){{'Книга'}}@else {{'Документ'}}@endif</td>
                         <td>{{ $artwork->created_at }}</td>
                         <td>
                             <a style="width:110px" href="{{ route('artwork.edit', $artwork->id) }}" class="btn btn-sm btn-warning">Редактировать</a>

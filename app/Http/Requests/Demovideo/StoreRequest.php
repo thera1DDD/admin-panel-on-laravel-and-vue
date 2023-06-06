@@ -27,7 +27,7 @@ class StoreRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'courses_id'=> 'required',
-            'video_file' => 'required|mimetypes:video/mp4,video/avi|max:1000000'
+            'video_file' => 'required'
         ];
     }
 }

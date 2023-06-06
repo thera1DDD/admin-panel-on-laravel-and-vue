@@ -1,33 +1,31 @@
 @extends('layouts.admin')
 
 @section('title')
-    Категории
+    Courses
 @endsection
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Категории сайта</h3>
-        <div class="card-tools">
-            <a href="{{ route('category.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить категорию</a>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Категории сайта</h3>
+            <div class="card-tools">
+                <a href="{{ route('category.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить категорию</a>
+            </div>
         </div>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body table-responsive p-0">
-        <table class="table table-hover">
-            <thead>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+                <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Местоположение</th>
-                    <th>Дата загрузки</th>
+                    <th>Название</th>
                     <th>Действие</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @forelse ($categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
-                        <td>{{ $category->type }}</td>
-                        <td>{{ $category->created_at }}</td>
+                        <td>{{ $category->name }}</td>
                         <td>
                             <a style="width: 110px" href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>
@@ -41,9 +39,9 @@
                 @empty
 
                 @endforelse
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
     </div>
-    <!-- /.card-body -->
-  </div>
 @endsection

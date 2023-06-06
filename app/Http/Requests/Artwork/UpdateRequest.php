@@ -28,6 +28,7 @@ class UpdateRequest extends FormRequest
             'description' => 'required|string',
             'languages_id' => 'nullable',
             'filename' => 'nullable',
+            'documentType'=> 'required'
         ];
     }
 }

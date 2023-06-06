@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label for="status">Местоположение</label>
                         <select  name="status"  id="status" class="form-control select2" style="width: 100%;">
-                            @if($popularQuestion->status == 1)
+                            @if($category->status == 1)
                                 <option value="1">Активен</option>
                                 <option value="0">Не Активен</option>
                             @else

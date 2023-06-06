@@ -46,6 +46,13 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="documentType">Тип файла</label>
+                <select  name="documentType" id="status" class="form-control select2" style="width: 100%;">
+                    <option value="book">Книга</option>
+                    <option value="document">Документ</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="filename">Файл</label>
                 <div class="input-group">
                     <div class="custom-file">
