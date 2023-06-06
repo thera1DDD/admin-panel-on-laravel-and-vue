@@ -20,7 +20,14 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('category.index',compact('categories'));
+        $types = $categories->pluck('type')->unique();
+        $typeIds = $categories->pluck('id', 'type');
+        return view('category.index', compact('types', 'typeIds'));
+    }
+
+    public function show($type){
+        $categories = Category::where('type',$type)->get();
+        return view('category.show', compact('categories',));
     }
 
 
@@ -53,8 +60,5 @@ class CategoryController extends Controller
         return redirect()->route('category.index')->with('success','Category updated');
     }
 
-    public function show($type){
-        $categories = Category::all()->where('type','==',$type);
-        return view('category.show', compact('categories',));
-    }
+
 }

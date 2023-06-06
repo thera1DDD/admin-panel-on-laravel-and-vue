@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
 @section('title')
-    Категории
+    Локация
 @endsection
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Категории сайта</h3>
+        <h3 class="card-title">Локация</h3>
         <div class="card-tools">
             <a href="{{ route('category.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить категорию</a>
         </div>
@@ -18,20 +18,19 @@
                 <tr>
                     <th>ID</th>
                     <th>Местоположение</th>
-                    <th>Дата загрузки</th>
                     <th>Действие</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($categories as $category)
+                @forelse ($types as $type)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td><a href="{{route('category.show', $category->type)}}">{{$category->type}}</a></td>
-                        <td>{{ $category->created_at }}</td>
+                        <td>{{$typeIds[$type]}}</td>
+
+                        <td><a href="{{ route('category.show',$type )}}">{{$type}}</a></td>
                         <td>
-                            <a style="width: 110px" href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
+                            <a style="width: 110px" href="{{ route('category.edit',$typeIds[$type] )}}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>
-                            <form action="{{route('category.delete',$category->id) }}" method="post">
+                            <form action="{{route('category.delete',$typeIds[$type])}}" method="post">
                                 @csrf
                                 @method('delete')
                                 <input style="width: 110px;"  type="submit" value="Удалить" class="btn btn-danger">
