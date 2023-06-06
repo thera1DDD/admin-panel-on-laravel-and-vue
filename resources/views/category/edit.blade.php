@@ -16,12 +16,17 @@
                 <form action="{{route('category.update',$category->id)}}" method="post" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
+                    <label for="name">Категория</label>
                     <div class="form-group">
                         <input type="text" value="{{ $category->name ?? old('name') }}" name="name" class="form-control" placeholder="Название категории">
                     </div>
-                    <label for="name">Категория</label>
+                    <label for="name">Местоположение</label>
                     <div class="form-group">
-                        <input type="text" value="{{ $category->type ?? old('name') }}" name="name" class="form-control" placeholder="Местоположение">
+                        <input type="text" value="{{ $category->type ?? old('name') }}" name="type" class="form-control" placeholder="Местоположение">
+                    </div>
+                    <label for="name">Путь</label>
+                    <div class="form-group">
+                        <input type="text" value="{{ $category->path ?? old('name') }}" name="path" class="form-control" placeholder="Ссылка на категорию">
                     </div>
                     <div class="form-group">
                         <label for="status">Местоположение</label>
