@@ -52,4 +52,9 @@ class CategoryController extends Controller
         $this->categoryService->update($data,$category);
         return redirect()->route('category.index')->with('success','Category updated');
     }
+
+    public function show($type){
+        $categories = Category::all()->where('type','==',$type);
+        return view('category.show', compact('categories',));
+    }
 }

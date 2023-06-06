@@ -17,9 +17,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Название</th>
                     <th>Местоположение</th>
-                    <th>Путь</th>
                     <th>Дата загрузки</th>
                     <th>Действие</th>
                 </tr>
@@ -28,9 +26,7 @@
                 @forelse ($categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
-                        <td>{{ $category->type }}</td>
-                        <td>{{ $category->path }}</td>
+                        <td><a href="{{route('category.show', $category->type)}}">{{$category->type}}</a></td>
                         <td>{{ $category->created_at }}</td>
                         <td>
                             <a style="width: 110px" href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
