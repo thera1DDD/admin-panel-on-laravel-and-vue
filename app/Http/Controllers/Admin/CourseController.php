@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Language;
 use App\Service\CourseService;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -27,12 +28,24 @@ class CourseController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
-        $absolutePath = $this->absolutePath('images/course');
-        if($request->hasFile('main_image')){
-//            $data['main_image'] = $data['main_image']->storeAs($absolutePath,$filename);
-           $data['main_image'] = $this->uploadImage( $data['main_image'],$absolutePath. '/images/courses', false,'public');
-           dd($data['main_image']);
+
+        if ($request->hasFile('main_image')) {
+            $file = $request->file('main_image');
+            $path = $file->store('images/courses', 'public');
+
+            $data['main_image'] = $path;
         }
+
+        // Добавьте остальную логику сохранения данных в базе
+
+        // ...
+
+        // Добавьте код, который добавляет полный путь к картинке в $data['main_image']
+        $data['main_image'] = Storage::disk('public')->url($data['main_image']);
+
+        // Сохраните данные в базе
+
+        // ...
         $this->courseService->store($data);
         return redirect()->route('course.index')->with('success','Курс добавлен');
     }
