@@ -22,7 +22,6 @@ class DemovideoController extends Controller
     public function  index(){
         $demovideos = Demovideo::all();
         return view('demovideo.index',compact('demovideos'));
-
     }
 
     public function create(){
@@ -33,9 +32,12 @@ class DemovideoController extends Controller
 
     public function update(UpdateRequest $request, Demovideo $demovideo){
         $data = $request->validated();
-        if($request->hasFile('poster')){
-            $data['poster'] = $this->uploadImage($data['poster'],'/images/demovideos', false,'public');
+        if ($request->hasFile('poster')) {
+            $file = $request->file('poster');
+            $path = $file->store('posters/demovideo', 'public');
+            $data['poster'] = $path;
         }
+        $data['poster'] = Storage::disk('public')->url($data['poster']);
         if(isset($data['video_file'])){
             $data['video_file'] = Storage::disk('public')->put('/demovideo',$data['video_file']);
         }
@@ -54,7 +56,22 @@ class DemovideoController extends Controller
     }
 
     public function store(StoreRequest $request)
-    {   $data = $request->validated();
+    {
+        $data = $request->validated();
+        if ($request->hasFile('poster')) {
+            $file = $request->file('poster');
+            $path = $file->store('posters/demovideo', 'public');
+            $data['poster'] = $path;
+        }
+        $data['poster'] = Storage::disk('public')->url($data['poster']);
+//
+        if ($request->hasFile('video_file')) {
+            $file = $request->file('video_file');
+            $path = $file->store('demovideo', 'public');
+            $data['video_file'] = $path;
+        }
+        $data['video_file'] = Storage::disk('public')->url($data['video_file']);
+
         $this->demovideoService->store($data);
         return redirect()->route('demovideo.index')->with('success','Demovideo created');
     }
