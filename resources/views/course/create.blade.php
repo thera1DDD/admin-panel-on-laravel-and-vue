@@ -24,6 +24,15 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="description">Описание</label>
+                <input type="text" name="description"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('description') }}" required placeholder="Описание">
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="name">Язык</label>
                 <select name="languages_id"  id="languages_id" class="form-control select2" data-placeholder="Выберите язык" style="width: 100%;">
                     @foreach($languages as $language)

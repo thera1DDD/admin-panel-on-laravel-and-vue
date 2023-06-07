@@ -48,6 +48,7 @@ Route::group(['prefix' => 'test'], function (){
     Route::get('/all', [\App\Http\Controllers\API\V1\TestController::class,'getAll']);
     //
 });
+
 Route::group(['prefix' => 'favourite'], function (){
     //вывод всего избранного по id пользователя
     Route::get('/getCabinet/{id}', [\App\Http\Controllers\API\V1\FavouriteController::class,'show']);

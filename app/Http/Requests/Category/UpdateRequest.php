@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required|string',
             'type' => 'required|string',
-            'path' => 'required|string',
+            'path' => 'nullable|string',
         ];
     }
 }

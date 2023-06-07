@@ -18,7 +18,11 @@
                     @csrf
                     <label for="name">Название</label>
                     <div class="form-group">
-                        <input type="text" value="{{ $course->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
+                        <input type="text" value="{{ $course->name ?? old('name') }}" name="name" class="form-control" placeholder="Название">
+                    </div>
+                    <label for="name">Описание</label>
+                    <div class="form-group">
+                        <input type="text" value="{{ $course->description ?? old('description') }}" name="description" class="form-control" placeholder="Описание">
                     </div>
                     <div class="form-group">
                         <label for="name">Главное фото</label>

@@ -27,6 +27,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string',
             'languages_id' => 'required',
             'main_image'=>'required',
+            'description'=>'required',
             'slug' => 'nullable',
         ];
     }

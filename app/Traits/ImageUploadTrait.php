@@ -16,6 +16,8 @@ trait ImageUploadTrait
      * @param string|null $disk
      * @return string
      */
+
+
     public function uploadImage(UploadedFile $file, string $folder = null, bool $crop = false, string $disk = null): string
     {
         if (is_null($folder) or empty($folder)) {
@@ -70,5 +72,9 @@ trait ImageUploadTrait
         $image = Image::make($path);
         $image->resize($width, $height, function($constraint) {$constraint->aspectRatio();});
         $image->save();
+    }
+
+    public function absolutePath(){
+        return '45.12.75.46/storage/app/public';
     }
 }
