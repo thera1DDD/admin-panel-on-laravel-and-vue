@@ -74,7 +74,7 @@ trait ImageUploadTrait
         $image->save();
     }
 
-    public function absolutePath(){
-        return '45.12.75.46/storage/app/public';
+    public function absolutePath($localPath){
+        return '45.12.75.46/storage/app/public/'.$localPath;
     }
 }

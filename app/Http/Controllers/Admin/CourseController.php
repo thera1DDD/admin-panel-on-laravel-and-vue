@@ -27,9 +27,11 @@ class CourseController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
-        $absolutePath = $this->absolutePath();
+        $absolutePath = $this->absolutePath('images/course');
         if($request->hasFile('main_image')){
-            $data['main_image'] = $this->uploadImage( $data['main_image'],$absolutePath. '/images/courses', false,'public');
+//            $data['main_image'] = $data['main_image']->storeAs($absolutePath,$filename);
+           $data['main_image'] = $this->uploadImage( $data['main_image'],$absolutePath. '/images/courses', false,'public');
+           dd($data['main_image']);
         }
         $this->courseService->store($data);
         return redirect()->route('course.index')->with('success','Курс добавлен');
