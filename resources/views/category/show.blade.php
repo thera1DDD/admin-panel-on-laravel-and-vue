@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Courses
+
 @endsection
 @section('content')
     <div class="card">
@@ -28,6 +28,7 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->path }}</td>
+                        <td>@if($category->status==1){{ 'Активен' }}@else{{'Не активен'}}@endif</td>
                         <td>
                             <a style="width: 110px" href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>
