@@ -34,7 +34,7 @@
                         <td>{{ $course->language->name}}</td>
                         <td>{{ $course->slug }}</td>
                         <td>{{ $course->created_at }}</td>
-                        <td><img src="{{ $course->main_image}}" style="width: 200px"></td>
+                        <td><img src="{{$course->main_image}}" style="width: 200px"></td>
                         <td>
                             <a style="width: 110px" href="{{ route('course.edit', $course->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>

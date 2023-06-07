@@ -28,24 +28,12 @@ class CourseController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
-
         if ($request->hasFile('main_image')) {
             $file = $request->file('main_image');
             $path = $file->store('images/courses', 'public');
-
             $data['main_image'] = $path;
         }
-
-        // Добавьте остальную логику сохранения данных в базе
-
-        // ...
-
-        // Добавьте код, который добавляет полный путь к картинке в $data['main_image']
         $data['main_image'] = Storage::disk('public')->url($data['main_image']);
-
-        // Сохраните данные в базе
-
-        // ...
         $this->courseService->store($data);
         return redirect()->route('course.index')->with('success','Курс добавлен');
     }

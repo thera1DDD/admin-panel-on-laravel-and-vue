@@ -26,7 +26,7 @@ class AddPosterToDemovideosTable extends Migration
     public function down()
     {
         Schema::table('demovideos', function (Blueprint $table) {
-            $table->string('poster')->nullable();
+            Schema::dropColumns('demovideos',['poster']);
         });
     }
 }

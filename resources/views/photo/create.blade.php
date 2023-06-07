@@ -33,8 +33,9 @@
             <div class="form-group">
                 <label for="name">Model type</label>
                 <select  name="photoable_type"  id="photoable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
-                    <option value="Module">Module</option>
-                    <option value="Course">Course</option>
+                    <option value="Module">Модуль</option>
+                    <option value="Category">Категория</option>
+                    <option value="Course">Курс</option>
                 </select>
                 @error('photoable_type')
                 <span class="invalid-feedback" role="alert">

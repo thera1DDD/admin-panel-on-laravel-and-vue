@@ -27,8 +27,7 @@ class AddColumnSurnameToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('surname');
-            $table->dropColumn('patronymic');
+            Schema::dropColumns('users',['surname','patronymic']);
         });
     }
 }

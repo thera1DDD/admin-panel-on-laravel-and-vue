@@ -8,6 +8,7 @@ use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
 use App\Models\Category;
 use App\Service\CategoryService;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -38,6 +39,12 @@ class CategoryController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
+        if ($request->hasFile('poster')) {
+            $file = $request->file('poster');
+            $path = $file->store('images/categories', 'public');
+            $data['poster'] = $path;
+        }
+        $data['poster'] = Storage::disk('public')->url($data['poster']);
         $this->categoryService->store($data);
         return redirect()->route('category.index')->with('success','Category created');
     }

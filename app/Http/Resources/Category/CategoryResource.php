@@ -4,6 +4,7 @@ namespace App\Http\Resources\Category;
 
 use App\Http\Resources\Course\SingleModuleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use function Symfony\Component\Translation\t;
 
 class CategoryResource extends JsonResource
 {
@@ -19,7 +20,8 @@ class CategoryResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'type'=>$this->type,
-            'path'=>$this->path
+            'path'=>$this->path,
+            'poster'=>$this->poster
         ];
     }
 }

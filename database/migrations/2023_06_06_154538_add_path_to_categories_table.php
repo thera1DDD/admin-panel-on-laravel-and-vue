@@ -26,7 +26,7 @@ class AddPathToCategoriesTable extends Migration
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->string('path')->nullable();
+            Schema::dropColumns('categories',['path']);
         });
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Module;
 use App\Service\ModuleService;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class ModuleController extends Controller
 {
@@ -28,11 +29,14 @@ class ModuleController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
-        if($request->hasFile('main_image')){
-            $data['main_image'] = $this->uploadImage($data['main_image'],'/images/modules', false,'public');
+        if ($request->hasFile('main_image')) {
+            $file = $request->file('main_image');
+            $path = $file->store('images/modules', 'public');
+            $data['main_image'] = $path;
         }
+        $data['main_image'] = Storage::disk('public')->url($data['main_image']);
         $this->moduleService->store($data);
-        return redirect()->route('module.index')->with('success','Module created');
+        return redirect()->route('module.index')->with('success','Модуль создан');
     }
 
     public function create(){
@@ -43,11 +47,14 @@ class ModuleController extends Controller
 
     public function update(UpdateRequest  $request, Module $module){
         $data = $request->validated();
-        if($request->hasFile('main_image')){
-            $data['main_image'] = $this->uploadImage($data['main_image'],'/images/modules', false,'public');
+        if ($request->hasFile('main_image')) {
+            $file = $request->file('main_image');
+            $path = $file->store('images/modules', 'public');
+            $data['main_image'] = $path;
         }
+        $data['main_image'] = Storage::disk('public')->url($data['main_image']);
         $this->moduleService->update($module,$data);
-        return redirect()->route('module.index')->with('success','Module updated');
+        return redirect()->route('module.index')->with('success','Модуль обновлен');
     }
 
     public function edit(Module $module){
@@ -57,7 +64,7 @@ class ModuleController extends Controller
 
     public function delete(Module $module){
         $module->delete();
-        return redirect()->route('module.index')->with('success','Module deleted');
+        return redirect()->route('module.index')->with('success','Модуль удалён');
     }
 
 

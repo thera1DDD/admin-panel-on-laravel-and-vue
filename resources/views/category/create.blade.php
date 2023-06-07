@@ -11,7 +11,7 @@
             <a href="{{ route('category.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> Посмотреть все категории</a>
         </div>
     </div>
-    <form method="POST" action="{{ route('category.store') }}">
+    <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data" >
         @csrf
         <div class="card-body">
             <div class="form-group">
@@ -43,6 +43,23 @@
                 <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Постер</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Загрузка</span>
+                    </div>
+                </div>
+                @error('poster')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                 @enderror
             </div>
         </div>

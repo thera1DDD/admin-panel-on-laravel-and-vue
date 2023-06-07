@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDocumentTypeToArtworkTable extends Migration
+class AddPosterToCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddDocumentTypeToArtworkTable extends Migration
      */
     public function up()
     {
-        Schema::table('artworks', function (Blueprint $table) {
-            $table->string('documentType');
-            $table->integer('status')->default(1);
+        Schema::table('categories', function (Blueprint $table) {
+            $table->string('poster')->nullable();
         });
     }
 
@@ -26,8 +25,8 @@ class AddDocumentTypeToArtworkTable extends Migration
      */
     public function down()
     {
-        Schema::table('artworks', function (Blueprint $table) {
-            Schema::dropColumns('artworks',['documentType','status']);
+        Schema::table('categories', function (Blueprint $table) {
+            Schema::dropColumns('categories',['poster']);
         });
     }
 }
