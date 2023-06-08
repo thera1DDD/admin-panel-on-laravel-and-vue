@@ -250,6 +250,16 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/{id}',[\App\Http\Controllers\Admin\CategoryController::class, 'show'])->name('category.show');
     });
 
+    Route::group(['prefix' => 'column'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\ColumnController::class, 'index'])->name('column.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\ColumnController::class, 'create'])->name('column.create');
+        Route::post('/',[\App\Http\Controllers\Admin\ColumnController::class, 'store'])->name('column.store');
+        Route::get('/{column}/edit',[\App\Http\Controllers\Admin\ColumnController::class, 'edit'])->name('column.edit');
+        Route::patch('{column}',[\App\Http\Controllers\Admin\ColumnController::class, 'update'])->name('column.update');
+        Route::delete('{column}',[\App\Http\Controllers\Admin\ColumnController::class, 'delete'])->name('column.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\ColumnController::class, 'show'])->name('column.show');
+    });
+
 
 
 

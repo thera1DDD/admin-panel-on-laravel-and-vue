@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Column extends Model
 {
-    use HasFactory;
+    protected $table = 'columns';
+    protected $guarded = false;
+
+    public function category()
+    {
+        return $this->hasMany(Category::class, 'columns_id');
+    }
 }

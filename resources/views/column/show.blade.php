@@ -20,8 +20,6 @@
                     <th>Название</th>
                     <th>Путь</th>
                     <th>Постер</th>
-                    <th>Активность</th>
-                    <th>Колона</th>
                     <th>Действие</th>
                 </tr>
                 </thead>
@@ -33,7 +31,6 @@
                         <td>{{ $category->path }}</td>
                         <td><img src="{{ $category->poster }}"></td>
                         <td>@if($category->status==1){{ 'Активен' }}@else{{'Не активен'}}@endif</td>
-                        <td>{{ $category->column->name?? 'none'}}</td>
                         <td>
                             <a style="width: 110px" href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>

@@ -6,7 +6,7 @@ use App\Http\Resources\Course\SingleModuleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use function Symfony\Component\Translation\t;
 
-class CategoryResource extends JsonResource
+class ColumnResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +19,8 @@ class CategoryResource extends JsonResource
         return[
             'id'=>$this->id,
             'name'=>$this->name,
-            'location'=>$this->location,
-            'path'=>$this->path,
-            'poster'=>$this->poster,
+            'category'=> CategoryResource::collection($this->category)
         ];
+
     }
 }

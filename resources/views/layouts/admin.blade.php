@@ -206,6 +206,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('column.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Колоны</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('category.index') }}" class="nav-link">
                                         <i class="nav-icon fas fa-chalkboard"></i>
                                         <p>Категории</p>

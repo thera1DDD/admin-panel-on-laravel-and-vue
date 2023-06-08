@@ -14,11 +14,6 @@ class AddTestProgressToStat extends Migration
     public function up()
     {
         Schema::table('stats', function (Blueprint $table) {
-            $table->foreignId('tests_id')
-                ->nullable()
-                ->index()
-                ->constrained('tests')
-                ->onDelete('cascade');
             $table->foreignId('passed_tests_id')
                 ->nullable()
                 ->index()
@@ -28,11 +23,6 @@ class AddTestProgressToStat extends Migration
                 ->nullable()
                 ->index()
                 ->constrained('questions')
-                ->onDelete('cascade');
-            $table->foreignId('passed_answers_id')
-                ->nullable()
-                ->index()
-                ->constrained('answers')
                 ->onDelete('cascade');
         });
     }
@@ -45,7 +35,12 @@ class AddTestProgressToStat extends Migration
     public function down()
     {
         Schema::table('stats', function (Blueprint $table) {
-            Schema::dropColumns('stats',['tests_id','passed_tests_id','passed_questions_id','passed_answers_id',]);
+            $table->dropForeign('stats_passed_tests_id_foreign');
+            $table->dropColumn('passed_tests_id');
+            $table->dropForeign('stats_passed_questions_id_foreign');
+            $table->dropColumn('passed_questions_id');
+
+
         });
     }
 }

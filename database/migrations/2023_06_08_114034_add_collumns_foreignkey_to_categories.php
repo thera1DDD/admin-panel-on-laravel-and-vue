@@ -27,7 +27,8 @@ class AddCollumnsForeignkeyToCategories extends Migration
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
-            Schema::dropColumns('categories',['columns_id']);
+            $table->dropForeign('categories_columns_id_foreign');
+            $table->dropColumn('columns_id');
         });
     }
 }

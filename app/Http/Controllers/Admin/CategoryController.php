@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
 use App\Models\Category;
+use App\Models\Column;
 use App\Service\CategoryService;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,21 +22,21 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $types = $categories->pluck('type')->unique();
-        $typeIds = $categories->pluck('id', 'type');
-        return view('category.index', compact('types', 'typeIds'));
+        $locations = $categories->pluck('location')->unique();
+        $locationIds = $categories->pluck('id', 'location');
+        return view('category.index', compact('locations', 'locationIds'));
     }
 
-    public function show($type){
-        $categories = Category::where('type',$type)->get();
+    public function show($location){
+        $categories = Category::where('location',$location)->get();
         return view('category.show', compact('categories',));
     }
 
 
     public function create(){
-        return view('category.create');
+        $columns = Column::all();
+        return view('category.create',compact('columns'));
     }
-
 
     public function store(StoreRequest $request){
         $data = $request->validated();
@@ -43,15 +44,15 @@ class CategoryController extends Controller
             $file = $request->file('poster');
             $path = $file->store('images/categories', 'public');
             $data['poster'] = $path;
+            $data['poster'] = Storage::disk('public')->url($data['poster']);
         }
-        $data['poster'] = Storage::disk('public')->url($data['poster']);
         $this->categoryService->store($data);
         return redirect()->route('category.index')->with('success','Category created');
     }
 
-
     public function edit(Category $category){
-        return view('category.edit',compact('category'));
+        $columns = Column::all();
+        return view('category.edit',compact('category','columns'));
     }
 
 
@@ -67,8 +68,8 @@ class CategoryController extends Controller
             $file = $request->file('poster');
             $path = $file->store('images/categories', 'public');
             $data['poster'] = $path;
+            $data['poster'] = Storage::disk('public')->url($data['poster']);
         }
-        $data['poster'] = Storage::disk('public')->url($data['poster']);
         $this->categoryService->update($data,$category);
         return redirect()->route('category.index')->with('success','Category updated');
     }

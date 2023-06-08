@@ -17,6 +17,7 @@ class CreateColumnsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('queue');
+            $table->timestamps();
         });
     }
 

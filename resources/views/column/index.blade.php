@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Локация
+    Колоны
 @endsection
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Локация</h3>
+        <h3 class="card-title">Колоны футера</h3>
         <div class="card-tools">
-            <a href="{{ route('category.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить категорию</a>
+            <a href="{{ route('column.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить категорию</a>
         </div>
     </div>
     <!-- /.card-header -->
@@ -17,20 +17,21 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Местоположение</th>
+                    <th>Название</th>
+                    <th>Очередь</th>
                     <th>Действие</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($locations as $location)
+                @forelse ($columns as $column)
                     <tr>
-                        <td>{{$locationIds[$location]}}</td>
-
-                        <td><a href="{{ route('category.show',$location )}}">{{$location}}</a></td>
+                        <td>{{$column->id}}</td>
+                        <td>{{$column->name}}</td>
+                        <td>{{$column->queue}}</td>
                         <td>
-                            <a style="width: 110px" href="{{ route('category.edit',$locationIds[$location] )}}" class="btn btn-sm btn-warning">Редактировать</a>
+                            <a style="width: 110px" href="{{ route('column.edit',$column->id )}}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>
-                            <form action="{{route('category.delete',$locationIds[$location])}}" method="post">
+                            <form action="{{route('column.delete',$column->id)}}" method="post">
                                 @csrf
                                 @method('delete')
                                 <input style="width: 110px;"  type="submit" value="Удалить" class="btn btn-danger">

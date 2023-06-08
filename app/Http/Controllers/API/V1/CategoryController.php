@@ -5,10 +5,12 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Category\ColumnResource;
 use App\Http\Resources\Course\CourseResource;
 use App\Http\Resources\Course\ModuleResource;
 use App\Http\Resources\Course\SingleCourseResource;
 use App\Models\Category;
+use App\Models\Column;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\Stat;
@@ -18,14 +20,15 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 class CategoryController extends MainApiController
 {
     public function getAll($location){
-
-        $category = Category::where('type','=',$location)->get();
-        if($category){
-            return CategoryResource::collection($category);
+        if($location=='header' || 'menu'){
+            $categories = Category::where('location',$location)->get();
+            return CategoryResource::collection($categories);
         }
         else{
-            return $this->error('not found',404);
+            $columns = Column::with(['category' => function ($query) use ($location) {
+                $query->where('location', $location);
+            }])->get();
+            return ColumnResource::collection($columns);
         }
-
     }
 }

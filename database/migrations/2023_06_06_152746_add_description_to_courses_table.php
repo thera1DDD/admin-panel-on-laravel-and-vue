@@ -25,8 +25,8 @@ class AddDescriptionToCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::table('course', function (Blueprint $table) {
-            Schema::dropColumns('course',['description']);
+        Schema::table('courses', function (Blueprint $table) {
+            Schema::dropColumns('courses',['description']);
         });
     }
 }

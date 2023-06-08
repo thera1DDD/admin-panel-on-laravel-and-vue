@@ -33,13 +33,13 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="type">Местоположение</label>
-                <select  name="type" id="status" class="form-control select2" style="width: 100%;">
+                <label for="location">Местоположение</label>
+                <select  name="location" id="location" class="form-control select2" style="width: 100%;">
                     <option value="footer">Footer</option>
                     <option value="header">Header</option>
                     <option value="menu">Menu</option>
                 </select>
-                @error('type')
+                @error('location')
                 <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -57,6 +57,19 @@
                     </div>
                 </div>
                 @error('poster')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Колона</label>
+                <select name="columns_id"  id="columns_id" class="form-control select2"  style="width: 100%;">
+                    @foreach($columns as $column)
+                        <option value="{{$column->id}}">{{$column->name}}</option>
+                    @endforeach()
+                </select>
+                @error('columns_id')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

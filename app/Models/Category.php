@@ -9,4 +9,8 @@ class Category extends Model
 {
     protected $table = 'categories';
     protected $guarded = false;
+
+    public function column(){
+        return $this->belongsTo(Column::class,'columns_id','id');
+    }
 }

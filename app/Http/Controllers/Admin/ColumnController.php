@@ -18,15 +18,14 @@ class ColumnController extends Controller
     {
         $this->columnService = $columnService;
     }
-    public function create($id){
-        $column = Column::findOrfail($id);
-        return view('column.create',compact('column'));
+    public function create(){
+        return view('column.create');
     }
 
     public function store(StoreRequest $request){
         $data = $request->validated();
         $this->columnService->store($data);
-        return redirect()->route('column.show',$data['columns_id'])->with('success','Column created');
+        return redirect()->route('column.index')->with('success','Column created');
     }
 
     public function edit(Column $column){
@@ -42,11 +41,11 @@ class ColumnController extends Controller
     public function update(UpdateRequest $request,Column $column){
         $data = $request->validated();
         $this->columnService->update($data,$column);
-        return redirect()->route('column.show',$column['columns_id'])->with('success','Column updated');
+        return redirect()->route('column.index')->with('success','Column updated');
     }
 
     public function delete(Column $column){
         $column->delete();
-        return redirect()->route('column.show',$column['columns_id'])->with('success','Column deleted');
+        return redirect()->route('column.index')->with('success','Column deleted');
     }
 }
