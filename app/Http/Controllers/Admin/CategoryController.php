@@ -63,6 +63,12 @@ class CategoryController extends Controller
 
     public function update(UpdateRequest $request, Category $category){
         $data = $request->validated();
+        if ($request->hasFile('poster')) {
+            $file = $request->file('poster');
+            $path = $file->store('images/categories', 'public');
+            $data['poster'] = $path;
+        }
+        $data['poster'] = Storage::disk('public')->url($data['poster']);
         $this->categoryService->update($data,$category);
         return redirect()->route('category.index')->with('success','Category updated');
     }
