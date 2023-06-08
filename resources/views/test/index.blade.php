@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $test->id }}</td>
                         <td><a href="{{route('test.show', $test->id)}}">{{$test->name}}</a></td>
-                        <td>{{ $test->testable->name }}</td>
+                        <td>{{ $test->testable->name ?? 'none'}}</td>
 
                         <td>{{ $test->created_at }}</td>
                         <td>
