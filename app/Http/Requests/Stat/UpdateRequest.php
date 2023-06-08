@@ -27,9 +27,11 @@ class UpdateRequest extends FormRequest
             'passed_courses_id' => 'nullable|integer',
             'passed_modules_id' => 'nullable|integer',
             'passed_videos_id' => 'nullable|integer',
-            'passed_tasks_id' => 'nullable|integer',
-            'courses_id' => 'nullable|integer',
             'users_id' => 'nullable|integer',
+            'tests_id' => 'nullable|integer',
+            'passed_tests_id' => 'nullable|integer',
+            'passed_questions_id' => 'nullable|integer',
+            'passed_answers_id' => 'nullable|integer',
         ];
     }
 }

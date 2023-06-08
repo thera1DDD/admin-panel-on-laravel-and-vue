@@ -101,6 +101,21 @@
                     </span>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="passed_tests_id">Пройденный тест</label>
+                <select name="passed_tests_id"  id="passed_tests_id" class="form-control select2" style="width: 100%;">
+                    <option></option>
+                    @foreach($tests as $test)
+                        <option value="{{$test->id}}">{{$test->name}}</option>
+                    @endforeach()
+                </select>
+                @error('passed_courses_id')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create Favourite</button>

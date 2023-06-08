@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Stat;
+namespace App\Http\Requests\Column;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,8 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'passed_courses_id' => 'nullable|integer',
-            'passed_modules_id' => 'nullable|integer',
-            'passed_videos_id' => 'nullable|integer',
-            'users_id' => 'nullable|integer',
-            'passed_tests_id' => 'nullable|integer',
-            'passed_tasks_id ' => 'nullable|integer',
-
+            'name' => 'required|string',
+            'queue' => 'required|integer',
         ];
     }
 }

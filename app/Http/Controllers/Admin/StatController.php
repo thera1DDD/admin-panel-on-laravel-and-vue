@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Module;
 use App\Models\Stat;
 use App\Models\Task;
+use App\Models\Test;
 use App\Models\User;
 use App\Models\Video;
 use App\Service\StatService;
@@ -30,8 +31,8 @@ class StatController extends Controller
     }
 
     public function create(){
-        $stats = Stat::all();$courses = Course::all(); $users = User::all();$modules = Module::all(); $videos = Video::all();$tasks = Task::all();
-        return view('stat.create',compact('stats','users','courses','modules','videos','tasks'));
+        $stats = Stat::all();$courses = Course::all(); $users = User::all();$modules = Module::all(); $videos = Video::all();$tasks = Task::all(); $tests = Test::all();
+        return view('stat.create',compact('stats','users','courses','modules','videos','tasks','tests'));
     }
 
     public function store(StoreRequest $request){

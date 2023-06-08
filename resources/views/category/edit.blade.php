@@ -49,7 +49,7 @@
                         <label for="name">Постер</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
+                                <input name="poster" type="file" class="custom-file-input" id="exampleInputFile" accept="image/*">
                                 <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
                             </div>
                             <div class="input-group-append">

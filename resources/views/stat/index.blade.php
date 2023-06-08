@@ -21,6 +21,7 @@
                     <th>Курс</th>
                     <th>Пользователь</th>
                     <th>Пройденный Модуль</th>
+                    <th>Пройденный Тест</th>
                     <th>Пройденное Задание</th>
                     <th>Просмотренное Видео</th>
                     <th>Пройденный Курс</th>
@@ -36,6 +37,7 @@
                         <td>@if(isset($stat->course->name)){{ $stat->course->name }}@else{{''}}@endif</td>
                         <td>@if(isset($stat->user->name)){{ $stat->user->name }}@else{{''}}@endif</td>
                         <td>@if(isset($stat->module->name)){{ $stat->module->name }}@else{{''}}@endif</td>
+                        <td>@if(isset($stat->test->name)){{ $stat->test->name }}@else{{''}}@endif</td>
                         <td>@if(isset($stat->task->name)){{ $stat->task->name }}@else{{''}}@endif</td>
                         <td>@if(isset($stat->video->name)){{ $stat->video->name }}@else{{''}}@endif</td>
                         <td>@if(isset($stat->course->name)){{ $stat->course->name }}@else{{''}}@endif</td>
