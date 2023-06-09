@@ -68,6 +68,7 @@ Route::group(['prefix' => 'dictionary'], function (){
     //вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
     Route::get('/translate/{dictionaryType}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
     //
+    Route::get('switch/all',[\App\Http\Controllers\API\V1\DictionaryController::class,'getSwithes']);
 });
 
 Route::group(['prefix' => 'book'], function (){

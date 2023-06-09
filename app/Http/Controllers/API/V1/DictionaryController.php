@@ -5,11 +5,13 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Dictionary\SwitchResource;
 use App\Http\Resources\Dictionary\TranslateResource;
 use App\Http\Resources\Dictionary\WordResource;
 use App\Http\Resources\Test\TestResource;
 use App\Http\Resources\Teacher\TeacherResource;
 use App\Models\Course;
+use App\Models\SwitchLang;
 use App\Models\Teacher;
 use App\Models\Test;
 use App\Models\Translate;
@@ -51,6 +53,16 @@ class DictionaryController extends MainApiController
             case('ru-lez' || 'ru-avar');
                 return $this->search($word);
             default: return  $this->error('dictionary not found',404);
+        }
+    }
+
+    public function getSwithes(){
+        $switch = SwitchLang::all();
+        if(isset($switch)){
+            return SwitchResource::collection($switch);
+        }
+        else{
+            return $this->error('switches not found',404);
         }
     }
 }

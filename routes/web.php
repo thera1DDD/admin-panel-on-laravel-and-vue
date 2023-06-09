@@ -260,6 +260,16 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/{id}',[\App\Http\Controllers\Admin\ColumnController::class, 'show'])->name('column.show');
     });
 
+    Route::group(['prefix' => 'switchLang'], function (){
+        Route::get('/',[\App\Http\Controllers\Admin\SwitchController::class, 'index'])->name('switchLang.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\SwitchController::class, 'create'])->name('switchLang.create');
+        Route::post('/',[\App\Http\Controllers\Admin\SwitchController::class, 'store'])->name('switchLang.store');
+        Route::get('/{switchLang}/edit',[\App\Http\Controllers\Admin\SwitchController::class, 'edit'])->name('switchLang.edit');
+        Route::patch('{switchLang}',[\App\Http\Controllers\Admin\SwitchController::class, 'update'])->name('switchLang.update');
+        Route::delete('{switchLang}',[\App\Http\Controllers\Admin\SwitchController::class, 'delete'])->name('switchLang.delete');
+        Route::get('/{id}',[\App\Http\Controllers\Admin\SwitchController::class, 'show'])->name('switchLang.show');
+    });
+
 
 
 
