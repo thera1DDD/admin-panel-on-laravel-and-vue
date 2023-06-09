@@ -97,6 +97,15 @@ Route::group(['prefix' => 'category'], function (){
     Route::get('/all/{location}', [\App\Http\Controllers\API\V1\CategoryController::class,'getAll']);
 });
 
+Route::group(['prefix' => 'reg'], function (){
+    //отметка пройденного материала(отметка зеленным)
+    //принимает   'passed_courses_id' => 'nullable|integer',
+    //            'passed_modules_id' => 'nullable',
+    //            'passed_videos_id' => 'nullable',
+    //            'users_id' => 'nullable',
+    Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'register']);
+    //
+});
 
 
 
