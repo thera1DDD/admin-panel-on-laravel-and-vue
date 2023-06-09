@@ -25,6 +25,11 @@ class RegisterController extends MainApiController
     protected function register(StoreRequest $request)
     {
         $data = $request->validated();
+        // Проверяем наличие пользователя в базе данных
+        $existingUser = User::where('email', $data['email'])->first();
+        if ($existingUser) {
+            return $this->error('Пользователь c такой почтой уже существует',409);
+        }
         $user = User::firstOrCreate([
             'name' => $data['name'],
             'email' => $data['email'],
