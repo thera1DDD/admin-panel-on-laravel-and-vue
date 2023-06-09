@@ -15,7 +15,7 @@
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label for="name">Название</label>
+                <label for="name">Название на сайте</label>
                 <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Название на сайте">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -24,8 +24,8 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Описание</label>
-                <input type="text" name="description"  id="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" required placeholder="Описание">
+                <label for="description">Описание</label>
+                <input type="text" name="description"  id="description" class="form-control @error('description') is-invalid @enderror"  required placeholder="Описание">
                 @error('description')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
