@@ -30,8 +30,8 @@
                     <tr>
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
-                        <td>{{ $category->path }}</td>
-                        <td><img src="{{ $category->poster }}"></td>
+                        <td >{{ $category->path }}</td>
+                        <td><img src="{{getImage($category->poster)}}" style="width: 200px"  ></td>
                         <td>@if($category->status==1){{ 'Активен' }}@else{{'Не активен'}}@endif</td>
                         <td>{{ $category->column->name?? 'none'}}</td>
                         <td>
