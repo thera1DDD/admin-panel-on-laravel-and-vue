@@ -25,6 +25,7 @@ class CourseController extends MainApiController
         }
 
     }
+
     public function show($id){
         $course = Course::with('demovideo')->find($id);
         if(isset($course)) {
