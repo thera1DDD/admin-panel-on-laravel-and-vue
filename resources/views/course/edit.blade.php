@@ -23,6 +23,11 @@
                     <label for="name">Описание</label>
                     <div class="form-group">
                         <input type="text" value="{{ $course->description ?? old('description') }}" name="description" class="form-control" placeholder="Описание">
+                        @error('description')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="name">Главное фото</label>
@@ -35,6 +40,11 @@
                                 <span class="input-group-text">Загрузка</span>
                             </div>
                         </div>
+                        @error('main_image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="name">Язык</label>

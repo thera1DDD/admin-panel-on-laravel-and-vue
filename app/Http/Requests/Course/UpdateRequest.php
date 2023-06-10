@@ -26,9 +26,9 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required|string',
             'languages_id' => 'required',
-            'main_image'=>'required',
+            'main_image'=>'nullable',
             'description'=>'required',
-            'slug' => 'nullable',
+            'slug' => 'required',
         ];
     }
 }

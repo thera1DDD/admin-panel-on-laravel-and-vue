@@ -24,10 +24,10 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'nullable|string',
-            'path' => 'nullable|string',
-            'poster' => 'nullable',
-            'location' => 'nullable|string',
+            'name' => 'required|string',
+            'path' => 'required|string',
+            'poster' => 'required',
+            'location' => 'required|string',
             'columns_id' => 'nullable|integer',
         ];
     }
