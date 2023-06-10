@@ -47,8 +47,11 @@ class CourseController extends Controller
 
     public function update(UpdateRequest  $request, Course $course){
         $data = $request->validated();
-        if($request->hasFile('main_image')){
-            $data['main_image'] = $this->uploadImage($data['main_image'],'/images/courses', false,'public');
+        if ($request->hasFile('main_image')) {
+            $file = $request->file('main_image');
+            $path = $file->store('images/courses', 'public');
+            $data['main_image'] = $path;
+            $data['main_image'] = Storage::disk('public')->url($data['main_image']);
         }
         $this->courseService->update($course,$data);
         return redirect()->route('course.index')->with('success','Курс обновлён');
