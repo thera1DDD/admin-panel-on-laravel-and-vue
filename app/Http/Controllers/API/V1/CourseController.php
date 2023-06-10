@@ -18,7 +18,7 @@ class CourseController extends MainApiController
     public function getAll(){
         $course = Course::with('demovideo')->get();
         if(isset($course)){
-            return CourseResource::collection($course);
+            return SingleCourseResource::collection($course);
         }
         else{
             return $this->error('course not found',404);
