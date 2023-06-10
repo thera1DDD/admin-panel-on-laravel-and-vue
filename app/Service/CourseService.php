@@ -11,7 +11,7 @@ class CourseService extends Controller
         Course::firstOrCreate($data);
     }
 
-    public function update($course,$data){
+    public function update(Course $course,$data){
         $course->update($data);
     }
 }

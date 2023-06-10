@@ -33,8 +33,8 @@ class ModuleController extends Controller
             $file = $request->file('main_image');
             $path = $file->store('images/modules', 'public');
             $data['main_image'] = $path;
+            $data['main_image'] = Storage::disk('public')->url($data['main_image']);
         }
-        $data['main_image'] = Storage::disk('public')->url($data['main_image']);
         $this->moduleService->store($data);
         return redirect()->route('module.index')->with('success','Модуль создан');
     }

@@ -32,8 +32,8 @@ class CourseController extends Controller
             $file = $request->file('main_image');
             $path = $file->store('images/courses', 'public');
             $data['main_image'] = $path;
+            $data['main_image'] = Storage::disk('public')->url($data['main_image']);
         }
-        $data['main_image'] = Storage::disk('public')->url($data['main_image']);
         $this->courseService->store($data);
         return redirect()->route('course.index')->with('success','Курс добавлен');
     }
