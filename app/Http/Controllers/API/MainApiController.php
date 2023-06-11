@@ -45,7 +45,7 @@ class MainApiController extends Controller
    public function translateBackward(int $id,string $language){
        $translate = Translate::where('language',$language)->where('id',$id)->first();
        if($translate){
-           return $translate->word->name;
+           return new WordResource($translate->word);
        }
        else{
            return $this->error('there is no translate',404);

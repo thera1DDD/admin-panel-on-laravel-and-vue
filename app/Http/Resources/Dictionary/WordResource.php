@@ -16,7 +16,7 @@ class WordResource extends JsonResource
     {
         return[
             'id'=>$this->id,
-            'name'=>$this->name,
+            'translate'=>$this->name,
         ];
     }
 }

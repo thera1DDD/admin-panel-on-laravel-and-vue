@@ -9,4 +9,7 @@ class Word extends Model
 {
     protected $table = 'words';
     protected $guarded = false;
+
+
+
 }
