@@ -27,36 +27,50 @@ class RegisterController extends MainApiController
     protected function register(StoreRequest $request)
     {
         $data = $request->validated();
-        // Проверяем наличие пользователя в базе данных
+        // проверка на сущетсвование пользователя
         $existingUser = User::where('email', $data['email'])->first();
         if ($existingUser) {
             return $this->error('Пользователь c такой почтой уже существует',409);
         }
-        $user = User::firstOrCreate([
-            'name' => $data['name'],
-            'email' => $data['email'],
-
-         //   'password' => Hash::make($data['password']),
+        //
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
         ]);
-        return new RegisterResource($user);
+
+        $token = $user->createToken('reg')->accessToken;
+        return response()->json([
+            'token' => $token,
+            'user' => $user,
+            'status' => false
+        ]);
     }
 
 
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $credentials = $request->only('email', 'password');
 
+        // Аутентификация пользователя
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('MyApp')->accessToken;
+            // Аутентификация успешна
 
-            return response()->json(['token' => $token], 200);
+            // Получение пользователя
+            $user = Auth::user();
+
+            // Генерация токена
+            $token = $user->createToken('API Token')->accessToken;
+
+            return response()->json([
+                'token' => $token,
+                'user' => $user,
+                'status' => true
+            ], 200);
+        } else {
+            return response()->json(['error' => 'Invalid credentials'], 401);
         }
-        return response()->json(['message' => 'Invalid credentials'], 401);
     }
 
 

@@ -101,6 +101,10 @@ Route::group(['prefix' => 'register'], function (){
     Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'register']);
 });
 
+Route::group(['prefix' => 'authorization'], function (){
+    Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'authenticate']);
+});
+
 
 
 
