@@ -32,19 +32,20 @@ class RegisterController extends MainApiController
         if ($existingUser) {
             return $this->error('Пользователь c такой почтой уже существует',409);
         }
-        //
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
+        else{
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
+            ]);
 
-        $token = $user->createToken('reg')->accessToken;
-        return response()->json([
-            'token' => $token,
-            'user' => $user,
-            'status' => false
-        ]);
+            $token = $user->createToken('API Token')->accessToken;
+            return response()->json([
+                'token' => $token,
+                'user' => $user,
+                'status' => false
+            ]);
+        }
     }
 
 
