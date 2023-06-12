@@ -22,7 +22,7 @@ trait HttpResponse
     protected function error(string $message, int $status = 422) : JsonResponse
     {
         return response()->json([
-            'success' => false,
+            'status' => false,
             'message' => $message,
         ], $status);
     }
