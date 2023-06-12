@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\Auth;
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Register\StoreRequest;
+use App\Http\Resources\Auth\RegisterResource;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\ColumnResource;
 use App\Http\Resources\Course\CourseResource;
@@ -34,9 +35,10 @@ class RegisterController extends MainApiController
         $user = User::firstOrCreate([
             'name' => $data['name'],
             'email' => $data['email'],
+
          //   'password' => Hash::make($data['password']),
         ]);
-        return $user;
+        return new RegisterResource($user);
     }
 
 
