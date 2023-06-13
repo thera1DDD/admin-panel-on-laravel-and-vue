@@ -25,13 +25,16 @@ class CabinetController extends MainApiController
                 if (isset($existingUser)) {
                     return response()->json(['success' => false, 'message' => 'Электронная почта уже существует'], 422);
                 }
+                else{
+                    $data['password'] = bcrypt( $data['password']);
+                    $user->update($data);
+                    return response()->json([
+                        'user' => $data,
+                        'status' => true
+                    ]);
+                }
             }
-            $data['password'] =  bcrypt( $data['password']);
-            $user->update($data);
-            return response()->json([
-                'user' => $data,
-                'status' => true
-            ]);
+
         }
         else{
             return $this->error('Пользователь не найден', 404);
