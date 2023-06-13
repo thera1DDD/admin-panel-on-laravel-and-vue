@@ -52,7 +52,7 @@ Route::group(['prefix' => 'test'], function (){
 
 Route::group(['prefix' => 'favourite'], function (){
     //вывод всего избранного по id пользователя
-    Route::get('/getCabinet/{id}', [\App\Http\Controllers\API\V1\FavouriteController::class,'show']);
+    Route::get('/getFavouriteData/{id}', [\App\Http\Controllers\API\V1\FavouriteController::class,'show']);
     //
     //вывод только данных пользователя по id
     Route::get('/{id}', [\App\Http\Controllers\API\V1\UserController::class,'show']);
@@ -103,6 +103,10 @@ Route::group(['prefix' => 'register'], function (){
 
 Route::group(['prefix' => 'authorization'], function (){
     Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'authenticate']);
+});
+
+Route::group(['prefix' => 'cabinet'], function (){
+    Route::post('/update', [\App\Http\Controllers\API\V1\CabinetController::class,'update']);
 });
 
 

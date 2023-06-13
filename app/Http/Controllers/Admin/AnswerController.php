@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Answer\StoreRequest;
-use App\Http\Requests\Answer\UpdateRequest;
+use App\Http\Requests\API\Register\UpdateRequest;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Service\AnswerService;
