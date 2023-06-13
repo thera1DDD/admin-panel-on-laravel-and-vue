@@ -30,7 +30,7 @@ class StoreRequest extends FormRequest
             'patronymic' => 'nullable',
             'phone' => 'nullable',
             'photo' => 'nullable',
-            'email' => 'required|email|unique:users',
+            'email' => 'nullable|email|unique:users',
             'password' => 'nullable',
         ];
     }
