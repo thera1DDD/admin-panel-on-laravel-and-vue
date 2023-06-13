@@ -26,6 +26,7 @@ class CabinetController extends MainApiController
                     return response()->json(['success' => false, 'message' => 'Электронная почта уже существует'], 422);
                 }
             }
+            $data['password'] =  bcrypt( $data['password']);
             $user->update($data);
             return response()->json([
                 'user' => $data,
