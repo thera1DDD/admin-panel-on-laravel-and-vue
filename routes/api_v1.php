@@ -51,11 +51,8 @@ Route::group(['prefix' => 'test'], function (){
 });
 
 Route::group(['prefix' => 'favourite'], function (){
-    //вывод всего избранного по id пользователя
-    Route::get('/getFavouriteData/{id}', [\App\Http\Controllers\API\V1\FavouriteController::class,'show']);
-    //
-    //вывод только данных пользователя по id
-    Route::get('/{id}', [\App\Http\Controllers\API\V1\UserController::class,'show']);
+    //вывод избранного по id пользователя
+    Route::get('/{id}', [\App\Http\Controllers\API\V1\FavouriteController::class,'show']);
     //
 });
 Route::group(['prefix' => 'dictionary'], function (){
@@ -80,11 +77,6 @@ Route::group(['prefix' => 'book'], function (){
     //
 });
 Route::group(['prefix' => 'stat'], function (){
-    //отметка пройденного материала(отметка зеленным)
-    //принимает   'passed_courses_id' => 'nullable|integer',
-    //            'passed_modules_id' => 'nullable',
-    //            'passed_videos_id' => 'nullable',
-    //            'users_id' => 'nullable',
     Route::post('/postStat', [\App\Http\Controllers\API\V1\StatController::class,'postStat']);
     //
 });
@@ -107,6 +99,7 @@ Route::group(['prefix' => 'authorization'], function (){
 
 Route::group(['prefix' => 'cabinet'], function (){
     Route::post('/update', [\App\Http\Controllers\API\V1\CabinetController::class,'update']);
+    Route::get('/user/{id}', [\App\Http\Controllers\API\V1\CabinetController::class,'show']);
 });
 
 

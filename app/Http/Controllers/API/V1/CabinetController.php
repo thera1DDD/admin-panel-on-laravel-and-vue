@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Requests\API\Cabinet\StoreRequest;
+use App\Http\Resources\Cabinet\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,12 +37,22 @@ class CabinetController extends MainApiController
                     ]);
                 }
             }
-
         }
         else{
             return $this->error('Пользователь не найден', 404);
         }
     }
+    public function show($id){
+        $user = User::find($id);
+        if(isset($user)) {
+            return new UserResource($user);
+        }
+        else{
+            return $this->error('user not found',404);
+        }
+
+    }
+
 }
 
 
