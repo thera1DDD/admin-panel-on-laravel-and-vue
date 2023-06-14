@@ -4,7 +4,7 @@ namespace App\Http\Resources\Dictionary;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TranslateResource extends JsonResource
+class BackwardsTranslateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,9 +14,10 @@ class TranslateResource extends JsonResource
      */
     public function toArray($request)
     {
-        return[
-            'id'=>$this->id,
-            'translate'=>$this->translate,
+        return [
+            'id' => $this->id,
+            'word' => $this->translate,
+            'translate' => $this->word->name,
         ];
     }
 }

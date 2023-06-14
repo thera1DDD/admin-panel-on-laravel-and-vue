@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Dictionary\BackwardsTranslateResource;
+use App\Http\Resources\Dictionary\OrdinaryTranslateResource;
 use App\Http\Resources\Dictionary\TranslateResource;
 use App\Http\Resources\Dictionary\WordResource;
 use App\Models\Translate;
@@ -27,18 +29,33 @@ class MainApiController extends Controller
        }
    }
 
-    public function search($word){
-        $words = Word::query();
+    public function search($word,$language){
         if ($word) {
-            $data =  $words->where('name', 'like', "%{$word}%")->get();
-            return  WordResource::collection($data);
+            $data = Word::where('name', 'like', "%{$word}%")->get();
+
+            $result = [];
+
+            foreach ($data as $word) {
+                $translate = $word->translate()
+                    ->where('language', $language)
+                    ->pluck('translate')
+                    ->toArray();
+
+                $result[] = [
+                    'id' => $word->id,
+                    'word' => $word->name,
+                    'translate' => count($translate) > 0 ? implode(', ', $translate) : null,
+                ];
+            }
+
+            return response()->json($result);
         }
     }
     public function searchBackward($word,$language){
         $translate = Translate::query();
         if ($word) {
-            $data =  $translate->where('translate', 'like', "%{$word}%")->where('language',$language)->get();
-            return  TranslateResource::collection($data);
+            $data =  $translate->with('word')->where('translate', 'like', "%{$word}%")->where('language',$language)->get();
+            return  BackwardsTranslateResource::collection($data);
         }
     }
 
@@ -52,9 +69,13 @@ class MainApiController extends Controller
        }
    }
 
-   public function getAllWords($language){
-       $translate = Translate::where('language','=',$language)->get();
-       return TranslateResource::collection($translate);
+   public function getAllBackwardWords($language){
+       $translate = Translate::with('word')->where('language',$language)->get();
+       return BackwardsTranslateResource::collection($translate);
    }
+    public function getAllOrdinaryWords($language){
+        $translate = Translate::with('word')->where('language',$language)->get();
+        return OrdinaryTranslateResource::collection($translate);
+    }
 //end Dictionary stuff
 }

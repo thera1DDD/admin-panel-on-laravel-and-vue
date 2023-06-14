@@ -24,25 +24,26 @@ class DictionaryController extends MainApiController
     public function getAll(string $dictionaryType){
         switch ($dictionaryType){
             case('lez-ru');
-                return $this->getAllWords('Лезгинский');
+                return $this->getAllBackwardWords('Лезгинский');
             case('avar-ru');
-                return $this->getAllWords('Аварский');
-            case ('ru-lez' or 'ru-avar');
-                $words = Word::all();
-                 return WordResource::collection($words);
+                return $this->getAllBackwardWords('Аварский');
+            case ('ru-lez');
+               return $this->getAllOrdinaryWords('Лезгинский');
+            case ('ru-avar');
+                return $this->getAllOrdinaryWords('Аварский');
             default: return  $this->error('dictionary not found',404);
         }
     }
 
-    public function getTranslate(string $dictionaryType,int $id){
-        return match ($dictionaryType) {
-            'ru-lez' => $this->translate($id,'Лезгинский'),
-                'ru-avar' => $this->translate(  $id,'Аварский'),
-                    'lez-ru' => $this->translateBackward($id,'Лезгинский'),
-                        'avar-ru' => $this->translateBackward($id,'Аварский') ,
-                             default => $this->error('wrong dictionary type', 404),
-        };
-    }
+//    public function getTranslate(string $dictionaryType,int $id){
+//        return match ($dictionaryType) {
+//            'ru-lez' => $this->translate($id,'Лезгинский'),
+//                'ru-avar' => $this->translate(  $id,'Аварский'),
+//                    'lez-ru' => $this->translateBackward($id,'Лезгинский'),
+//                        'avar-ru' => $this->translateBackward($id,'Аварский') ,
+//                             default => $this->error('wrong dictionary type', 404),
+//        };
+//    }
 
     public function getSearch(string $dictionaryType, string $word){
         switch ($dictionaryType){
@@ -50,8 +51,10 @@ class DictionaryController extends MainApiController
                 return $this->searchBackward($word,'Лезгинский');
             case('avar-ru');
                 return $this->searchBackward($word,'Аварский');
-            case('ru-lez' || 'ru-avar');
-                return $this->search($word);
+            case('ru-lez');
+                return $this->search($word,'Лезгинский');
+            case('ru-avar');
+                return $this->search($word,'Аварский');
             default: return  $this->error('dictionary not found',404);
         }
     }
