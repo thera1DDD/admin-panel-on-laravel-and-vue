@@ -19,11 +19,11 @@ class RegisterController extends MainApiController
             return $this->error('Пользователь c такой почтой уже существует',409);
         }
         else{
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->password)
-            ]);
+            if($request->password){
+                $data['password']= bcrypt($data['password']);
+            }
+            $user = User::firstOrCreate($data);
+
             $token = $user->createToken('API Token')->accessToken;
             return response()->json([
                 'token' => $token,
