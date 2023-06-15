@@ -82,7 +82,7 @@ class RegisterController extends MainApiController
         if ($user->verification_code == $request->input('code')) {
             $user->verification_code = null; // Обнуляем код подтверждения
             $user->save();
-            return response()->json(['message' => 'Registration successful'], 200);
+            return response()->json(['message' => 'Registration successful','status'=>true], 200);
         } else {
             return $this->error('Invalid verification code',400);
         }
