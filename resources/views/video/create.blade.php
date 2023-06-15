@@ -24,6 +24,15 @@ Create Video
                 @enderror
             </div>
             <div class="form-group">
+                <label for="number">Номер</label>
+                <input type="text" name="number"  id="number" class="form-control @error('number') is-invalid @enderror" value="{{ old('number') }}" required placeholder="Название">
+                @error('number')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="name">Description</label>
                 <input type="text" name="description"  id="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" required placeholder="Название">
                 @error('description')

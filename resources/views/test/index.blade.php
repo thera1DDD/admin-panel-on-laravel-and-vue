@@ -18,6 +18,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Название</th>
+                    <th>Номер</th>
                     <th>Источник</th>
                     <th>Дата создания</th>
                     <th>Действие</th>
@@ -28,8 +29,8 @@
                     <tr>
                         <td>{{ $test->id }}</td>
                         <td><a href="{{route('test.show', $test->id)}}">{{$test->name}}</a></td>
+                        <td>{{ $test->number }}</td>
                         <td>{{ $test->testable->name ?? 'none'}}</td>
-
                         <td>{{ $test->created_at }}</td>
                         <td>
                             <a style="width: 110px" href="{{ route('test.edit', $test->id) }}" class="btn btn-sm btn-warning">Редактировать</a>

@@ -15,9 +15,18 @@
             @method('patch')
             @csrf
             <div class="form-group">
-                <label for="name">Text</label>
+                <label for="name">Название</label>
                 <textarea  type="text" name="name"  id="text" class="form-control @error('text') is-invalid @enderror"  required placeholder="Test" >{{$test->name}} </textarea>
                 @error('text')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+            </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="number">Номер</label>
+                <textarea  type="text" name="number"  id="text" class="form-control @error('text') is-invalid @enderror"  required placeholder="Test" >{{$test->number}} </textarea>
+                @error('number')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
             </span>

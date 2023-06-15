@@ -26,7 +26,7 @@ class AddCodeToCourses extends Migration
     public function down()
     {
         Schema::table('courses', function (Blueprint $table) {
-            //
+            Schema::dropColumns('courses',['code']);
         });
     }
 }

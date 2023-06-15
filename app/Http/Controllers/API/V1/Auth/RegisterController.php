@@ -47,14 +47,12 @@ class RegisterController extends MainApiController
         }
 
         // Генерация и отправка кода на указанный email
-        $verificationCode = $this->generateVerificationCode(); // Ваша функция для генерации кода
-
+        $verificationCode = $this->generateVerificationCode(); // функция для генерации кода
         // Добавление нового пользователя в базу данных
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'verification_code' => $verificationCode, // Сохранение кода подтверждения в модели пользователя
-            // Добавьте другие поля, если требуется
         ]);
 
         // Отправка уведомления с кодом подтверждения
@@ -81,12 +79,12 @@ class RegisterController extends MainApiController
         }
 
         // Проверка кода подтверждения
-        if ($user->verification_code === $request->input('code')) {
+        if ($user->verification_code == $request->input('code')) {
             $user->verification_code = null; // Обнуляем код подтверждения
             $user->save();
             return response()->json(['message' => 'Registration successful'], 200);
         } else {
-            return response()->json(['error' => 'Invalid verification code'], 400);
+            return $this->error('Invalid verification code',400);
         }
     }
 
@@ -97,29 +95,7 @@ class RegisterController extends MainApiController
         return rand(1000, 9999); // В этом примере генерируется случайное четырехзначное число
     }
 
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
 
-        // Аутентификация пользователя
-        if (Auth::attempt($credentials)) {
-            // Аутентификация успешна
-
-            // Получение пользователя
-            $user = Auth::user();
-
-            // Генерация токена
-            $token = $user->createToken('API Token')->accessToken;
-
-            return response()->json([
-                'token' => $token,
-                'user' => $user,
-                'status' => true
-            ], 200);
-        } else {
-            return response()->json(['error' => 'Invalid credentials'], 401);
-        }
-    }
 
 
 

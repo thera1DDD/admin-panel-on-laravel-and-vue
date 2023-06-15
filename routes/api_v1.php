@@ -94,7 +94,7 @@ Route::group(['prefix' => 'register'], function (){
 });
 
 Route::group(['prefix' => 'authorization'], function (){
-    Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'authenticate']);
+    Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'verifyCode']);
 });
 
 Route::group(['prefix' => 'cabinet'], function (){

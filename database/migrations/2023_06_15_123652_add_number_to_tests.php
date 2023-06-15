@@ -14,7 +14,7 @@ class AddNumberToTests extends Migration
     public function up()
     {
         Schema::table('tests', function (Blueprint $table) {
-            $table->string('number')->nullable();
+            $table->double('number')->nullable();
         });
     }
 

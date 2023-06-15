@@ -27,7 +27,8 @@ class UpdateRequest extends FormRequest
             'modules_id' => 'nullable',
             'word' => 'required',
             'description' => 'required',
-            'name' => 'nullable'
+            'name' => 'nullable',
+            'number' => 'required',
         ];
     }
 }

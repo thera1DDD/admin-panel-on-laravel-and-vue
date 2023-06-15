@@ -14,7 +14,7 @@ class AddNumberToVideo extends Migration
     public function up()
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->string('number')->nullable();
+            $table->double('number')->nullable();
         });
     }
 

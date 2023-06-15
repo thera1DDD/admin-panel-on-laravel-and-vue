@@ -23,7 +23,16 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Источник</label>
+                <label for="number">Номер</label>
+                <input type="text" name="number"  id="number" class="form-control @error('number') is-invalid @enderror" value="{{ old('number') }}" required placeholder="Номер">
+                @error('number')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+            </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="testable_type">Источник</label>
                 <select  name="testable_type"  id="testable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
                     <option value="Module">Модули</option>
                     <option value="Course">Курсы</option>

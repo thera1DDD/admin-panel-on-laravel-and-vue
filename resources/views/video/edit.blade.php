@@ -20,6 +20,10 @@
                     <div class="form-group">
                         <input type="text" value="{{ $video->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
                     </div>
+                    <label for="name">Number</label>
+                    <div class="form-group">
+                        <input type="text" value="{{ $video->number ?? old('number') }}" name="number" class="form-control" placeholder="Номер">
+                    </div>
                     <label for="description">Description</label>
                     <div class="form-group">
                         <input type="text" value="{{ $video->description ?? old('description') }}" name="description" class="form-control" placeholder="Description">

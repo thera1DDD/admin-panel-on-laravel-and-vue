@@ -19,6 +19,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Номер</th>
                     <th>Description</th>
                     <th>Module</th>
                     <th>Video_file</th>
@@ -31,6 +32,7 @@
                     <tr>
                         <td>{{ $video->id }}</td>
                         <td>{{ $video->name }}</td>
+                        <td>{{ $video->number }}</td>
                         <td>{{ $video->description }}</td>
                         <td>{{ $video->module->name}}</td>
                         <td><a href="{{route('video.play', $video->id)}}">{{$video->video_file}}</a></td>

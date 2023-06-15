@@ -14,7 +14,7 @@ class AddCodeToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('verification_code')->nullable();
+            $table->integer('verification_code')->nullable();
         });
     }
 

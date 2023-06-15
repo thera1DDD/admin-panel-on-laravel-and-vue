@@ -19,6 +19,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Слово</th>
+                    <th>Номер</th>
                     <th>Название задания</th>
                     <th>Описание</th>
                     <th>Модуль</th>
@@ -31,6 +32,7 @@
                     <tr>
                         <td>{{ $task->id }}</td>
                         <td>{{ $task->word }}</td>
+                        <td>{{ $task->number }}</td>
                         <td>{{ $task->name }}</td>
                         <td>{{ $task->description }}</td>
                         <td>{{ $task->module->name }}</td>

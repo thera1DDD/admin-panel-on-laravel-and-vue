@@ -27,6 +27,7 @@ class StoreRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'modules_id'=> 'required',
+            'number' => 'required',
             'video_file' => 'required'
         ];
     }

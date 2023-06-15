@@ -27,7 +27,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string',
             'testable_type'=>'required|string',
             'testable_id'=>'nullable',
-
+            'number' => 'nullable',
         ];
     }
 }

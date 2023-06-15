@@ -18,10 +18,14 @@
                     @csrf
                     <label for="word">Слово</label>
                     <div class="form-group">
-                        <input type="text" value="{{ $task->word ?? old('word') }}" name="word" class="form-control" placeholder="Word">
+                        <input type="text" value="{{ $task->word ?? old('word') }}" name="word" class="form-control" placeholder="Слово">
+                    </div>
+                    <label for="number">Номер</label>
+                    <div class="form-group">
+                        <input type="text" value="{{ $task->number ?? old('number') }}" name="number" class="form-control" placeholder="Номер">
                     </div>
                     <div class="form-group">
-                        <label for="name">Название</label>
+                        <label for="name">Название задания</label>
                         <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{$task->name}}" required placeholder="Слово">
                         @error('name')
                         <span class="invalid-feedback" role="alert">
