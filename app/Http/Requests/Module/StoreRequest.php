@@ -30,6 +30,7 @@ class StoreRequest extends FormRequest
             'courses_id' =>'required',
             'main_image'=>'required',
             'slug' => 'nullable',
+            'code' => 'required',
         ];
     }
 }

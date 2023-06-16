@@ -16,6 +16,10 @@
                 <form action="{{route('course.update',$course->id)}}" method="post" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
+                    <label for="name">Код курса</label>
+                    <div class="form-group">
+                        <input type="text" value="{{ $course->code ?? old('code') }}" name="code" class="form-control" placeholder="Name">
+                    </div>
                     <label for="name">Название</label>
                     <div class="form-group">
                         <input type="text" value="{{ $course->name ?? old('name') }}" name="name" class="form-control" placeholder="Название">

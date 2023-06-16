@@ -41,10 +41,8 @@ class CategoryController extends Controller
     public function store(StoreRequest $request){
         $data = $request->validated();
         if ($request->hasFile('poster')) {
-            $file = $request->file('poster');
-            $path = $file->store('images/categories', 'public');
-            $data['poster'] = $path;
-            $data['poster'] = Storage::disk('public')->url($data['poster']);
+            $path = $request->file('poster')->store('images/categories', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
         }
         $this->categoryService->store($data);
         return redirect()->route('category.index')->with('success','Category created');
@@ -65,10 +63,8 @@ class CategoryController extends Controller
     public function update(UpdateRequest $request, Category $category){
         $data = $request->validated();
         if ($request->hasFile('poster')) {
-            $file = $request->file('poster');
-            $path = $file->store('images/categories', 'public');
-            $data['poster'] = $path;
-            $data['poster'] = Storage::disk('public')->url($data['poster']);
+            $path = $request->file('poster')->store('images/categories', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
         }
         $this->categoryService->update($data,$category);
         return redirect()->route('category.index')->with('success','Category updated');

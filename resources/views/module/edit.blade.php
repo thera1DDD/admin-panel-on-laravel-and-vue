@@ -16,6 +16,10 @@
                 <form action="{{route('module.update',$module->id)}}" method="post" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
+                    <label for="name">Код модуля</label>
+                    <div class="form-group">
+                        <input type="text" value="{{ $module->code ?? old('code') }}" name="code" class="form-control" placeholder="Name">
+                    </div>
                     <label for="name">Название</label>
                     <div class="form-group">
                         <input type="text" value="{{ $module->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
@@ -24,7 +28,7 @@
                     <div class="form-group">
                         <input type="text" value="{{ $module->description ?? old('description') }}" name="description" class="form-control" placeholder="Description">
                     </div>
-                    <label for="number">Номер</label>
+                    <label for="number">Глава</label>
                     <div class="form-group">
                         <input type="text" value="{{ $module->number ?? old('number') }}" name="number" class="form-control" placeholder="Number">
                     </div>

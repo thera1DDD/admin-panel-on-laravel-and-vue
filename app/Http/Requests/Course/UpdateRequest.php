@@ -29,6 +29,7 @@ class UpdateRequest extends FormRequest
             'main_image'=>'nullable',
             'description'=>'required',
             'slug' => 'required',
+            'code' => 'required',
         ];
     }
 }

@@ -26,8 +26,8 @@ class CourseController extends MainApiController
 
     }
 
-    public function show($id){
-        $course = Course::with('demovideo')->find($id);
+    public function show($code){
+        $course = Course::with('demovideo')->where('code',$code)->first();
         if(isset($course)) {
             return new SingleCourseResource($course);
         }
@@ -36,9 +36,9 @@ class CourseController extends MainApiController
         }
     }
 
-    public function courseWithProgress($courseId,$userId)
+    public function courseWithProgress($courseId,$userId,$code)
     {
-        $course = Course::find($courseId);
+        $course = Course::where('code',$code)->first();
         //получение количества просмотренных видео курса
         $passed_videos = Stat::where('courses_id',$courseId)->where('users_id',$userId)->whereNotNull('passed_videos_id')->count();
         $passed_tasks = Stat::where('courses_id',$courseId)->where('users_id',$userId)->whereNotNull('passed_tasks_id')->count();
@@ -67,8 +67,8 @@ class CourseController extends MainApiController
         }
     }
 
-    public function moduleShow($id){
-        $module = Module::with('video','test','task')->find($id);
+    public function moduleShow($code){
+        $module = Module::with('video','test','task')->where('code',$code)->first();
         return new ModuleResource($module);
     }
 }

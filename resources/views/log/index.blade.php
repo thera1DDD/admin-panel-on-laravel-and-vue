@@ -34,7 +34,7 @@
                     @forelse ($logs as $log)
                         <tr>
                             <td>{{ $log->id }}</td>
-                            <td>{{ $log->user->name }}</td>
+                            <td>{{ $log->user->name ?? 'Удаленный пользователь'}}</td>
                             <td>{{ $log->action_type }}</td>
                             <td>{{ $log->category }}</td>
                             <td>{{ $log->record }}</td>

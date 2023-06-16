@@ -15,6 +15,15 @@
         @csrf
         <div class="card-body">
             <div class="form-group">
+                <label for="name">Код модуля</label>
+                <input type="text" name="code"  id="code" class="form-control @error('code') is-invalid @enderror" value="{{ old('code') }}" required placeholder="Название">
+                @error('code')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="name">Название</label>
                 <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Название">
                 @error('name')
@@ -23,6 +32,7 @@
                     </span>
                 @enderror
             </div>
+
             <div class="form-group">
                 <label for="name">Описание</label>
                 <input type="text" name="description"  id="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" required placeholder="Название">

@@ -16,6 +16,7 @@ class SingleModuleResource extends JsonResource
     {
         return[
             'id'=>$this->id,
+            'code'=>$this->code,
             'name'=>$this->name,
             'description'=>$this->description,
             'main_image'=>$this->main_image,

@@ -30,10 +30,8 @@ class ModuleController extends Controller
     public function store(StoreRequest $request){
         $data = $request->validated();
         if ($request->hasFile('main_image')) {
-            $file = $request->file('main_image');
-            $path = $file->store('images/modules', 'public');
-            $data['main_image'] = $path;
-            $data['main_image'] = Storage::disk('public')->url($data['main_image']);
+            $path = $request->file('main_image')->store('images/modules', 'public');
+            $data['main_image'] = Storage::disk('public')->url($path);
         }
         $this->moduleService->store($data);
         return redirect()->route('module.index')->with('success','Модуль создан');
@@ -48,11 +46,8 @@ class ModuleController extends Controller
     public function update(UpdateRequest  $request, Module $module){
         $data = $request->validated();
         if ($request->hasFile('main_image')) {
-            $file = $request->file('main_image');
-            $path = $file->store('images/modules', 'public');
-            $data['main_image'] = $path;
-            $data['main_image'] = Storage::disk('public')->url($data['main_image']);
-
+            $path = $request->file('main_image')->store('images/modules', 'public');
+            $data['main_image'] = Storage::disk('public')->url($path);
         }
         $this->moduleService->update($module,$data);
         return redirect()->route('module.index')->with('success','Модуль обновлен');

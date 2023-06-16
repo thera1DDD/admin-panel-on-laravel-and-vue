@@ -18,6 +18,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Код курса</th>
                     <th>Название</th>
                     <th>Описание</th>
                     <th>Язык</th>
@@ -31,6 +32,7 @@
                 @forelse ($courses as $course)
                     <tr>
                         <td>{{ $course->id }}</td>
+                        <td>{{ $course->code }}</td>
                         <td>{{ $course->name }}</td>
                         <td>{{ $course->description }}</td>
                         <td>{{ $course->language->name}}</td>

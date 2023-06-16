@@ -205,7 +205,7 @@ class UserController extends Controller
     public function delete($id){
         $user = User::findOrFail($id);
 
-        $user->delete();
+        $user->forceDelete();
 
         return response()->json('ok', 200);
     }

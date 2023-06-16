@@ -73,8 +73,4 @@ trait ImageUploadTrait
         $image->resize($width, $height, function($constraint) {$constraint->aspectRatio();});
         $image->save();
     }
-
-    public function absolutePath($localPath){
-        return '45.12.75.46/storage/app/public/'.$localPath;
-    }
 }

@@ -37,15 +37,22 @@ class RegisterController extends MainApiController
 
     public function register(Request $request)
     {
+        $user = User::where('email', $request->input('email'))->first();
+        if($user){
+            if($user->verification_code !=null) {
+                $user->forceDelete();
+            }
+        }
+        // Валидация
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'name' => 'required',
         ]);
 
+
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
-
         // Генерация и отправка кода на указанный email
         $verificationCode = $this->generateVerificationCode(); // функция для генерации кода
         // Добавление нового пользователя в базу данных
@@ -57,8 +64,13 @@ class RegisterController extends MainApiController
 
         // Отправка уведомления с кодом подтверждения
         $user->notify(new VerificationCodeNotification($verificationCode));
+        // Если пользователь не отправил код
+        $createdAt = $user->created_at;
+        $currentTime = now();
+        $timeDifference = $currentTime->diffInSeconds($createdAt);
 
-        return response()->json(['user' => $user], 201);
+
+        return response()->json(['user' => $user,], 201);
     }
 
     public function verifyCode(Request $request)
@@ -75,39 +87,35 @@ class RegisterController extends MainApiController
         $user = User::where('email', $request->input('email'))->first();
 
         if (!$user) {
-            return response()->json(['error' => 'User not found'], 404);
+            return $this->error('User not found',404);
         }
-
-        // Проверка кода подтверждения
-        if ($user->verification_code == $request->input('code')) {
-            $user->verification_code = null; // Обнуляем код подтверждения
-            $user->save();
-            return response()->json(['message' => 'Registration successful','status'=>true], 200);
-        } else {
-            return $this->error('Invalid verification code',400);
+        // Проверка времени
+        $createdAt = $user->created_at;
+        $currentTime = now();
+        $timeDifference = $currentTime->diffInMinutes($createdAt);
+        // Проверка на время для кода
+        if ($timeDifference < 1) {
+            if ($user->verification_code == $request->input('code')) {
+                $user->verification_code = null; // Обнуляем код подтверждения
+                $token = $user->createToken('API Token')->accessToken;
+                $user->save();
+                return response()->json(['message' => 'Registration successful', 'status' => true,'token'=>$token], 200);
+            }
+            else {
+                return $this->error('Invalid verification code', 400);
+            }
+        }
+        else{
+            // Удаление пользователя и связанных данных
+            $user->forceDelete();
+            return $this->error('Срок действия проверочного кода истек.Данные сброшенны', 400);
         }
     }
 
     private function generateVerificationCode()
     {
-        // Ваша логика для генерации кода подтверждения
-        // Например, можно использовать функцию для генерации случайного числа или комбинации символов
-        return rand(1000, 9999); // В этом примере генерируется случайное четырехзначное число
+        return rand(1000, 9999);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //    public function getAll($location){

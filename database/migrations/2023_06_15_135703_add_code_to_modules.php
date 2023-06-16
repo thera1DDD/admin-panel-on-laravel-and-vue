@@ -14,7 +14,7 @@ class AddCodeToModules extends Migration
     public function up()
     {
         Schema::table('modules', function (Blueprint $table) {
-            //
+            $table->string('code');
         });
     }
 
@@ -26,7 +26,7 @@ class AddCodeToModules extends Migration
     public function down()
     {
         Schema::table('modules', function (Blueprint $table) {
-            //
+            Schema::dropColumns('modules',['code']);
         });
     }
 }

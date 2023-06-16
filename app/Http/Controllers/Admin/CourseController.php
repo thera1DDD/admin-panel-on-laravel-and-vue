@@ -29,10 +29,8 @@ class CourseController extends Controller
     public function store(StoreRequest $request){
         $data = $request->validated();
         if ($request->hasFile('main_image')) {
-            $file = $request->file('main_image');
-            $path = $file->store('images/courses', 'public');
-            $data['main_image'] = $path;
-            $data['main_image'] = Storage::disk('public')->url($data['main_image']);
+            $path = $request->file('main_image')->store('images/courses', 'public');
+            $data['main_image'] = Storage::disk('public')->url($path);
         }
         $this->courseService->store($data);
         return redirect()->route('course.index')->with('success','Курс добавлен');
@@ -48,10 +46,8 @@ class CourseController extends Controller
     public function update(UpdateRequest  $request, Course $course){
         $data = $request->validated();
         if ($request->hasFile('main_image')) {
-            $file = $request->file('main_image');
-            $path = $file->store('images/courses', 'public');
-            $data['main_image'] = $path;
-            $data['main_image'] = Storage::disk('public')->url($data['main_image']);
+            $path = $request->file('main_image')->store('images/courses', 'public');
+            $data['main_image'] = Storage::disk('public')->url($path);
         }
         $this->courseService->update($course,$data);
         return redirect()->route('course.index')->with('success','Курс обновлён');

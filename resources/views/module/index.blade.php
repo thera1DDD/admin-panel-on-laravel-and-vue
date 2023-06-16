@@ -18,6 +18,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Код модуля</th>
                     <th>Название</th>
                     <th>Описание</th>
                     <th>Номер</th>
@@ -32,11 +33,12 @@
                 @forelse ($modules as $module)
                     <tr>
                         <td>{{ $module->id }}</td>
+                        <td>{{ $module->code }}</td>
                         <td>{{ $module->name }}</td>
                         <td>{{ $module->description }}</td>
                         <td>{{ $module->number }}</td>
                         <td>{{ $module->course->name}}</td>
-                        <td><img src="{{ getImage($module->main_image)}}" style="width: 200px"></td>
+                        <td><img alt="something" src="{{ getImage($module->main_image)}}" style="width: 200px"></td>
                         <td>{{ $module->slug }}</td>
                         <td>{{ $module->created_at }}</td>
                         <td>

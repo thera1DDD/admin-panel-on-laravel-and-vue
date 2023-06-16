@@ -25,17 +25,17 @@ Route::group(['prefix' => 'course'], function (){
     //вывод всех курсов
     Route::get('/all', [\App\Http\Controllers\API\V1\CourseController::class,'getAll']);
     //
-    //вывод курса по id
-    Route::get('/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'show']);
+    //вывод курса по code
+    Route::get('/{code}', [\App\Http\Controllers\API\V1\CourseController::class,'show']);
     //
     //вывод курса со статистикой на странице прохождения курса
-    Route::get('/withProgress/{courseId}/{userId}', [\App\Http\Controllers\API\V1\CourseController::class,'courseWithProgress']);
+    Route::get('/withProgress/{courseId}/{userId}/{code}', [\App\Http\Controllers\API\V1\CourseController::class,'courseWithProgress']);
     //
 });
 
 Route::group(['prefix' => 'module'], function (){
     //вывод модуля с видео, тестами, заданиями на странице прохождения курса
-    Route::get('/{id}', [\App\Http\Controllers\API\V1\CourseController::class,'moduleShow']);
+    Route::get('/{code}', [\App\Http\Controllers\API\V1\CourseController::class,'moduleShow']);
     //
 });
 Route::group(['prefix' => 'teacher'], function (){
