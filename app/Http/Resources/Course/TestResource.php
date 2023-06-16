@@ -17,6 +17,8 @@ class TestResource extends JsonResource
         return[
             'id'=>$this->id,
             'name'=>$this->name,
+            'number'=>$this->number,
+
         ];
     }
 }
