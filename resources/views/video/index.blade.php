@@ -39,7 +39,7 @@
                         <td>{{ $video->description }}</td>
                         <td>{{ $video->module->name}}</td>
                         <td><a href="{{route('video.play', $video->id)}}">{{$video->video_file}}</a></td>
-                        <td><img src="{{getImage($video->poster)}}" style="width: 150px" alt=" " ></td>
+                        <td><img src="{{getImage($video->poster)}}" style="width: 150px"></td>
                         <td>{{ $video->created_at }}</td>
                         <td>
                             <a style="width: 110px"  href="{{ route('video.edit', $video->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
