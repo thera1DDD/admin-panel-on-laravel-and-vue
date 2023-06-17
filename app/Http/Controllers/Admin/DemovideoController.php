@@ -72,7 +72,7 @@ class DemovideoController extends Controller
     public function play($id)
     {
         $demovideo = Demovideo::findOrFail($id);
-        $video_file_path = Storage::url($demovideo->video_file);
+        $video_file_path = $demovideo->video_file;
         return view('demovideo.show', compact('video_file_path'));
     }
 }
