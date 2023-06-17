@@ -11,6 +11,7 @@ use App\Models\Test;
 use App\Service\TestService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TestController extends Controller
 {
@@ -56,12 +57,43 @@ class TestController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
-        $this->testService->store($data);
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('images/tests/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
+        $testable_id = $data['testable_id'];
+        $testable_type = "App\Models\\" . $data['testable_type'];
+        $test = Test::create([
+            'name' => $data['name'],
+            'code' => $data['code'],
+            'number' =>$data['number'],
+            'poster' =>$data['poster'],
+        ]);
+        $model = $testable_type::findOrFail($testable_id);
+        $test->testable()->associate($model);
+        $test->save();
         return redirect()->route('test.index')->with('success','Test created');
     }
     public function update(UpdateRequest $request,Test $test){
         $data = $request->validated();
-        $this->testService->update($data,$test);
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('images/tests/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
+        else{
+            $data['poster'] = $test->poster;
+        }
+        $testable_id = $data['testable_id'];
+        $testable_type = "App\Models\\" . $data['testable_type'];
+        $test->update([
+            'name' => $data['name'],
+            'code' => $data['code'],
+            'number' =>$data['number'],
+            'poster' =>$data['poster'],
+        ]);
+        $model = $testable_type::findOrFail($testable_id);
+        $test->testable()->associate($model);
+        $test->save();
         return redirect()->route('test.index')->with('success','Test updated');
     }
 

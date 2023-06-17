@@ -18,8 +18,9 @@ class VideoResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'number'=>$this->number,
-            'description'=>$this->desciption,
+            'description'=>$this->description,
             'poster'=>$this->poster,
+            'code'=>$this->code,
             'video_file'=>$this->video_file
         ];
     }

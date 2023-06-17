@@ -11,7 +11,7 @@
                 <a href="{{ route('test.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Test</a>
             </div>
         </div>
-        <form method="POST" action="{{ route('test.update',$test->id) }}">
+        <form method="POST" action="{{ route('test.update',$test->id) }}" enctype="multipart/form-data">
             @method('patch')
             @csrf
             <div class="form-group">
@@ -31,6 +31,32 @@
                         <strong>{{ $message }}</strong>
             </span>
                 @enderror
+            </div>
+            <div class="form-group">
+                <label for="number">Код</label>
+                <textarea  type="text" name="code"  id="text" class="form-control @error('text') is-invalid @enderror"  required placeholder="Test" >{{$test->code}} </textarea>
+                @error('code')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+            </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Poster</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
+                        @error('poster')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Загрузка</span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="name">Model type</label>

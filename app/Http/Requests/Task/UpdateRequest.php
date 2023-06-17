@@ -29,6 +29,8 @@ class UpdateRequest extends FormRequest
             'description' => 'required',
             'name' => 'nullable',
             'number' => 'required',
+            'poster' => 'nullable',
+            'code' => 'nullable',
         ];
     }
 }

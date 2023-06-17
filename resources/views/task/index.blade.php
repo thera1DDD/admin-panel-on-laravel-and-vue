@@ -19,10 +19,12 @@
                 <tr>
                     <th>ID</th>
                     <th>Слово</th>
+                    <th>Код</th>
                     <th>Номер</th>
                     <th>Название задания</th>
                     <th>Описание</th>
                     <th>Модуль</th>
+                    <th>Постер</th>
                     <th>Date Posted</th>
                     <th>Action</th>
                 </tr>
@@ -32,10 +34,12 @@
                     <tr>
                         <td>{{ $task->id }}</td>
                         <td>{{ $task->word }}</td>
+                        <td>{{ $task->code }}</td>
                         <td>{{ $task->number }}</td>
                         <td>{{ $task->name }}</td>
                         <td>{{ $task->description }}</td>
                         <td>{{ $task->module->name }}</td>
+                        <td><img src="{{ getImage($task->poster)}}"style="width: 200px" ></td>
                         <td>{{ $task->created_at }}</td>
                         <td>
                             <a style="width: 66px" href="{{ route('task.edit', $task->id) }}" class="btn btn-sm btn-warning">Edit</a>

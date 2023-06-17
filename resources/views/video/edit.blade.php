@@ -20,6 +20,11 @@
                     <div class="form-group">
                         <input type="text" value="{{ $video->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
                     </div>
+                    <label for="name">Код</label>
+                    <div class="form-group">
+                        <input type="text" value="{{ $video->code ?? old('code') }}" name="code" class="form-control" placeholder="Код">
+                    </div>
+
                     <label for="name">Number</label>
                     <div class="form-group">
                         <input type="text" value="{{ $video->number ?? old('number') }}" name="number" class="form-control" placeholder="Номер">
@@ -33,6 +38,23 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input name="video_file" type="file" class="custom-file-input" id="exampleInputFile">
+                                <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Загрузка</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Poster</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
+                                @error('poster')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
                             </div>
                             <div class="input-group-append">

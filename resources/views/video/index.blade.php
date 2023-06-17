@@ -18,33 +18,36 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Код</th>
+                    <th>Название</th>
                     <th>Номер</th>
-                    <th>Description</th>
-                    <th>Module</th>
-                    <th>Video_file</th>
-                    <th>Date Posted</th>
-                    <th>Action</th>
+                    <th>Описание</th>
+                    <th>Модуль</th>
+                    <th>Видео</th>
+                    <th>Постер</th>
+                    <th>Дата загрузки</th>
+                    <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse ($videos as $video)
                     <tr>
                         <td>{{ $video->id }}</td>
+                        <td>{{ $video->code }}</td>
                         <td>{{ $video->name }}</td>
                         <td>{{ $video->number }}</td>
                         <td>{{ $video->description }}</td>
                         <td>{{ $video->module->name}}</td>
                         <td><a href="{{route('video.play', $video->id)}}">{{$video->video_file}}</a></td>
+                        <td><img src="{{getImage($video->poster)}}" style="width: 150px" alt=" " ></td>
                         <td>{{ $video->created_at }}</td>
                         <td>
-                            <a style="width: 66px"  href="{{ route('video.edit', $video->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a style="width: 110px"  href="{{ route('video.edit', $video->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>
-
                             <form action="{{route('video.delete',$video->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
+                                <input style="width: 110px;"  type="submit" value="Удалить" class="btn btn-danger">
                             </form>
                         </td>
                     </tr>

@@ -26,8 +26,16 @@ class VideoController extends Controller
 
     public function update(UpdateRequest  $request, Video $video){
         $data = $request->validated();
-        if(isset($data['video_file'])){
-            $data['video_file'] = Storage::disk('public')->put('/video',$data['video_file']);
+//        if(isset($data['video_file'])){
+//            $data['video_file'] = Storage::disk('public')->put('/video',$data['video_file']);
+//        }
+        if ($request->hasFile('video_file')) {
+            $path = $request->file('video_file')->store('video/modulesVideo', 'public');
+            $data['video_file'] = Storage::disk('public')->url($path);
+        }
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('module/video/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
         }
         $this->videoService->update($data,$video);
         return redirect()->route('video.index')->with('success','Video created');
@@ -47,6 +55,14 @@ class VideoController extends Controller
 
     public function store(StoreRequest $request)
     {   $data = $request->validated();
+        if ($request->hasFile('video_file')) {
+            $path = $request->file('video_file')->store('video', 'public');
+            $data['video_file'] = Storage::disk('public')->url($path);
+        }
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('video/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
         $this->videoService->store($data);
         return redirect()->route('video.index')->with('success','Video created');
     }
@@ -54,7 +70,7 @@ class VideoController extends Controller
     public function play($id)
     {
         $video = Video::findOrFail($id);
-        $video_file_path = Storage::url($video->video_file);
+        $video_file_path = $video->video_file;
         return view('video.show', compact('video_file_path'));
     }
 

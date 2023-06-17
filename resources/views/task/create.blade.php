@@ -11,13 +11,22 @@
             <a href="{{ route('task.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> Посмотреть все слова</a>
         </div>
     </div>
-    <form method="POST" action="{{ route('task.store') }}">
+    <form method="POST" action="{{ route('task.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
             <div class="form-group">
                 <label for="name">Слово</label>
                 <input type="text" name="word"  id="word" class="form-control @error('word') is-invalid @enderror" value="{{ old('word') }}" required placeholder="Слово">
                 @error('word')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Код</label>
+                <input type="text" name="code"  id="code" class="form-control @error('code') is-invalid @enderror" value="{{ old('code') }}" required placeholder="Код">
+                @error('code')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -62,6 +71,23 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Poster</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
+                        @error('poster')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Загрузка</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-footer">

@@ -8,6 +8,7 @@ use App\Http\Requests\Task\UpdateRequest;
 use App\Models\Module;
 use App\Models\Task;
 use App\Service\TaskService;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Expr\AssignOp\Mod;
 
 class TaskController extends Controller
@@ -33,6 +34,10 @@ class TaskController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('images/categories', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
         $this->taskService->store($data);
         return redirect()->route('task.index')->with('success','Task created');
     }
@@ -52,6 +57,10 @@ class TaskController extends Controller
 
     public function update(UpdateRequest $request, Task $task){
         $data = $request->validated();
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('images/categories', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
         $this->taskService->update($data,$task);
         return redirect()->route('task.index')->with('success','Task updated');
     }

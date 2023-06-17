@@ -27,7 +27,9 @@ class StoreRequest extends FormRequest
             'name' => 'required|string',
             'testable_type'=>'required|string',
             'testable_id'=>'nullable',
-            'number' => 'nullable',
+            'number' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'poster' => 'required',
+            'code' => 'required',
         ];
     }
 }

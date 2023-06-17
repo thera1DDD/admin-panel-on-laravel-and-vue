@@ -13,12 +13,16 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <form action="{{route('task.update',$task->id)}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('task.update',$task->id)}} "method="post" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
                     <label for="word">Слово</label>
                     <div class="form-group">
                         <input type="text" value="{{ $task->word ?? old('word') }}" name="word" class="form-control" placeholder="Слово">
+                    </div>
+                    <label for="word">Код</label>
+                    <div class="form-group">
+                        <input type="text" value="{{ $task->code ?? old('code') }}" name="code" class="form-control" placeholder="Код">
                     </div>
                     <label for="number">Номер</label>
                     <div class="form-group">
@@ -56,6 +60,23 @@
                         <strong>{{ $message }}</strong>
                     </span>
                         @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Poster</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
+                                @error('poster')
+                                <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                                @enderror
+                                <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Загрузка</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Редактировать" >

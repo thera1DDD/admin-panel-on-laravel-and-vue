@@ -18,6 +18,8 @@ class TestResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'number'=>$this->number,
+            'poster'=>$this->poster,
+            'code'=>$this->code,
 
         ];
     }

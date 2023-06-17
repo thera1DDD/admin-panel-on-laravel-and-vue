@@ -28,7 +28,9 @@ class StoreRequest extends FormRequest
             'description' => 'required',
             'modules_id'=> 'required',
             'number' => 'required',
-            'video_file' => 'required'
+            'video_file' => 'required',
+            'poster' => 'nullable',
+            'code' => 'required',
         ];
     }
 }

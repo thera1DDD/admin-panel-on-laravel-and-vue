@@ -14,7 +14,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
-            <video class="video_show"  controls src="{{$video_file_path}}" ></video>
+            <video class="video_show"  controls src={{getImage($video_file_path)}} ></video>
         </div>
         <!-- /.card-body -->
     </div>

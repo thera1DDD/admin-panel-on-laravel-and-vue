@@ -28,7 +28,10 @@ class UpdateRequest extends FormRequest
             'description' => 'required',
             'modules_id'=> 'required',
             'number' => 'required',
-            'video_file' => 'nullable|mimetypes:video/mp4,video/avi|max:1000000'
+            'video_file' => 'nullable',
+            //'video_file' => 'nullable|mimetypes:video/mp4,video/avi|max:1000000',
+            'poster' => 'nullable',
+            'code' => 'required',
 
         ];
     }

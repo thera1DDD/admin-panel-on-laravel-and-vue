@@ -11,7 +11,7 @@
                 <a href="{{ route('test.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> Посмотреть все тесты</a>
             </div>
         </div>
-        <form method="POST" action="{{ route('test.store') }}">
+        <form method="POST" action="{{ route('test.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Название</label>
@@ -23,6 +23,15 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="name">Код</label>
+                <input type="text" name="code"  id="code" class="form-control @error('code') is-invalid @enderror" value="{{ old('code') }}" required placeholder="Код">
+                @error('code')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="number">Номер</label>
                 <input type="text" name="number"  id="number" class="form-control @error('number') is-invalid @enderror" value="{{ old('number') }}" required placeholder="Номер">
                 @error('number')
@@ -30,6 +39,23 @@
                         <strong>{{ $message }}</strong>
             </span>
                 @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Poster</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
+                        @error('poster')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Загрузка</span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="testable_type">Источник</label>
