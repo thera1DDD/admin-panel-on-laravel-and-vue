@@ -20,7 +20,6 @@ class TestResource extends JsonResource
             'number'=>$this->number,
             'poster'=>$this->poster,
             'code'=>$this->code,
-
         ];
     }
 }

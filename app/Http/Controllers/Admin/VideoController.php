@@ -54,7 +54,8 @@ class VideoController extends Controller
 
 
     public function store(StoreRequest $request)
-    {   $data = $request->validated();
+    {
+        $data = $request->validated();
         if ($request->hasFile('video_file')) {
             $path = $request->file('video_file')->store('video', 'public');
             $data['video_file'] = Storage::disk('public')->url($path);

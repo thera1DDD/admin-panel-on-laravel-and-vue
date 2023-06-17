@@ -31,23 +31,16 @@ class DemovideoController extends Controller
     }
 
     public function update(UpdateRequest $request, Demovideo $demovideo){
-        $data=$request->validated();
-        if ($request->hasFile('poster')) {
-            $file = $request->file('poster');
-            $path = $file->store('images/courses', 'public');
-            $data['poster'] = $path;
+        $data = $request->validated();
+        if ($request->hasFile('video_file')) {
+            $path = $request->file('video_file')->store('video', 'public');
+            $data['video_file'] = Storage::disk('public')->url($path);
         }
-        $data['poster'] = Storage::disk('public')->url($data['poster']);
-        $video = new Demovideo();
-        $video->poster = $data['poster'];
-        $video->name = $data['name'];
-        $video->description = $data['description'];
-        $video->courses_id = $data['courses_id'];
-        $video_file = $data['video_file'];
-        $video_file_name = time() . '_' . $video_file->getClientOriginalName();
-        $video_file_path = $video_file->storeAs('demovideo', $video_file_name, 'public');
-        $video->video_file = $video_file_path;
-        $video->save();
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('video/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
+        $this->demovideoService->update($data,$demovideo);
         return redirect()->route('demovideo.index')->with('success','Demovideo updated');
     }
 
@@ -63,23 +56,16 @@ class DemovideoController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $data=$request->validated();
-        if ($request->hasFile('poster')) {
-            $file = $request->file('poster');
-            $path = $file->store('images/courses', 'public');
-            $data['poster'] = $path;
+        $data = $request->validated();
+        if ($request->hasFile('video_file')) {
+            $path = $request->file('video_file')->store('video', 'public');
+            $data['video_file'] = Storage::disk('public')->url($path);
         }
-        $data['poster'] = Storage::disk('public')->url($data['poster']);
-        $video = new Demovideo();
-        $video->poster = $data['poster'];
-        $video->name = $data['name'];
-        $video->description = $data['description'];
-        $video->courses_id = $data['courses_id'];
-        $video_file = $data['video_file'];
-        $video_file_name = time() . '_' . $video_file->getClientOriginalName();
-        $video_file_path = $video_file->storeAs('demovideo', $video_file_name, 'public');
-        $video->video_file = $video_file_path;
-        $video->save();
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('video/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
+        $this->demovideoService->store($data);
         return redirect()->route('demovideo.index')->with('success','Demovideo created');
     }
 

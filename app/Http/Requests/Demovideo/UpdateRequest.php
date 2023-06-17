@@ -25,9 +25,9 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'nullable',
+            'description' => 'required',
             'courses_id'=> 'required',
-            'video_file' => 'required',
+            'video_file' => 'nullable',
             'poster' => 'nullable',
         ];
     }

@@ -22,6 +22,7 @@
                     <th>Description</th>
                     <th>Course</th>
                     <th>Video_file</th>
+                    <th>Постер</th>
                     <th>Date Posted</th>
                     <th>Action</th>
                 </tr>
@@ -34,6 +35,7 @@
                         <td>{{ $demovideo->description }}</td>
                         <td>{{ $demovideo->course->name}}</td>
                         <td><a href="{{route('demovideo.play', $demovideo->id)}}">{{$demovideo->video_file}}</a></td>
+                        <td><img src="{{getImage($demovideo->poster)}}" style="width: 200px"></td>
                         <td>{{ $demovideo->created_at }}</td>
                         <td>
                             <a style="width: 66px"  href="{{ route('demovideo.edit', $demovideo->id) }}" class="btn btn-sm btn-warning">Edit</a>
