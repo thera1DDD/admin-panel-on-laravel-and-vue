@@ -61,6 +61,17 @@ class CourseController extends MainApiController
             $courseResource->totalExam = $totalExam;
             $courseResource->passedVideos = $passed_videos;
             $courseResource->passedTasks = $passed_tasks;
+            // Дополнительная логика и проверки
+            $modules = $course->module;
+            $userStats = Stat::where('users_id', $userId)
+                ->whereIn('passed_modules_id', $modules->pluck('id'))
+                ->pluck('passed_modules_id')
+                ->toArray();
+
+            $courseResource->modules = $modules->map(function ($module) use ($userStats) {
+                $module->passed = in_array($module->id, $userStats);
+                return $module;
+            });
             return $courseResource;
         } else {
             return $this->error('Course not found', 404);

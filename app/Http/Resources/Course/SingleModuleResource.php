@@ -22,6 +22,7 @@ class SingleModuleResource extends JsonResource
             'main_image'=>$this->main_image,
             'sort'=>$this->sort,
             'number'=>$this->number,
+            'passed' => isset($this->passed) ? $this->passed : false,
         ];
     }
 }
