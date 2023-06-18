@@ -38,11 +38,13 @@ class CourseController extends MainApiController
 
     public function courseWithProgress($courseId,$userId,$code)
     {
+        //получние курса по code
         $course = Course::where('code',$code)->first();
         //получение количества просмотренных видео курса
         $passed_videos = Stat::where('courses_id',$courseId)->where('users_id',$userId)->whereNotNull('passed_videos_id')->count();
         $passed_tasks = Stat::where('courses_id',$courseId)->where('users_id',$userId)->whereNotNull('passed_tasks_id')->count();
         //
+        //подсчет имеющихся видео, тестов, заданий в курсе
         if (isset($course,$passed_tasks,$passed_videos)){
         $totalVideos = $course->module->flatMap(function ($module) {
             return $module->video;
@@ -61,7 +63,8 @@ class CourseController extends MainApiController
             $courseResource->totalExam = $totalExam;
             $courseResource->passedVideos = $passed_videos;
             $courseResource->passedTasks = $passed_tasks;
-            // Дополнительная логика и проверки
+        //
+            //проверка на модулей на пройденность
             $modules = $course->module;
             $userStats = Stat::where('users_id', $userId)
                 ->whereIn('passed_modules_id', $modules->pluck('id'))
@@ -72,6 +75,7 @@ class CourseController extends MainApiController
                 $module->passed = in_array($module->id, $userStats);
                 return $module;
             });
+            //
             return $courseResource;
         } else {
             return $this->error('Course not found', 404);
