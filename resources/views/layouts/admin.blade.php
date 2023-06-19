@@ -166,7 +166,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('stat.index') }}" class="nav-link">
                                         <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Статистика</p>
+                                        <p>Прогресс</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

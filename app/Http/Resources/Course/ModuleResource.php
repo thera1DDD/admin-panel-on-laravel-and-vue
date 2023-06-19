@@ -21,9 +21,9 @@ class ModuleResource extends JsonResource
             'main_image'=>$this->main_image,
             'sort'=>$this->sort,
             'number'=>$this->number,
-            'test' => TestResource::collection($this->whenLoaded('test')),
-            'video' => VideoResource::collection($this->whenLoaded('video')),
-            'task' => TaskResource::collection($this->whenLoaded('task')),
+            'tests' => TestResource::collection($this->whenLoaded('test')),
+            'videos' => VideoResource::collection($this->whenLoaded('video')),
+            'tasks' => TaskResource::collection($this->whenLoaded('task')),
         ];
     }
 }

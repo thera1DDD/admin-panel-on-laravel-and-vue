@@ -63,6 +63,22 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="passed_tests_id">Пройденный тест</label>
+                        <select name="passed_tests_id"  id="passed_tests_id" class="form-control select2" style="width: 100%;">
+                            @foreach($tests as $test)
+                                <option value="{{ $test->id }}" {{ $test->id == $stat->passed_tests_id ? 'selected' : '' }}>
+                                    {{$test->name}}
+                                </option>
+                                <option></option>
+                            @endforeach
+                        </select>
+                        @error('passed_tests_id')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="passed_tasks_id">Пройденные задание</label>
                         <select name="passed_tasks_id"  id="passed_tasks_id" class="form-control select2" style="width: 100%;">
                             @foreach($tasks as $task)

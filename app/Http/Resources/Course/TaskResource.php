@@ -23,6 +23,7 @@ class TaskResource extends JsonResource
             'status'=>$this->status,
             'poster'=>$this->poster,
             'code'=>$this->code,
+            'passed' => isset($this->passed) ? $this->passed : false,
         ];
     }
 }

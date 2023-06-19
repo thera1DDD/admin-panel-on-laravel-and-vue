@@ -20,12 +20,12 @@ class CourseResource extends JsonResource
             'name'=>$this->name,
             'main_image'=>$this->main_image,
             'sort'=>$this->sort,
-            'totalVideos' => $this->totalVideos ?? null,
-            'totalTests' => $this->totalTests ?? null,
-            'totalTasks' => $this->totalTasks ?? null,
-            'totalExam'=>$this->totalExam ?? null,
-            'passedVideos' => $this->passedVideos ?? null,
-            'passedTasks'=>$this->passedTasks ?? null,
+            'total_videos' => $this->totalVideos ?? null,
+            'total_tests' => $this->totalTests ?? null,
+            'total_tasks' => $this->totalTasks ?? null,
+            'total_exam'=>$this->totalExam ?? null,
+            'passed_videos' => $this->passedVideos ?? null,
+            'passed_tasks'=>$this->passedTasks ?? null,
             'modules' => SingleModuleResource::collection($this->whenLoaded('module'))->toArray($request),
         ];
     }

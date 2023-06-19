@@ -20,6 +20,7 @@ class TestResource extends JsonResource
             'number'=>$this->number,
             'poster'=>$this->poster,
             'code'=>$this->code,
+            'passed' => isset($this->passed) ? $this->passed : false,
         ];
     }
 }

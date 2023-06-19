@@ -18,7 +18,6 @@ use Illuminate\Http\Request;
 class StatController extends Controller
 {
 
-
     protected $statService;
     public function __construct(StatService $statService)
     {
@@ -38,13 +37,13 @@ class StatController extends Controller
     public function store(StoreRequest $request){
         $data = $request->validated();
         $this->statService->store($data);
-        return redirect()->route('stat.index')->with('успешно','Статистика пользователя добавлена');
+        return redirect()->route('stat.index')->with('success','Статистика пользователя добавлена');
     }
 
 
     public function edit(Stat $stat){
-        $courses = Course::all(); $users = User::all(); $modules = Module::all();$videos = Video::all(); $tasks = Task::all();
-        return view('stat.edit',compact('stat','users','courses','videos','modules','tasks'));
+        $courses = Course::all(); $users = User::all(); $modules = Module::all();$videos = Video::all(); $tasks = Task::all();$tests = Test::all();
+        return view('stat.edit',compact('stat','users','courses','videos','modules','tasks','tests'));
     }
 
 

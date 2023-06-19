@@ -35,7 +35,7 @@ Route::group(['prefix' => 'course'], function (){
 
 Route::group(['prefix' => 'module'], function (){
     //вывод модуля с видео, тестами, заданиями на странице прохождения курса
-    Route::get('/{code}', [\App\Http\Controllers\API\V1\CourseController::class,'moduleShow']);
+    Route::get('/{code}/{userId}', [\App\Http\Controllers\API\V1\CourseController::class,'moduleShow']);
     //
 });
 Route::group(['prefix' => 'teacher'], function (){

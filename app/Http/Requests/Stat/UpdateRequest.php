@@ -32,6 +32,7 @@ class UpdateRequest extends FormRequest
             'passed_tests_id' => 'nullable|integer',
             'passed_questions_id' => 'nullable|integer',
             'passed_answers_id' => 'nullable|integer',
+            'passed_tasks_id' => 'nullable|integer',
         ];
     }
 }
