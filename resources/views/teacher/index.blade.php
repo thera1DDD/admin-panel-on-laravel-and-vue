@@ -28,7 +28,7 @@
                 @forelse ($teachers as $teacher)
                     <tr>
                         <td>{{ $teacher->id }}</td>
-                        <td>{{ $teacher->user->name }}</td>
+                        <td>{{ $teacher->user->name ?? 'Удаленный пользователь'}}</td>
                         <td>{{ $teacher->position}}</td>
                         <td>{{ $teacher->created_at }}</td>
                         <td>

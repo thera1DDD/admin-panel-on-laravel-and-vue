@@ -6,10 +6,10 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Статистика</h3>
+        <h3 class="card-title">Прогресс</h3>
 
         <div class="card-tools">
-            <a href="{{ route('stat.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить статистику пользователя</a>
+            <a href="{{ route('stat.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить прогресс пользователя</a>
         </div>
     </div>
     <!-- /.card-header -->

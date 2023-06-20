@@ -86,7 +86,7 @@ class CourseController extends MainApiController
         $module = Module::where('code', $code)->first();
 
         if ($module) {
-            $moduleResource = new ModuleResource($module->loadCount('video', 'task')); // Обновлено: использовать связь "tasks" вместо "task"
+            $moduleResource = new ModuleResource($module->loadCount('video', 'task'));
 
             // Проверка модуля на пройденность видео
             $videos = $module->video;
