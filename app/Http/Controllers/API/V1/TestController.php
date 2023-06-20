@@ -15,8 +15,8 @@ use Illuminate\Http\Request;
 class TestController extends MainApiController
 {
 
-    public function show($id){
-        $test = Test::with('question.answer')->find($id);
+    public function show($code){
+        $test = Test::with('question.answer')->where('code',$code)->first();
         if (!$test) {
           return $this->error('not found',404);
         }

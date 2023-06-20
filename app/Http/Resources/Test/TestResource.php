@@ -16,6 +16,7 @@ class TestResource extends JsonResource
     {
         return[
             'id'=>$this->id,
+            'code'=>$this->code,
             'name'=>$this->name,
             'question'=> QuestionResource::collection($this->whenLoaded('question'))
         ];
