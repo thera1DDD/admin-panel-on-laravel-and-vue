@@ -16,6 +16,7 @@ class TranslateResource extends JsonResource
     {
         return[
             'id'=>$this->id,
+
             'translate'=>$this->translate,
         ];
     }

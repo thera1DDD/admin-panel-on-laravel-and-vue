@@ -48,7 +48,7 @@ class MainApiController extends Controller
                 ];
             }
 
-            return response()->json($result);
+            return response()->json(['data'=>$result]);
         }
     }
     public function searchBackward($word,$language){
