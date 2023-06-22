@@ -27,7 +27,7 @@ class StoreRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'modules_id'=> 'required',
-            'number' => 'required',
+            'number' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'video_file' => 'required',
             'poster' => 'nullable',
             'code' => 'required',

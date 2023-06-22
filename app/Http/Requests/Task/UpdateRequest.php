@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
             'word' => 'required',
             'description' => 'required',
             'name' => 'nullable',
-            'number' => 'required',
+            'number' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'poster' => 'nullable',
             'code' => 'nullable',
         ];

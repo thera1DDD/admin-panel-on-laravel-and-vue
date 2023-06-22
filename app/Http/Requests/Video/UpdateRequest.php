@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'modules_id'=> 'required',
-            'number' => 'required',
+            'number' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'video_file' => 'nullable',
             //'video_file' => 'nullable|mimetypes:video/mp4,video/avi|max:1000000',
             'poster' => 'nullable',
