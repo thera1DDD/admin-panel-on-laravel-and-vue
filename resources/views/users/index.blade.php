@@ -37,7 +37,7 @@
                         <td>{{ $user->surname }}</td>
                         <td>{{ $user->patronymic }}</td>
                         <td>{{ $user->email }}</td>
-                        <td><img src="{{getImage($user->photo)}}"></td>
+                        <td><img src="{{getImage($user->photo)}}" style="width: 200px"></td>
                         <td>{{ $user->role }}</td>
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->created_at }}</td>
