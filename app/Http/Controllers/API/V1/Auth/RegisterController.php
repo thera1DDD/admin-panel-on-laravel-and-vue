@@ -46,7 +46,8 @@ class RegisterController extends MainApiController
         // Валидация
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
-            'name' => 'required',
+            'name' => 'required|string',
+            'password' => 'required|string|min:8'
         ]);
 
 
@@ -59,16 +60,12 @@ class RegisterController extends MainApiController
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'password' =>bcrypt($request->input('password')) ,
             'verification_code' => $verificationCode, // Сохранение кода подтверждения в модели пользователя
         ]);
 
         // Отправка уведомления с кодом подтверждения
         $user->notify(new VerificationCodeNotification($verificationCode));
-        // Если пользователь не отправил код
-        $createdAt = $user->created_at;
-        $currentTime = now();
-        $timeDifference = $currentTime->diffInSeconds($createdAt);
-
 
         return response()->json(['user' => $user,], 201);
     }
