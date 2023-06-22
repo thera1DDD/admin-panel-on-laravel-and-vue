@@ -130,7 +130,7 @@ class RegisterController extends MainApiController
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $user = User::where('email', $request->input('email'))->first();
+        $user = User::where('verification_code', $request->input('code'))->first();
 
         if (!$user) {
             return $this->error('User not found',404);
