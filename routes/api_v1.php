@@ -100,6 +100,12 @@ Route::group(['prefix' => 'auth'], function (){
     Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'authenticate']);
 });
 
+Route::group(['prefix' => 'reset'], function (){
+    Route::post('/send', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'passwordResetSend']);
+    Route::post('/check', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'passwordResetCheck']);
+});
+
+
 Route::group(['prefix' => 'cabinet'], function (){
     Route::post('/update', [\App\Http\Controllers\API\V1\CabinetController::class,'update']);
     Route::get('/user/{id}', [\App\Http\Controllers\API\V1\CabinetController::class,'show']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\Auth;
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Requests\API\Register\StoreRequest;
 use App\Models\User;
+use App\Notifications\ResetVerificationCodeNotification;
 use App\Notifications\VerificationCodeNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,55 @@ class RegisterController extends MainApiController
 //        }
 //    }
 
+
+    public function passwordResetSend(Request $request){
+        $user = User::where('email', $request->input('email'))->first();
+        if($user){
+            if($user->verification_code !=null) {
+                $user->forceDelete();
+            }
+            $verificationCode = $this->generateVerificationCode(); // функция для генерации кода
+            $user->verification_code = $verificationCode;
+            $user->updated_at = now();
+            $user->save();
+            $user->notify(new ResetVerificationCodeNotification($verificationCode));
+            return response()->json(['user' => $user,], 201);
+        }
+        else{
+            return $this->error('User not found',404);
+        }
+    }
+
+    public function passwordResetCheck(Request $request){
+        $user = User::where('email', $request->input('email'))->first();
+        //проверка времени
+        $createdAt = $user->updated_at;
+        $currentTime = now();
+        $timeDifference = $currentTime->diffInMinutes($createdAt);
+        if ($timeDifference < 1) {
+            if ($user->verification_code == $request->input('code')) {
+                if($request->input('password')== null)
+                {
+                    return $this->error('Password field is empty', 404);
+                }
+                $user->password = bcrypt($request->input('password'));
+                $user->verification_code = null; // Обнуляем код подтверждения
+//                $token = $user->createToken('API Token')->accessToken;
+                $user->save();
+                return response()->json(['message' => 'Reset successful', 'status' => true], 200);
+            }
+            else {
+                return $this->error('Invalid verification code', 400);
+            }
+        }
+        else{
+            // Удаление пользователя и связанных данных
+            $user->verification_code = null;
+            return $this->error('Срок действия проверочного кода истек.Данные сброшенны', 400);
+        }
+
+    }
+
     public function register(Request $request)
     {
         $user = User::where('email', $request->input('email'))->first();
@@ -49,7 +99,6 @@ class RegisterController extends MainApiController
             'name' => 'required|string',
             'password' => 'required|string|min:8'
         ]);
-
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
@@ -118,7 +167,9 @@ class RegisterController extends MainApiController
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+        if($request->input('email') == null or $request->input('password') == null){
+            return $this->error('Fields is empty!');
+        }
         // Аутентификация пользователя
         if (Auth::attempt($credentials)) {
             // Аутентификация успешна
