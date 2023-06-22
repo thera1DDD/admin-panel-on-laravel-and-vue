@@ -115,6 +115,30 @@ class RegisterController extends MainApiController
     }
 
 
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        // Аутентификация пользователя
+        if (Auth::attempt($credentials)) {
+            // Аутентификация успешна
+
+            // Получение пользователя
+            $user = Auth::user();
+
+            // Генерация токена
+            $token = $user->createToken('API Token')->accessToken;
+
+            return response()->json([
+                'token' => $token,
+                'user' => $user,
+                'status' => true
+            ], 200);
+        } else {
+            return response()->json(['error' => 'Invalid credentials'], 401);
+        }
+    }
+
 //    public function getAll($location){
 //        if($location == 'header' or $location =='menu'){
 //            $categories = Category::where('location',$location)->get();
