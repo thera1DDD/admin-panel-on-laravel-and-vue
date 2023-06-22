@@ -19,6 +19,9 @@ class AdminMiddleware
         if (auth()->check() && auth()->user()->isAdmin()) {
             return $next($request);
         }
+        if (auth()->check() && auth()->user()->isUser()) {
+            return redirect()->route('login');
+        }
         return redirect()->route('403Page');
     }
 }

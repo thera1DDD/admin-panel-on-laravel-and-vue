@@ -71,6 +71,7 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    @if(Auth::user()->role === 'admin')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-cogs"></i>
@@ -80,7 +81,6 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-
                                     <li class="nav-item">
                                         <a href="{{route('course.index')}}" class="nav-link">
                                             <i class="nav-icon fas fa-chalkboard"></i>
@@ -134,7 +134,7 @@
                                         </a>
                                     </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('user.index') }}" class="nav-link">
+                                    <a href="{{ route('users.index') }}" class="nav-link">
                                         <i class="nav-icon fas fa-chalkboard"></i>
                                         <p>Пользователи{{' '. \App\Models\User::all()->count()}}</p>
                                     </a>
@@ -260,7 +260,107 @@
                                 </li>
                             </ul>
                         </li>
+                    @elseif(Auth::user()->role === 'moderator')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-cogs"></i>
+                                <p>
+                                    Модератор
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('course.index')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>
+                                            Курсы
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('module.index')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>
+                                            Модули
+                                        </p>
+                                    </a>
+                                </li>
 
+                                <li class="nav-item">
+                                    <a href="{{route('video.index')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>
+                                            Видео
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('demovideo.index')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>
+                                            Демо Видео
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('word.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Общий словарь</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ route('task.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Задания</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ route('artwork.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <p>Произведения</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-cogs"></i>
+                                        <p>
+                                            Тесты
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{route('test.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Тесты
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('question.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Вопросы
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('answer.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Ответы
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                         <li class="nav-item">
                             <a href="{{ route('user.profile') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>

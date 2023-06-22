@@ -28,8 +28,8 @@
                 @forelse ($favourites as $favourite)
                     <tr>
                         <td>{{ $favourite->id }}</td>
-                        <td>{{ $favourite->course->name }}</td>
-                        <td>{{ $favourite->user->name }}</td>
+                        <td>{{ $favourite->course->name ?? 'Удаленный курс'}}</td>
+                        <td>{{ $favourite->user->name ?? 'Удаленынй пользователь'}}</td>
                         <td>{{ $favourite->created_at }}</td>
                         <td>
                             <a style="width: 66px" href="{{ route('favourite.edit', $favourite->id) }}" class="btn btn-sm btn-warning">Edit</a>

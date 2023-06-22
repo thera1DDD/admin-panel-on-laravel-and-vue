@@ -16,8 +16,11 @@ class ModeratorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->isModerator()) {
+        if (auth()->check() && auth()->user()->isModerator() or auth()->check() && auth()->user()->isAdmin())  {
             return $next($request);
+        }
+        if (auth()->check() && auth()->user()->isUser()) {
+            return redirect()->route('login');
         }
         return redirect()->route('403Page');
     }

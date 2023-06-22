@@ -85,7 +85,6 @@ class RegisterController extends MainApiController
             $user->verification_code = null;
             return $this->error('Срок действия проверочного кода истек.Данные сброшенны', 400);
         }
-
     }
 
     public function register(Request $request)

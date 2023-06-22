@@ -22,7 +22,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
+        'patronymic',
         'email',
+        'role',
         'password',
         'photo',
         'phone',
@@ -49,11 +52,15 @@ class User extends Authenticatable
     ];
     public function isAdmin()
     {
-        return $this->role === 'admin'; // Здесь 'admin' - это значение роли администратора в вашей системе
+        return $this->role === 'admin';
     }
     public function isModerator()
     {
-        return $this->role === 'moderator'; // Здесь 'moderator' - это значение роли модератора в вашей системе
+        return $this->role === 'moderator';
     }
 
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
 }

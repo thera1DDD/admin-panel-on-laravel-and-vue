@@ -20,10 +20,7 @@
     });
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/403', [\App\Http\Controllers\Admin\HomeController::class, 'errorPage'])->name('403Page');
-//    Route::group(['middleware' => 'admin'], function() {
-
-
-
+    Route::group(['middleware' => 'admin'], function() {
 
         Route::get('/home', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
 
@@ -283,6 +280,16 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/{id}',[\App\Http\Controllers\Admin\SwitchController::class, 'show'])->name('switchLang.show');
         });
 
+        Route::group(['prefix' => 'users'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\UserController::class, 'create'])->name('users.create');
+            Route::post('/',[\App\Http\Controllers\Admin\UserController::class, 'store'])->name('users.store');
+            Route::get('/{user}/edit',[\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('users.edit');
+            Route::patch('{user}',[\App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
+            Route::delete('{user}',[\App\Http\Controllers\Admin\UserController::class, 'delete'])->name('users.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\UserController::class, 'show'])->name('users.show');
+        });
+
 
         Route::resource('user', 'UserController');
         Route::resource('permission', 'PermissionController');
@@ -300,19 +307,139 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('/delete/user/{id}', 'UserController@delete');
         Route::get('/search/user', 'UserController@search');
 
-//    });
+    });
+//moder stuff
 
-//    Route::group(['middleware' => 'moderator'], function() {
-        Route::group(['prefix' => 'switchLang'], function (){
-            Route::get('/',[\App\Http\Controllers\Admin\SwitchController::class, 'index'])->name('switchLang.index');
-            Route::get('/create',[\App\Http\Controllers\Admin\SwitchController::class, 'create'])->name('switchLang.create');
-            Route::post('/',[\App\Http\Controllers\Admin\SwitchController::class, 'store'])->name('switchLang.store');
-            Route::get('/{switchLang}/edit',[\App\Http\Controllers\Admin\SwitchController::class, 'edit'])->name('switchLang.edit');
-            Route::patch('{switchLang}',[\App\Http\Controllers\Admin\SwitchController::class, 'update'])->name('switchLang.update');
-            Route::delete('{switchLang}',[\App\Http\Controllers\Admin\SwitchController::class, 'delete'])->name('switchLang.delete');
-            Route::get('/{id}',[\App\Http\Controllers\Admin\SwitchController::class, 'show'])->name('switchLang.show');
+
+    Route::group(['middleware' => 'moderator'], function() {
+
+        Route::get('/home', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+
+        Route::get('/profile', 'UserController@profile')->name('user.profile');
+
+        Route::post('/profile', 'UserController@postProfile')->name('user.postProfile');
+
+        Route::get('/password/change', 'UserController@getPassword')->name('userGetPassword');
+
+        Route::post('/password/change', 'UserController@postPassword')->name('userPostPassword');
+        Route::group(['prefix' => 'word'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\WordController::class, 'index'])->name('word.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\WordController::class, 'create'])->name('word.create');
+            Route::post('/',[\App\Http\Controllers\Admin\WordController::class, 'store'])->name('word.store');
+            Route::get('/{word}/edit',[\App\Http\Controllers\Admin\WordController::class, 'edit'])->name('word.edit');
+            Route::patch('{word}',[\App\Http\Controllers\Admin\WordController::class, 'update'])->name('word.update');
+            Route::delete('{word}',[\App\Http\Controllers\Admin\WordController::class, 'delete'])->name('word.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\WordController::class, 'show'])->name('word.show');
+            Route::get('/search',[\App\Http\Controllers\Admin\WordController::class, 'search'])->name('word.search');
+            Route::post('/import',[\App\Http\Controllers\Admin\WordController::class, 'import'])->name('word.import');
+
         });
-//    });
+
+        Route::group(['prefix' => 'translate'], function (){
+            Route::get('{id}',[\App\Http\Controllers\Admin\TranslateController::class, 'index'])->name('translate.index');
+            Route::get('{id}/create',[\App\Http\Controllers\Admin\TranslateController::class, 'create'])->name('translate.create');
+            Route::post('/',[\App\Http\Controllers\Admin\TranslateController::class, 'store'])->name('translate.store');
+            Route::get('/{translate}/edit',[\App\Http\Controllers\Admin\TranslateController::class, 'edit'])->name('translate.edit');
+            Route::patch('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'update'])->name('translate.update');
+            Route::delete('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'delete'])->name('translate.delete');
+        });
+
+
+
+        Route::group(['prefix' => 'course'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\CourseController::class, 'index'])->name('course.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\CourseController::class, 'create'])->name('course.create');
+            Route::post('/',[\App\Http\Controllers\Admin\CourseController::class, 'store'])->name('course.store');
+            Route::get('/{course}/edit',[\App\Http\Controllers\Admin\CourseController::class, 'edit'])->name('course.edit');
+            Route::patch('{course}',[\App\Http\Controllers\Admin\CourseController::class, 'update'])->name('course.update');
+            Route::delete('{course}',[\App\Http\Controllers\Admin\CourseController::class, 'delete'])->name('course.delete');
+            Route::get('/{course}',[\App\Http\Controllers\Admin\CourseController::class, 'play'])->name('course.play');
+        });
+
+        Route::group(['prefix' => 'module'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\ModuleController::class, 'index'])->name('module.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\ModuleController::class, 'create'])->name('module.create');
+            Route::post('/',[\App\Http\Controllers\Admin\ModuleController::class, 'store'])->name('module.store');
+            Route::get('/{module}/edit',[\App\Http\Controllers\Admin\ModuleController::class, 'edit'])->name('module.edit');
+            Route::patch('{module}',[\App\Http\Controllers\Admin\ModuleController::class, 'update'])->name('module.update');
+            Route::delete('{module}',[\App\Http\Controllers\Admin\ModuleController::class, 'delete'])->name('module.delete');
+        });
+
+
+        Route::group(['prefix' => 'demovideo'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\DemovideoController::class, 'index'])->name('demovideo.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\DemovideoController::class, 'create'])->name('demovideo.create');
+            Route::post('/',[\App\Http\Controllers\Admin\DemovideoController::class, 'store'])->name('demovideo.store');
+            Route::get('/{demovideo}/edit',[\App\Http\Controllers\Admin\DemovideoController::class, 'edit'])->name('demovideo.edit');
+            Route::patch('{demovideo}',[\App\Http\Controllers\Admin\DemovideoController::class, 'update'])->name('demovideo.update');
+            Route::delete('{demovideo}',[\App\Http\Controllers\Admin\DemovideoController::class, 'delete'])->name('demovideo.delete');
+            Route::get('/{demovideo}',[\App\Http\Controllers\Admin\DemovideoController::class, 'play'])->name('demovideo.play');
+        });
+
+        Route::group(['prefix' => 'test'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\TestController::class, 'index'])->name('test.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\TestController::class, 'create'])->name('test.create');
+            Route::post('/',[\App\Http\Controllers\Admin\TestController::class, 'store'])->name('test.store');
+            Route::get('/{test}/edit',[\App\Http\Controllers\Admin\TestController::class, 'edit'])->name('test.edit');
+            Route::patch('{test}',[\App\Http\Controllers\Admin\TestController::class, 'update'])->name('test.update');
+            Route::delete('{test}',[\App\Http\Controllers\Admin\TestController::class, 'delete'])->name('test.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\TestController::class, 'show'])->name('test.show');
+            Route::get('/models/{model}/records', [\App\Http\Controllers\Admin\TestController::class, 'getRecordsByType'])->name('records.by.type');
+        });
+
+        Route::group(['prefix' => 'question'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\QuestionController::class, 'index'])->name('question.index');
+            Route::get('{id}/create',[\App\Http\Controllers\Admin\QuestionController::class, 'create'])->name('question.create');
+            Route::post('/',[\App\Http\Controllers\Admin\QuestionController::class, 'store'])->name('question.store');
+            Route::get('/{question}/edit',[\App\Http\Controllers\Admin\QuestionController::class, 'edit'])->name('question.edit');
+            Route::patch('{question}',[\App\Http\Controllers\Admin\QuestionController::class, 'update'])->name('question.update');
+            Route::delete('{question}',[\App\Http\Controllers\Admin\QuestionController::class, 'delete'])->name('question.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\QuestionController::class, 'show'])->name('question.show');
+        });
+
+        Route::group(['prefix' => 'answer'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\AnswerController::class, 'index'])->name('answer.index');
+            Route::get('{id}/create',[\App\Http\Controllers\Admin\AnswerController::class, 'create'])->name('answer.create');
+            Route::post('/',[\App\Http\Controllers\Admin\AnswerController::class, 'store'])->name('answer.store');
+            Route::get('/{answer}/edit',[\App\Http\Controllers\Admin\AnswerController::class, 'edit'])->name('answer.edit');
+            Route::patch('{answer}',[\App\Http\Controllers\Admin\AnswerController::class, 'update'])->name('answer.update');
+            Route::delete('{answer}',[\App\Http\Controllers\Admin\AnswerController::class, 'delete'])->name('answer.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\AnswerController::class, 'show'])->name('answer.show');
+        });
+
+
+        Route::group(['prefix' => 'task'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\TaskController::class, 'index'])->name('task.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\TaskController::class, 'create'])->name('task.create');
+            Route::post('/',[\App\Http\Controllers\Admin\TaskController::class, 'store'])->name('task.store');
+            Route::get('/{task}/edit',[\App\Http\Controllers\Admin\TaskController::class, 'edit'])->name('task.edit');
+            Route::patch('{task}',[\App\Http\Controllers\Admin\TaskController::class, 'update'])->name('task.update');
+            Route::delete('{task}',[\App\Http\Controllers\Admin\TaskController::class, 'delete'])->name('task.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\TaskController::class, 'show'])->name('task.show');
+        });
+        Route::group(['prefix' => 'artwork'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\ArtworkController::class, 'index'])->name('artwork.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\ArtworkController::class, 'create'])->name('artwork.create');
+            Route::post('/',[\App\Http\Controllers\Admin\ArtworkController::class, 'store'])->name('artwork.store');
+            Route::get('/{artwork}/edit',[\App\Http\Controllers\Admin\ArtworkController::class, 'edit'])->name('artwork.edit');
+            Route::patch('{artwork}',[\App\Http\Controllers\Admin\ArtworkController::class, 'update'])->name('artwork.update');
+            Route::delete('{artwork}',[\App\Http\Controllers\Admin\ArtworkController::class, 'delete'])->name('artwork.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\ArtworkController::class, 'show'])->name('artwork.show');
+        });
+
+
+
+
+        Route::group(['prefix' => 'video'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\VideoController::class, 'index'])->name('video.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\VideoController::class, 'create'])->name('video.create');
+            Route::post('/',[\App\Http\Controllers\Admin\VideoController::class, 'store'])->name('video.store');
+            Route::get('/{video}/edit',[\App\Http\Controllers\Admin\VideoController::class, 'edit'])->name('video.edit');
+            Route::patch('{video}',[\App\Http\Controllers\Admin\VideoController::class, 'update'])->name('video.update');
+            Route::delete('{video}',[\App\Http\Controllers\Admin\VideoController::class, 'delete'])->name('video.delete');
+            Route::get('/{video}',[\App\Http\Controllers\Admin\VideoController::class, 'play'])->name('video.play');
+        });
+    });
 
 
 });

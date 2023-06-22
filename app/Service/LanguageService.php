@@ -6,15 +6,16 @@ use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Language\UpdateRequest;
 use App\Models\Language;
+use App\Models\User;
 
 class LanguageService extends Controller
 {
     public function store($data){
         event(new UserAction(auth()->user()->id, 'Добавление','Языки',$data['name']));
-        Language::firstOrCreate($data);
+        User::firstOrCreate($data);
     }
 
-    public function update($data, Language $language ){
+    public function update($data, User $language ){
         event(new UserAction(auth()->user()->id, 'Обновление','Языки',$data['name']));
         $language->update($data);
     }
