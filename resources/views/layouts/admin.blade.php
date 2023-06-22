@@ -136,7 +136,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('user.index') }}" class="nav-link">
                                         <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Пользователи</p>
+                                        <p>Пользователи{{' '. \App\Models\User::all()->count()}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

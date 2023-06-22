@@ -29,7 +29,7 @@
                     <tr>
                         <td>{{ $photo->id }}</td>
                         <td>{{ $photo->filename }}</td>
-                        <td>{{ $photo->photoable->name }}</td>
+                        <td>{{ $photo->photoable->name ?? 'Удаленный источник' }}</td>
                         <td>{{ $photo->created_at }}</td>
                         <td>
                             <a style="width: 110px"  href="{{ route('photo.edit', $photo->id) }}" class="btn btn-sm btn-warning">Редактировать</a>

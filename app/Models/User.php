@@ -47,6 +47,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function isAdmin()
+    {
+        return $this->role === 'admin'; // Здесь 'admin' - это значение роли администратора в вашей системе
+    }
+    public function isModerator()
+    {
+        return $this->role === 'moderator'; // Здесь 'moderator' - это значение роли модератора в вашей системе
+    }
 
 }

@@ -68,7 +68,7 @@
         $('#photoable_type').on('change', function() {
             var type = $(this).val();
             $.ajax({
-                url: '{{ route("records.by.type", ":type") }}'.replace(':type', type),
+                url: '{{ route("photoRecords.by.type", ":type") }}'.replace(':type', type),
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
