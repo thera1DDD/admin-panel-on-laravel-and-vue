@@ -122,7 +122,6 @@ class RegisterController extends MainApiController
     public function verifyCode(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
             'code' => 'required',
         ]);
 
