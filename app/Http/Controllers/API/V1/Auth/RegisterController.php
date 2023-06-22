@@ -56,8 +56,11 @@ class RegisterController extends MainApiController
     }
 
     public function passwordResetCheck(Request $request){
-        $user = User::where('email', $request->input('email'))->first();
-        //проверка времени
+        $user = User::where('verification_code', $request->input('code'))->first();
+        if(!$user){
+            return $this->error('User not found or invalid verification code',404);
+        }
+        //проверка времени с отправления кода
         $createdAt = $user->updated_at;
         $currentTime = now();
         $timeDifference = $currentTime->diffInMinutes($createdAt);
