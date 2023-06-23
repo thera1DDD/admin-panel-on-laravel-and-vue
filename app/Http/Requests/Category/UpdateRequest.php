@@ -26,9 +26,9 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required|string',
             'path' => 'required|string',
-            'poster' => 'required',
+            'poster' => 'nullable',
             'location' => 'required|string',
-            'columns_id' => 'required|integer',
+            'columns_id' => 'nullable|integer',
         ];
     }
 }

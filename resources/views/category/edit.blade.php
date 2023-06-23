@@ -23,9 +23,10 @@
                     <div class="form-group">
                         <label for="location">Местоположение</label>
                         <select  name="location" id="location" class="form-control select2" style="width: 100%;">
-                            <option value="footer">Footer</option>
-                            <option value="header">Header</option>
-                            <option value="menu">Menu</option>
+                            <option value="header" {{ $category->location == 'header' ? 'selected' : '' }}>Header</option>
+                            <option value="footer" {{ $category->location == 'footer' ? 'selected' : '' }}>Footer</option>
+                            <option value="menu" {{ $category->location == 'menu' ? 'selected' : '' }}>Menu</option>
+                            <option value="underMenu" {{ $category->location == 'underMenu' ? 'selected' : '' }}>UnderMenu</option>
                         </select>
                         @error('location')
                         <span class="invalid-feedback" role="alert">
@@ -55,14 +56,19 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="name">Язык</label>
-                        <select  name="columns_id"  id="columns_id"  class="form-control select2" data-placeholder="Language" style="width: 100%;">
+                        <label for="name">Колона</label>
+                        <select name="columns_id"  id="columns_id" class="form-control select2"  style="width: 100%;">
                             @foreach($columns as $column)
-                                <option value="{{$column->id }}" {{$column->id == $category->columns_id ? 'selected' : ''}}>
+                                <option value="{{$column->id }}" {{$column->id == $column->columns_id ? 'selected' : ''}}>
                                     {{$column->name }}
                                 </option>
                             @endforeach()
                         </select>
+                        @error('columns_id')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="name">Постер</label>

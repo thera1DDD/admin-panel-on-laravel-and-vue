@@ -20,7 +20,7 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 class CategoryController extends MainApiController
 {
     public function getAll($location){
-        if($location == 'header' or $location =='menu'){
+        if($location == 'header' or $location =='menu' or $location == 'underMenu'){
             $categories = Category::where('location',$location)->get();
             return CategoryResource::collection($categories);
         }

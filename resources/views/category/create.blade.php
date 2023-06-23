@@ -38,6 +38,7 @@
                     <option value="footer">Footer</option>
                     <option value="header">Header</option>
                     <option value="menu">Menu</option>
+                    <option value="underMenu">Under Menu</option>
                 </select>
                 @error('location')
                 <span class="invalid-feedback" role="alert">
@@ -76,7 +77,6 @@
                 @enderror
             </div>
         </div>
-
         <div class="card-footer">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Создать</button>
         </div>
