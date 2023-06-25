@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Env;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 
 if (!function_exists('getImage')) {
@@ -12,5 +13,9 @@ if (!function_exists('getImage')) {
             return  $trimmedPath;
         }
         return $filename;
+    }
+    function getUrl(){
+        $appUrl = Config::get('app.url') . '/img/profile.png';
+        return $appUrl;
     }
 }
