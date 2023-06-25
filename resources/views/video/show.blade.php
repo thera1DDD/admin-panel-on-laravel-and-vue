@@ -19,6 +19,7 @@
         </div>
 
 
+        <!-- /.card-body -->
     </div>
 @endsection
 <!-- Подключение библиотеки Hls.js -->
@@ -54,8 +55,10 @@
             }));
 
             // Установка выбранного варианта качества
-            hls.currentLevel = hls.levels.findIndex(function(level) {
-                return level.height === bestQuality;
+            hls.levels.forEach(function(level, index) {
+                if (level.height === bestQuality) {
+                    hls.currentLevel = index;
+                }
             });
         }
 
@@ -68,4 +71,3 @@
         navigator.connection.addEventListener('change', selectQuality);
     }
 </script>
-<!-- /.card-body -->
