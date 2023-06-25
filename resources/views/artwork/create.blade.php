@@ -69,6 +69,23 @@
                     </span>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="name">Постер</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Загрузка</span>
+                    </div>
+                </div>
+                @error('poster')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create</button>

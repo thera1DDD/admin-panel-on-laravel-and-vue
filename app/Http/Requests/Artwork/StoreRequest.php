@@ -28,7 +28,8 @@ class StoreRequest extends FormRequest
             'description' => 'required|string',
             'languages_id' => 'nullable',
             'filename' => 'required',
-            'documentType'=> 'required'
+            'documentType'=> 'required',
+            'poster'=> 'nullable'
         ];
     }
 }

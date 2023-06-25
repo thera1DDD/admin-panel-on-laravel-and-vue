@@ -10,6 +10,7 @@ use App\Models\Language;
 use App\Service\ArtworkService;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArtworkController extends Controller
 {
@@ -27,6 +28,14 @@ class ArtworkController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
+        if ($request->hasFile('filename')) {
+            $path = $request->file('filename')->store('artworks', 'public');
+            $data['filename'] = Storage::disk('public')->url($path);
+        }
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('artworks/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
         $this->artworkService->store($data);
         return redirect()->route('artwork.index')->with('success','Artwork created');
     }
@@ -40,6 +49,14 @@ class ArtworkController extends Controller
 
     public function update(UpdateRequest  $request, Artwork $artwork){
         $data = $request->validated();
+        if ($request->hasFile('filename')) {
+            $path = $request->file('filename')->store('artworks', 'public');
+            $data['filename'] = Storage::disk('public')->url($path);
+        }
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('artworks/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
         $this->artworkService->update($artwork,$data);
         return redirect()->route('artwork.index')->with('success','Artwork updated');
     }

@@ -16,8 +16,9 @@ class SingleArtworkResource extends JsonResource
     public function toArray($request)
     {
         return[
-            'name'=>$this->name,
-            'description'=>$this->description,
+            'name'=>$this->name ?? null ,
+            'description'=>$this->description ?? null,
+            'language'=>$this->language->name ?? null
         ];
     }
 }

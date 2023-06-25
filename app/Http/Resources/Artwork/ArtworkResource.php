@@ -17,12 +17,13 @@ class ArtworkResource extends JsonResource
     {
         return[
             'id'=>$this->id,
-            'name'=>$this->name,
+            'name'=>$this->name ?? null ,
             'description'=>$this->description,
-            'filename'=>$this->filename,
+            'filename'=>$this->filename ?? null ,
+            'poster'=>$this->poster ?? null,
             'sort'=>$this->sort,
             'slug'=>$this->slug,
-            'language'=>new LanguageResource($this->whenLoaded('language')),
+            'language'=>$this->language->name ?? null
         ];
     }
 }

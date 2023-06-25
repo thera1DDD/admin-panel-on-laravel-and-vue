@@ -70,12 +70,14 @@ Route::group(['prefix' => 'dictionary'], function (){
     Route::get('switch/all',[\App\Http\Controllers\API\V1\DictionaryController::class,'getSwithes']);
 });
 
-Route::group(['prefix' => 'book'], function (){
+Route::group(['prefix' => 'artwork'], function (){
     //вывод всех книг с их языком
     Route::get('/all', [\App\Http\Controllers\API\V1\ArtworkController::class,'getAll']);
     //
+    Route::get('/{id}', [\App\Http\Controllers\API\V1\ArtworkController::class,'show']);
+    //
+    Route::get('/{type}', [\App\Http\Controllers\API\V1\ArtworkController::class,'getAllByType']);
     //вывод книги по Id
-    Route::get('/book/{id}', [\App\Http\Controllers\API\V1\ArtworkController::class,'show']);
     //
 });
 Route::group(['prefix' => 'stat'], function (){
