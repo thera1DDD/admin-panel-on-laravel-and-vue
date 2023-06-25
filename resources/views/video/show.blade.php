@@ -13,61 +13,42 @@
             </div>
         </div>
         <!-- /.card-header -->
-        <!-- HTML-код для воспроизведения видео -->
+        <!-- Ваш код HTML для воспроизведения видео -->
         <div class="card-body table-responsive p-0">
             <video id="video" controls></video>
         </div>
 
-
-        <!-- /.card-body -->
     </div>
 @endsection
+
 <!-- Подключение библиотеки Hls.js -->
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Ваш собственный JavaScript код -->
 <script>
-    // Получение ссылки на видеоэлемент
-    var video = document.getElementById('video');
+    $(document).ready(function() {
+        // Получение ссылки на видеоэлемент
+        var video = document.getElementById('video');
 
-    // Создание экземпляра Hls
-    var hls = new Hls();
+        if (Hls.isSupported()) {
+            // Создание экземпляра Hls
+            var hls = new Hls();
 
-    // Загрузка и воспроизведение M3U8 файла
-    hls.loadSource("{{ getImage($video_file_path) }}");
-    hls.attachMedia(video);
+            // Загрузка и воспроизведение M3U8 файла
+            hls.loadSource("{{ getImage($video_file_path) }}");
+            hls.attachMedia(video);
 
-    // Обработчик события после загрузки плейлиста
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-        // Получение всех доступных вариантов качества видео
-        var availableQualities = hls.levels.map(function(level) {
-            return level.height;
-        });
-
-        // Функция для выбора наилучшего варианта качества в зависимости от скорости интернета
-        function selectQuality() {
-            // Получение текущей скорости интернета (в мегабитах в секунду)
-            var connectionSpeed = navigator.connection.downlink || 0;
-
-            // Выбор наилучшего варианта качества
-            var bestQuality = Math.max.apply(null, availableQualities.filter(function(quality) {
-                return quality <= connectionSpeed;
-            }));
-
-            // Установка выбранного варианта качества
-            hls.levels.forEach(function(level, index) {
-                if (level.height === bestQuality) {
-                    hls.currentLevel = index;
-                }
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            // Воспроизведение M3U8 файла с использованием стандартного видеоэлемента
+            video.src = "{{ getImage($video_file_path) }}";
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
             });
         }
-
-        // Вызов функции выбора качества при начале воспроизведения
-        video.addEventListener('play', selectQuality);
     });
-
-    // Включение автоматического изменения качества при изменении скорости интернета
-    if (navigator.connection && navigator.connection.addEventListener) {
-        navigator.connection.addEventListener('change', selectQuality);
-    }
 </script>
+<!-- /.card-body -->
