@@ -10,6 +10,7 @@ use App\Http\Resources\Course\SingleCourseResource;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\Stat;
+use App\Models\TestResult;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Mod;
 
@@ -123,9 +124,9 @@ class CourseController extends MainApiController
             // Проверка модуля на пройденность тестов
             $tests = $module->test;
             if ($tests) {
-                $userStatsTests = Stat::where('users_id', $userId)
-                    ->whereIn('passed_tests_id', $tests->pluck('id'))
-                    ->pluck('passed_tests_id')
+                $userStatsTests = TestResult::where('users_id', $userId)
+                    ->whereIn('tests_id', $tests->pluck('id'))
+                    ->pluck('tests_id')
                     ->toArray();
 
                 $moduleResource->tests = $tests->map(function ($test) use ($userStatsTests) {

@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'tests_id' => 'nullable|string',
+            'tests_id' => 'nullable',
             'users_id'=>'nullable',
             'questions_total' => 'nullable',
             'questions_correct' => 'nullable',
