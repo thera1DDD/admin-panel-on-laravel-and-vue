@@ -146,7 +146,7 @@ class RegisterController extends MainApiController
                 $user->verification_code = null; // Обнуляем код подтверждения
                 $token = $user->createToken('API Token')->accessToken;
                 $user->save();
-                return response()->json(['message' => 'Registration successful', 'status' => true,'token'=>$token], 200);
+                return response()->json(['message' => 'Registration successful', 'status' => true,'token'=>$token,'user'=>$user], 200);
             }
             else {
                 return $this->error('Invalid verification code', 400);
