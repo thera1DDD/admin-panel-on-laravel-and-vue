@@ -76,7 +76,7 @@ Route::group(['prefix' => 'artwork'], function (){
     //
     Route::get('/{id}', [\App\Http\Controllers\API\V1\ArtworkController::class,'show']);
     //
-    Route::get('/{type}', [\App\Http\Controllers\API\V1\ArtworkController::class,'getAllByType']);
+    Route::get('/type/{type}', [\App\Http\Controllers\API\V1\ArtworkController::class,'getAllByType']);
     //вывод книги по Id
     //
 });

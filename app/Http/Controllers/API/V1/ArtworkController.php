@@ -26,7 +26,7 @@ class ArtworkController extends MainApiController
             return new SingleArtworkResource($artwork);
         }
         else{
-            return $this->error('artwork nor found',404);
+            return $this->error('artwork not found',404);
         }
     }
     public function getAllByType($type){
@@ -35,7 +35,7 @@ class ArtworkController extends MainApiController
             return ArtworkResource::collection($artwork);
         }
         else{
-            return $this->error('artwork nor found',404);
+            return $this->error('artwork not found',404);
         }
     }
 

@@ -19,6 +19,7 @@ class ArtworkResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name ?? null ,
             'description'=>$this->description,
+            'type'=>$this->documentType,
             'filename'=>$this->filename ?? null ,
             'poster'=>$this->poster ?? null,
             'sort'=>$this->sort,
