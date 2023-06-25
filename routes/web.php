@@ -291,6 +291,17 @@ Route::group(['middleware' => 'auth'], function() {
         });
 
 
+        Route::group(['prefix' => 'testsResult'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\TestResultController::class, 'index'])->name('testsResult.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\TestResultController::class, 'create'])->name('testsResult.create');
+            Route::post('/',[\App\Http\Controllers\Admin\TestResultController::class, 'store'])->name('testsResult.store');
+            Route::get('/{testsResult}/edit',[\App\Http\Controllers\Admin\TestResultController::class, 'edit'])->name('testsResult.edit');
+            Route::patch('{testsResult}',[\App\Http\Controllers\Admin\TestResultController::class, 'update'])->name('testsResult.update');
+            Route::delete('{testsResult}',[\App\Http\Controllers\Admin\TestResultController::class, 'delete'])->name('testsResult.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\TestResultController::class, 'show'])->name('testsResult.show');
+        });
+
+
         Route::resource('user', 'UserController');
         Route::resource('permission', 'PermissionController');
         Route::resource('role', 'RoleController');
