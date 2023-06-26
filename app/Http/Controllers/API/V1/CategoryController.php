@@ -24,8 +24,6 @@ class CategoryController extends MainApiController
             $categories = Category::select('id', 'name', 'path','poster','location')
                 ->where('location', $location)
                 ->get();
-
-
             return new CategoryResource([
                 'data' => $categories,
                 'additional' => $categories // Добавьте дополнительные данные, если необходимо

@@ -6,7 +6,7 @@ use App\Http\Resources\Course\SingleModuleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use function Symfony\Component\Translation\t;
 
-class ColumnResource extends JsonResource
+class FooterCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,12 @@ class ColumnResource extends JsonResource
      */
     public function toArray($request)
     {
-        return[
-            'id'=>$this->id,
+        return [
+            'id' => $this->id,
             'name'=>$this->name,
-            'category'=> FooterCategoryResource::collection($this->category)
+            'path'=>$this->path,
+            'poster'=>$this->poster,
+            'location'=>$this->location,
         ];
-
     }
 }
