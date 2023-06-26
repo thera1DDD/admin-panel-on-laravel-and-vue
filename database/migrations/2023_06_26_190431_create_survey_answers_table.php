@@ -17,7 +17,7 @@ class CreateSurveyAnswersTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('image')->nullable();
-            $table->foreignId('survey_questions_id')->nullable()->index()->constrained('survey_questions');
+            $table->foreignId('survey_questions_id')->nullable()->index()->constrained('survey_questions')->onDelete('cascade');
             $table->timestamps();
         });
     }

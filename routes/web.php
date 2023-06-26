@@ -318,6 +318,35 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('/delete/user/{id}', 'UserController@delete');
         Route::get('/search/user', 'UserController@search');
 
+
+        Route::group(['prefix' => 'surveyQuestion'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\SurveyQuestionController::class, 'index'])->name('surveyQuestion.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\SurveyQuestionController::class, 'create'])->name('surveyQuestion.create');
+            Route::post('/',[\App\Http\Controllers\Admin\SurveyQuestionController::class, 'store'])->name('surveyQuestion.store');
+            Route::get('/{surveyQuestion}/edit',[\App\Http\Controllers\Admin\SurveyQuestionController::class, 'edit'])->name('surveyQuestion.edit');
+            Route::patch('{surveyQuestion}',[\App\Http\Controllers\Admin\SurveyQuestionController::class, 'update'])->name('surveyQuestion.update');
+            Route::delete('{surveyQuestion}',[\App\Http\Controllers\Admin\SurveyQuestionController::class, 'delete'])->name('surveyQuestion.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\SurveyQuestionController::class, 'show'])->name('surveyQuestion.show');
+        });
+
+        Route::group(['prefix' => 'surveyAnswer'], function (){
+            Route::get('{id}/create',[\App\Http\Controllers\Admin\SurveyAnswersController::class, 'create'])->name('surveyAnswer.create');
+            Route::post('/',[\App\Http\Controllers\Admin\SurveyAnswersController::class, 'store'])->name('surveyAnswer.store');
+            Route::get('/{surveyAnswer}/edit',[\App\Http\Controllers\Admin\SurveyAnswersController::class, 'edit'])->name('surveyAnswer.edit');
+            Route::patch('{surveyAnswer}',[\App\Http\Controllers\Admin\SurveyAnswersController::class, 'update'])->name('surveyAnswer.update');
+            Route::delete('{surveyAnswer}',[\App\Http\Controllers\Admin\SurveyAnswersController::class, 'delete'])->name('surveyAnswer.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\SurveyAnswersController::class, 'show'])->name('surveyAnswer.show');
+        });
+
+        Route::group(['prefix' => 'surveyResult'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\SurveyResultController::class, 'index'])->name('surveyResult.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\SurveyResultController::class, 'create'])->name('surveyResult.create');
+            Route::post('/',[\App\Http\Controllers\Admin\SurveyResultController::class, 'store'])->name('surveyResult.store');
+            Route::get('/{surveyResult}/edit',[\App\Http\Controllers\Admin\SurveyResultController::class, 'edit'])->name('surveyResult.edit');
+            Route::patch('{surveyResult}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'update'])->name('surveyResult.update');
+            Route::delete('{surveyResult}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'delete'])->name('surveyResult.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'show'])->name('surveyResult.show');
+        });
     });
 //moder stuff
 

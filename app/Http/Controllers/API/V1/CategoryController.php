@@ -26,7 +26,7 @@ class CategoryController extends MainApiController
                 ->get();
             return new CategoryResource([
                 'data' => $categories,
-                'additional' => $categories // Добавьте дополнительные данные, если необходимо
+                'additional' => $categories
             ]);
         }
         else{
