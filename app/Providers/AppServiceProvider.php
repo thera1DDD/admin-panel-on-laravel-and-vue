@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Resources\Category\CategoryResource;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Passport::routes();
+        CategoryResource::withoutWrapping();
     }
 }

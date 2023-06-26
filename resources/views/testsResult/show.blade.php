@@ -22,7 +22,8 @@
                     <th>Кол-во правильных ответов</th>
                     <th>Время прохождения теста</th>
                     <th>Прохождение</th>
-
+                    <th>Дата прохождения</th>
+                    <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,7 @@
                         <td>{{ $testsResult->questions_correct }}</td>
                         <td>{{ $testsResult->passing_time }}</td>
                         <td>@if($testsResult->is_passed == 1){{'Пройден'}} @else{{'Не пройден'}}@endif</td>
+                        <td>{{ $testsResult->created_at }}</td>
                         <td>
                             <a style="width: 110px" href="{{ route('testsResult.edit',$testsResult->id )}}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>

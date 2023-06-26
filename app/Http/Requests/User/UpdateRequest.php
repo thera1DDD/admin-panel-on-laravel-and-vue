@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string',
             'surname' => 'nullable|string',
             'patronymic' => 'nullable|string',
-            'email' => 'nullable|string',
+            'email' => 'required|email|unique:users,email',
             'photo' => 'nullable',
             'password' => 'nullable|string',
             'phone' => 'nullable|string',

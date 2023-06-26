@@ -20,6 +20,7 @@ class UserService extends Controller
 
     public function update($data, User $user ){
         event(new UserAction(auth()->user()->id, 'Обновление','Пользователи',$data['name']));
+        $extistingUser = User::where('email',$data['email'])->first();
         if(isset($data['password'])){
             $data['password'] = bcrypt($data['password']);
         }

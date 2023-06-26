@@ -21,8 +21,15 @@ class CategoryController extends MainApiController
 {
     public function getAll($location){
         if($location == 'header' or $location =='menu' or $location == 'underMenu'){
-            $categories = Category::where('location',$location)->get();
-            return CategoryResource::collection($categories);
+            $categories = Category::select('id', 'name', 'path','poster','location')
+                ->where('location', $location)
+                ->get();
+
+
+            return new CategoryResource([
+                'data' => $categories,
+                'additional' => $categories // Добавьте дополнительные данные, если необходимо
+            ]);
         }
         else{
             $columns = Column::with(['category' => function ($query) use ($location) {
