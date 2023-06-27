@@ -143,9 +143,9 @@ class RegisterController extends MainApiController
 
         $user = User::where('verification_code', $code)->first();
 
-//        if (!$user) {
-//            return $this->error('User not found or wrong verification code',404);
-//        }
+        if (!$user) {
+            return $this->error('User does not exist or invalid verification code',404);
+        }
         // Проверка времени
         $createdAt = $user->created_at;
         $currentTime = now();
