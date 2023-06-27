@@ -95,12 +95,10 @@ Route::group(['prefix' => 'category'], function (){
 
 Route::group(['prefix' => 'register'], function (){
     Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'register']);
+    Route::post('/verify/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'verifyCode']);
     Route::get('/survey/all', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'getSurvey']);
 });
 
-Route::group(['prefix' => 'verify'], function (){
-    Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'verifyCode']);
-});
 Route::group(['prefix' => 'auth'], function (){
     Route::post('/post', [\App\Http\Controllers\API\V1\Auth\RegisterController::class,'authenticate']);
 });
