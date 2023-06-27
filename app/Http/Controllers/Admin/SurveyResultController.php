@@ -7,6 +7,7 @@ use App\Http\Requests\SurveyResult\StoreRequest;
 use App\Http\Requests\SurveyResult\UpdateRequest;
 use App\Models\Course;
 use App\Models\SurveyResult;
+use App\Models\TestResult;
 use App\Models\User;
 use App\Service\SurveyResultService;
 use Illuminate\Http\Request;
@@ -21,9 +22,28 @@ class SurveyResultController extends Controller
         $this->surveyResultService = $surveyResultService;
     }
 
-    public function index(){
-       $surveyResults = SurveyResult::all();
-       return view('surveyResult.index',compact('surveyResults'));
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+
+        $surveyResults = SurveyResult::with('user')
+            ->when($search, function ($query, $search) {
+                $query->whereHas('user', function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                });
+            })
+            ->get()
+            ->groupBy('users_id')
+            ->map(function ($group) {
+                return $group->first();
+            });
+        return view('surveyResult.index', compact('surveyResults', 'search'));
+    }
+
+    public function show($id)
+    {
+        $surveyResults = SurveyResult::where('users_id',$id)->get();
+        return view('surveyResult.show', compact('surveyResults'));
     }
 
     public function create(){

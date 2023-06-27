@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Requests\API\Register\StoreRequest;
+use App\Http\Resources\Survey\SurveyQuestionResource;
+use App\Models\SurveyQuestion;
+use App\Models\SurveyResult;
 use App\Models\User;
 use App\Notifications\ResetVerificationCodeNotification;
 use App\Notifications\VerificationCodeNotification;
@@ -121,17 +124,24 @@ class RegisterController extends MainApiController
         return response()->json(['user' => $user,], 201);
     }
 
+
+
+
     public function verifyCode(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'code' => 'required',
+            'data.*.survey_questions_id' => 'required',
+            'data.*.survey_answers_id' => 'required',
+            'data.*.users_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
+        $code = $request->input('code');
+        $answers = $request->input('data');
 
-        $user = User::where('verification_code', $request->input('code'))->first();
+        $user = User::where('verification_code', $code)->first();
 
         if (!$user) {
             return $this->error('User not found',404);
@@ -142,9 +152,17 @@ class RegisterController extends MainApiController
         $timeDifference = $currentTime->diffInMinutes($createdAt);
         // Проверка на время для кода
         if ($timeDifference < 1) {
-            if ($user->verification_code == $request->input('code')) {
+            if ($user->verification_code ==$code) {
                 $user->verification_code = null; // Обнуляем код подтверждения
                 $token = $user->createToken('API Token')->accessToken;
+                //добавление опроса
+                foreach ($answers as $answer) {
+                    $surveyResult = new SurveyResult();
+                    $surveyResult->survey_questions_id = $answer['survey_questions_id'];
+                    $surveyResult->survey_answers_id = $answer['survey_answers_id'];
+                    $surveyResult->users_id = $answer['users_id'];
+                    $surveyResult->save();
+                }
                 $user->save();
                 return response()->json(['message' => 'Registration successful', 'status' => true,'token'=>$token,'user'=>$user], 200);
             }
@@ -189,6 +207,16 @@ class RegisterController extends MainApiController
         } else {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
+    }
+
+
+
+    public function getSurvey(){
+        $survey = SurveyQuestion::with('survey_answer')->get();
+        if(!$survey){
+            return $this->error('survey not found',404);
+        }
+        return SurveyQuestionResource::collection($survey);
     }
 
 //    public function getAll($location){

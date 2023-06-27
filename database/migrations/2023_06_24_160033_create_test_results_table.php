@@ -33,6 +33,6 @@ class CreateTestResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_results');
+        Schema::dropIfExists('tests_results');
     }
 }

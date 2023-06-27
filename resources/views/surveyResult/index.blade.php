@@ -1,55 +1,48 @@
 @extends('layouts.admin')
 
 @section('title')
-    Результаты опроса
+    Результаты пользователей
 @endsection
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Результаты опроса</h3>
-
-        <div class="card-tools">
-            <a href="{{ route('surveyResult.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить Результаты</a>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Результаты пользователей</h3>
+            <div class="card-tools">
+                <form action="{{ url()->current() }}" method="GET">
+                    <input type="text" name="search" value="{{ $search }}" placeholder="Поиск">
+                    @unless ($search)
+                        <button type="submit">Найти</button>
+                    @endunless
+                    @if ($search)
+                        <button type="submit">Очистить</button>
+                        <input type="hidden" name="search" value="">
+                    @endif
+                </form>
+            </div>
         </div>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body table-responsive p-0">
-        <table class="table table-hover">
-            <thead>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+                <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Вопрос</th>
-                    <th>Ответ</th>
                     <th>Пользователь</th>
-                    <th>Дата загрузки</th>
-                    <th>Действие</th>
+                    <th>Фото</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @forelse ($surveyResults as $surveyResult)
                     <tr>
-                        <td>{{ $surveyResult->id }}</td>
-                        <td>{{ $surveyResult->survey_question->name }}</td>
-                        <td>{{ $surveyResult->survey_answer->name }}</td>
-                        <td>{{ $surveyResult->user->name ?? 'Удаленный пользователь'}}</td>
-                        <td>{{ $surveyResult->created_at }}</td>
-                        <td>
-                            <a style="width: 110px" href="{{ route('surveyResult.edit', $surveyResult->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
-                            <br>
-
-                            <form action="{{route('surveyResult.delete',$surveyResult->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <input style="width: 110px;"  type="submit" value="Удалить" class="btn btn-danger">
-                            </form>
-                        </td>
+                        <td>{{$surveyResult->users_id}}</td>
+                        <td><a href="{{ route('surveyResult.show', $surveyResult->users_id) }}">{{( $surveyResult->user->name). ' ' . ($surveyResult->user->surname?? null) }}</a></td>
+                        <td><img src="{{getImage($surveyResult->user->photo ?? null)}}"style="width: 100px" >  </td>
                     </tr>
                 @empty
 
                 @endforelse
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
     </div>
-    <!-- /.card-body -->
-  </div>
 @endsection
