@@ -19,7 +19,7 @@ class SwitchResource extends JsonResource
             'name'=>$this->name,
             'description'=>$this->description,
             'switch'=>$this->switch,
-            'languages_id'
+            'languages_id'=>$this->languages_id
         ];
     }
 }
