@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'words_id' => 'required',
-            'language' => 'required',
+            'languages_id' => 'required',
             'translate' => 'required',
         ];
     }

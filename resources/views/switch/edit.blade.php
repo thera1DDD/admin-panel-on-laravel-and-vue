@@ -44,6 +44,16 @@
                             @enderror
                         </div>
                     <div class="form-group">
+                        <label for="name">Язык</label>
+                        <select  name="languages_id"  id="languages_id"  class="form-control select2" data-placeholder="Language" style="width: 100%;">
+                            @foreach($languages as $language)
+                                <option value="{{$language->id }}" {{$language->id == $switchLang->languages_id ? 'selected' : ''}}>
+                                    {{$language->name }}
+                                </option>
+                            @endforeach()
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Редактировать" >
                     </div>
                 </form>

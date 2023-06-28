@@ -6,6 +6,7 @@ use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SwitchLang\StoreRequest;
 use App\Http\Requests\SwitchLang\UpdateRequest;
+use App\Models\Language;
 use App\Models\SwitchLang;
 use App\Service\SwitchLangService;
 
@@ -26,7 +27,8 @@ class SwitchController extends Controller
 
 
     public function create(){
-        return view('switch.create');
+        $languages = Language::all();
+        return view('switch.create',compact('languages'));
     }
 
 
@@ -39,7 +41,8 @@ class SwitchController extends Controller
 
 
     public function edit(SwitchLang $switchLang){
-        return view('switch.edit',compact('switchLang'));
+        $languages = Language::all();
+        return view('switch.edit',compact('switchLang','languages'));
     }
 
 

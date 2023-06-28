@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Translate\StoreRequest;
 use App\Http\Requests\Translate\UpdateRequest;
+use App\Models\Language;
 use App\Models\Translate;
 use App\Models\Word;
 use App\Service\TranslateService;
@@ -21,8 +22,9 @@ class TranslateController extends Controller
     }
 
     public function create($id){
+        $languages = Language::all();
         $word = Word::all()->where('id','=',$id)->first();
-        return view('translate.create', compact('word'));
+        return view('translate.create', compact('word','languages'));
     }
 
     public function index($id){
@@ -40,7 +42,8 @@ class TranslateController extends Controller
     }
 
     public function edit(Translate $translate){
-        return view('translate.edit', compact('translate'));
+        $languages = Language::all();
+        return view('translate.edit', compact('translate','languages'));
     }
 
     public function update(UpdateRequest $request,Translate $translate){

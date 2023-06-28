@@ -12,7 +12,10 @@ class Translate extends Model
 
 
     public function word(){
-
         return $this->belongsTo(Word::class,'words_id','id');
+    }
+
+    public function language(){
+        return $this->belongsTo(Language::class,'languages_id','id');
     }
 }

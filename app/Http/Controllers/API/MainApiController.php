@@ -19,8 +19,8 @@ class MainApiController extends Controller
    use HttpResponse;
 
 //Dictionary stuff start
-   public function translate(int $id,$language){
-       $words = Translate::where('words_id', $id)->where('language', $language)->get();
+   public function translate(int $id,$languages_id){
+       $words = Translate::where('words_id', $id)->where('languages_id', $languages_id)->get();
        if (isset($words)) {
            return TranslateResource::collection($words);
        }
@@ -29,7 +29,7 @@ class MainApiController extends Controller
        }
    }
 
-    public function search($word,$language){
+    public function search($word,$languages_id){
         if ($word) {
             $data = Word::where('name', 'like', "%{$word}%")->get();
 
@@ -37,7 +37,7 @@ class MainApiController extends Controller
 
             foreach ($data as $word) {
                 $translate = $word->translate()
-                    ->where('language', $language)
+                    ->where('languages_id', $languages_id)
                     ->pluck('translate')
                     ->toArray();
 
@@ -51,16 +51,16 @@ class MainApiController extends Controller
             return response()->json(['data'=>$result]);
         }
     }
-    public function searchBackward($word,$language){
+    public function searchBackward($word,$languages_id){
         $translate = Translate::query();
         if ($word) {
-            $data =  $translate->with('word')->where('translate', 'like', "%{$word}%")->where('language',$language)->get();
+            $data =  $translate->with('word')->where('translate', 'like', "%{$word}%")->where('languages_id',$languages_id)->get();
             return  BackwardsTranslateResource::collection($data);
         }
     }
 
-   public function translateBackward(int $id,string $language){
-       $translate = Translate::where('language',$language)->where('id',$id)->first();
+   public function translateBackward(int $id,string $languages_id){
+       $translate = Translate::where('languages_id',$languages_id)->where('id',$id)->first();
        if($translate){
            return new WordResource($translate->word);
        }
@@ -69,12 +69,12 @@ class MainApiController extends Controller
        }
    }
 
-   public function getAllBackwardWords($language){
-       $translate = Translate::with('word')->where('language',$language)->get();
+   public function getAllBackwardWords($languages_id){
+       $translate = Translate::with('word')->where('languages_id',$languages_id)->get();
        return BackwardsTranslateResource::collection($translate);
    }
-    public function getAllOrdinaryWords($language){
-        $translate = Translate::with('word')->where('language',$language)->get();
+    public function getAllOrdinaryWords($languages_id){
+        $translate = Translate::with('word')->where('languages_id',$languages_id)->get();
         return OrdinaryTranslateResource::collection($translate);
     }
 //end Dictionary stuff

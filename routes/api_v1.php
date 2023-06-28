@@ -59,14 +59,14 @@ Route::group(['prefix' => 'favourite'], function (){
 });
 Route::group(['prefix' => 'dictionary'], function (){
     //вывод всех слов по типу словаря ru-lez,ru-avar,lez-ru,avar-ru
-    Route::get('/all/{dictionaryType}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getAll']);
+    Route::get('/all/{dictionaryType}/{language}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getAll']);
     //
     //поиск по словам
-    Route::get('/search/{dictionaryType}/{word}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getSearch']);
+    Route::get('/search/{dictionaryType}/{languages_id}/{word}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getSearch']);
     //
-    //вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
-    Route::get('/translate/{dictionaryType}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
-    //
+//    //вывод перевода слова по типу словаря ru-lez,ru-avar,lez-ru,avar-ru и id слова
+//    Route::get('/translate/{dictionaryType}/{languages_id}/{id}', [\App\Http\Controllers\API\V1\DictionaryController::class,'getTranslate']);
+//    //
     Route::get('switch/all',[\App\Http\Controllers\API\V1\DictionaryController::class,'getSwithes']);
 });
 

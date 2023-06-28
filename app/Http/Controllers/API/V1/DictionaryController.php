@@ -21,16 +21,12 @@ use Illuminate\Http\Request;
 
 class DictionaryController extends MainApiController
 {
-    public function getAll(string $dictionaryType){
+    public function getAll(string $dictionaryType,$languages_id){
         switch ($dictionaryType){
-            case('lez-ru');
-                return $this->getAllBackwardWords('Лезгинский');
-            case('avar-ru');
-                return $this->getAllBackwardWords('Аварский');
-            case ('ru-lez');
-               return $this->getAllOrdinaryWords('Лезгинский');
-            case ('ru-avar');
-                return $this->getAllOrdinaryWords('Аварский');
+            case(str_starts_with($dictionaryType,'ru'));
+                return $this->getAllOrdinaryWords($languages_id);
+            case (!str_starts_with($dictionaryType,'ru'));
+                return $this->getAllBackwardWords($languages_id);
             default: return  $this->error('dictionary not found',404);
         }
     }
@@ -45,16 +41,12 @@ class DictionaryController extends MainApiController
 //        };
 //    }
 
-    public function getSearch(string $dictionaryType, string $word){
+    public function getSearch(string $dictionaryType,int $languages_id, string $word){
         switch ($dictionaryType){
-            case('lez-ru');
-                return $this->searchBackward($word,'Лезгинский');
-            case('avar-ru');
-                return $this->searchBackward($word,'Аварский');
-            case('ru-lez');
-                return $this->search($word,'Лезгинский');
-            case('ru-avar');
-                return $this->search($word,'Аварский');
+            case(str_starts_with($dictionaryType,'ru'));
+                return $this->search($word,$languages_id);
+            case (!str_starts_with($dictionaryType,'ru'));
+                return $this->searchBackward($word,$languages_id);
             default: return  $this->error('dictionary not found',404);
         }
     }

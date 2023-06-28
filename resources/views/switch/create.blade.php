@@ -41,6 +41,19 @@
                     </span>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="languages_id">Язык</label>
+                <select name="languages_id"  id="languages_id" class="form-control select2"  style="width: 100%;">
+                    @foreach($languages as $language)
+                        <option value="{{$language->id}}">{{$language->name}}</option>
+                    @endforeach()
+                </select>
+                @error('languages_id')
+                <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                @enderror
+            </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Создать</button>
              </div>

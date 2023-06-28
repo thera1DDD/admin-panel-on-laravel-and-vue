@@ -15,7 +15,7 @@ class LanguageService extends Controller
         User::firstOrCreate($data);
     }
 
-    public function update($data, User $language ){
+    public function update($data, Language $language ){
         event(new UserAction(auth()->user()->id, 'Обновление','Языки',$data['name']));
         $language->update($data);
     }

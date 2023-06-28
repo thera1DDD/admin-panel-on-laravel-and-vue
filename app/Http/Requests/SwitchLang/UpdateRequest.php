@@ -27,6 +27,7 @@ class UpdateRequest extends FormRequest
             'name' => 'nullable|string',
             'switch' => 'nullable|string',
             'description' => 'nullable|string',
+            'languages_id'=>'required'
         ];
     }
 }

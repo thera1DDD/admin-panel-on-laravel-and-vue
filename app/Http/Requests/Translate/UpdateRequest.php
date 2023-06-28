@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'language' => 'required',
+            'languages_id' => 'required',
             'translate' => 'required',
         ];
     }
