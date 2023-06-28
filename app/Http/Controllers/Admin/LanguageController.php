@@ -34,7 +34,6 @@ class LanguageController extends Controller
     public function store(StoreRequest $request){
         $data = $request->validated();
         $this->languageService->store($data);
-
         return redirect()->route('language.index')->with('success','Language created');
     }
 

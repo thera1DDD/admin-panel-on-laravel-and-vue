@@ -12,7 +12,7 @@ class LanguageService extends Controller
 {
     public function store($data){
         event(new UserAction(auth()->user()->id, 'Добавление','Языки',$data['name']));
-        User::firstOrCreate($data);
+        Language::firstOrCreate($data);
     }
 
     public function update($data, Language $language ){
