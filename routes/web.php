@@ -280,6 +280,15 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/{id}',[\App\Http\Controllers\Admin\SwitchController::class, 'show'])->name('switchLang.show');
         });
 
+        Route::group(['prefix' => 'testsResult'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\TestResultController::class, 'index'])->name('testsResult.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\TestResultController::class, 'create'])->name('testsResult.create');
+            Route::post('/',[\App\Http\Controllers\Admin\TestResultController::class, 'store'])->name('testsResult.store');
+            Route::get('/{testsResult}/edit',[\App\Http\Controllers\Admin\TestResultController::class, 'edit'])->name('testsResult.edit');
+            Route::patch('{testsResult}',[\App\Http\Controllers\Admin\TestResultController::class, 'update'])->name('testsResult.update');
+            Route::delete('{testsResult}',[\App\Http\Controllers\Admin\TestResultController::class, 'delete'])->name('testsResult.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\TestResultController::class, 'show'])->name('testsResult.show');
+        });
         Route::group(['prefix' => 'users'], function (){
             Route::get('/',[\App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
             Route::get('/create',[\App\Http\Controllers\Admin\UserController::class, 'create'])->name('users.create');
@@ -291,15 +300,7 @@ Route::group(['middleware' => 'auth'], function() {
         });
 
 
-        Route::group(['prefix' => 'testsResult'], function (){
-            Route::get('/',[\App\Http\Controllers\Admin\TestResultController::class, 'index'])->name('testsResult.index');
-            Route::get('/create',[\App\Http\Controllers\Admin\TestResultController::class, 'create'])->name('testsResult.create');
-            Route::post('/',[\App\Http\Controllers\Admin\TestResultController::class, 'store'])->name('testsResult.store');
-            Route::get('/{testsResult}/edit',[\App\Http\Controllers\Admin\TestResultController::class, 'edit'])->name('testsResult.edit');
-            Route::patch('{testsResult}',[\App\Http\Controllers\Admin\TestResultController::class, 'update'])->name('testsResult.update');
-            Route::delete('{testsResult}',[\App\Http\Controllers\Admin\TestResultController::class, 'delete'])->name('testsResult.delete');
-            Route::get('/{id}',[\App\Http\Controllers\Admin\TestResultController::class, 'show'])->name('testsResult.show');
-        });
+
 
 
         Route::resource('user', 'UserController');
@@ -478,6 +479,49 @@ Route::group(['middleware' => 'auth'], function() {
             Route::patch('{video}',[\App\Http\Controllers\Admin\VideoController::class, 'update'])->name('video.update');
             Route::delete('{video}',[\App\Http\Controllers\Admin\VideoController::class, 'delete'])->name('video.delete');
             Route::get('/{video}',[\App\Http\Controllers\Admin\VideoController::class, 'play'])->name('video.play');
+        });
+
+
+        Route::group(['prefix' => 'switchLang'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\SwitchController::class, 'index'])->name('switchLang.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\SwitchController::class, 'create'])->name('switchLang.create');
+            Route::post('/',[\App\Http\Controllers\Admin\SwitchController::class, 'store'])->name('switchLang.store');
+            Route::get('/{switchLang}/edit',[\App\Http\Controllers\Admin\SwitchController::class, 'edit'])->name('switchLang.edit');
+            Route::patch('{switchLang}',[\App\Http\Controllers\Admin\SwitchController::class, 'update'])->name('switchLang.update');
+            Route::delete('{switchLang}',[\App\Http\Controllers\Admin\SwitchController::class, 'delete'])->name('switchLang.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\SwitchController::class, 'show'])->name('switchLang.show');
+        });
+
+        Route::group(['prefix' => 'testsResult'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\TestResultController::class, 'index'])->name('testsResult.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\TestResultController::class, 'create'])->name('testsResult.create');
+            Route::post('/',[\App\Http\Controllers\Admin\TestResultController::class, 'store'])->name('testsResult.store');
+            Route::get('/{testsResult}/edit',[\App\Http\Controllers\Admin\TestResultController::class, 'edit'])->name('testsResult.edit');
+            Route::patch('{testsResult}',[\App\Http\Controllers\Admin\TestResultController::class, 'update'])->name('testsResult.update');
+            Route::delete('{testsResult}',[\App\Http\Controllers\Admin\TestResultController::class, 'delete'])->name('testsResult.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\TestResultController::class, 'show'])->name('testsResult.show');
+        });
+
+        Route::group(['prefix' => 'language'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\LanguageController::class, 'index'])->name('language.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\LanguageController::class, 'create'])->name('language.create');
+            Route::post('/',[\App\Http\Controllers\Admin\LanguageController::class, 'store'])->name('language.store');
+            Route::get('/{language}/edit',[\App\Http\Controllers\Admin\LanguageController::class, 'edit'])->name('language.edit');
+            Route::patch('{language}',[\App\Http\Controllers\Admin\LanguageController::class, 'update'])->name('language.update');
+            Route::delete('{language}',[\App\Http\Controllers\Admin\LanguageController::class, 'delete'])->name('language.delete');
+        });
+
+
+        Route::group(['prefix' => 'photo'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\PhotoController::class, 'index'])->name('photo.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\PhotoController::class, 'create'])->name('photo.create');
+            Route::post('/',[\App\Http\Controllers\Admin\PhotoController::class, 'store'])->name('photo.store');
+            Route::get('/{photo}/edit',[\App\Http\Controllers\Admin\PhotoController::class, 'edit'])->name('photo.edit');
+            Route::patch('{photo}',[\App\Http\Controllers\Admin\PhotoController::class, 'update'])->name('photo.update');
+            Route::delete('{photo}',[\App\Http\Controllers\Admin\PhotoController::class, 'delete'])->name('photo.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\PhotoController::class, 'show'])->name('photo.show');
+            Route::get('/photos/{photo}/records', [\App\Http\Controllers\Admin\PhotoController::class, 'getRecordsByType'])->name('photoRecords.by.type');
+
         });
     });
 

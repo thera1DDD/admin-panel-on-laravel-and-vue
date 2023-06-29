@@ -62,7 +62,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('img/signup.ico') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{asset(getImage(auth()->user()->photo))}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ auth()->user()->name}}</a>
@@ -82,149 +82,106 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{route('course.index')}}" class="nav-link">
-                                            <i class="nav-icon fas fa-chalkboard"></i>
-                                            <p>
-                                                Курсы
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('module.index')}}" class="nav-link">
-                                            <i class="nav-icon fas fa-chalkboard"></i>
-                                            <p>
-                                                Модули
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('language.index')}}" class="nav-link">
-                                            <i class="nav-icon fas fa-chalkboard"></i>
-                                            <p>
-                                                Языки
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('video.index')}}" class="nav-link">
-                                            <i class="nav-icon fas fa-chalkboard"></i>
-                                            <p>
-                                                Видео
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('demovideo.index')}}" class="nav-link">
-                                            <i class="nav-icon fas fa-chalkboard"></i>
-                                            <p>
-                                              Демо Видео
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('role.index') }}" class="nav-link">
-                                            <i class="nav-icon fas fa-chalkboard"></i>
-                                            <p>Роли</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('permission.index') }}" class="nav-link">
-                                            <i class="nav-icon fas fa-chalkboard"></i>
-                                            <p>Права</p>
-                                        </a>
-                                    </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('users.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Пользователи{{' '. \App\Models\User::all()->count()}}</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('comment.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Комментарии</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('photo.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Фото</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('word.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Общий словарь</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('favourite.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Избранное</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('stat.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Прогресс</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('task.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Задания</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('upgrade.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Обновления</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('log.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Логи</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('teacher.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Учителя</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('artwork.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Произведения</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('popularQuestion.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Популярные вопросы</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('column.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Колоны</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('category.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Категории</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('switchLang.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Переключатели словаря</p>
-                                    </a>
-                                </li>
 
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-cogs"></i>
+                                        <p>
+                                            Курсы
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{route('course.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Курсы
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('module.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Модули
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('demovideo.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Демонстративные видео</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('language.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Языки
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('video.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Видео
+                                                </p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="{{ route('photo.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Фото</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('task.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Задания
+                                                </p>
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-cogs"></i>
+                                        <p>
+                                            Общий словарь
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{route('word.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Словарь
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('switchLang.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Переключатели словаря</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('language.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Языки словаря
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link active">
                                         <i class="nav-icon fas fa-cogs"></i>
@@ -293,6 +250,107 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-cogs"></i>
+                                        <p>
+                                            Другое
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('users.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Пользователи{{' '. \App\Models\User::all()->count()}}</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('favourite.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Избранное</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('stat.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Прогресс</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="{{ route('upgrade.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Обновления</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('log.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Логи</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('teacher.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Учителя</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('artwork.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Произведения</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('popularQuestion.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Популярные вопросы</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('column.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Колоны</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('category.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Категории</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('comment.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Комментарии
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('user.profile') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-user"></i>
+                                                <p>
+                                                    Аккаунт
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                                                <i class="nav-icon fas fa-power-off"></i>
+                                                <p>
+                                                    Выход
+                                                </p>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                     @elseif(Auth::user()->role === 'moderator')
@@ -305,58 +363,104 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{route('course.index')}}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-cogs"></i>
                                         <p>
                                             Курсы
+                                            <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('module.index')}}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>
-                                            Модули
-                                        </p>
-                                    </a>
-                                </li>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{route('course.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Курсы
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('module.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Модули
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('demovideo.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Демонстративные видео</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('language.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Языки
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('video.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Видео
+                                                </p>
+                                            </a>
+                                        </li>
 
-                                <li class="nav-item">
-                                    <a href="{{route('video.index')}}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                        <li class="nav-item">
+                                            <a href="{{ route('photo.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Фото</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('task.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Задания
+                                                </p>
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-cogs"></i>
                                         <p>
-                                            Видео
+                                            Общий словарь
+                                            <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('demovideo.index')}}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>
-                                            Демо Видео
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('word.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Общий словарь</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="{{ route('task.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Задания</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="{{ route('artwork.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-chalkboard"></i>
-                                        <p>Произведения</p>
-                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{route('word.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Словарь
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('switchLang.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Переключатели словаря</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('language.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    Языки словаря
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link active">
@@ -373,6 +477,12 @@
                                                 <p>
                                                     Тесты
                                                 </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('testsResult.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Результаты тестов</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -396,27 +506,7 @@
                             </ul>
                         </li>
                     @endif
-                        <li class="nav-item">
-                            <a href="{{ route('user.profile') }}" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Аккаунт
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                          document.getElementById('logout-form').submit();">
-                                <i class="nav-icon fas fa-power-off"></i>
-                                <p>
-                                    Выход
-                                </p>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </a>
-                        </li>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

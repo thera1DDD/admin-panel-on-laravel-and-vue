@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\User;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -23,11 +25,19 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
+        $currentUser = User::select('id')->where('email',$this->email)->first();
+        $currentUser = $currentUser['id'];
         return [
             'name' => 'required|string',
             'surname' => 'nullable|string',
             'patronymic' => 'nullable|string',
-            'email' => 'required|email|unique:users,email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->where(function ($query) use ($currentUser) {
+                    $query->where('id', '!=', $currentUser);
+                }),
+            ],
             'photo' => 'nullable',
             'password' => 'nullable|string',
             'phone' => 'nullable|string',
