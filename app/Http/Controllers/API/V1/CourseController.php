@@ -126,6 +126,7 @@ class CourseController extends MainApiController
             if ($tests) {
                 $userStatsTests = TestResult::where('users_id', $userId)
                     ->whereIn('tests_id', $tests->pluck('id'))
+                    ->where('is_passed', 1) // Добавляем проверку на значение is_passed равное 1
                     ->pluck('tests_id')
                     ->toArray();
 
