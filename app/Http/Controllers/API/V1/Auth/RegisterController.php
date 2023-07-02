@@ -130,9 +130,9 @@ class RegisterController extends MainApiController
     public function verifyCode(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'data.*.survey_questions_id' => 'required',
-            'data.*.survey_answers_id' => 'required',
-            'data.*.users_id' => 'required',
+            'data.*.survey_questions_id' => 'nullable',
+            'data.*.survey_answers_id' => 'nullable',
+            'data.*.users_id' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -156,12 +156,14 @@ class RegisterController extends MainApiController
                 $user->verification_code = null; // Обнуляем код подтверждения
                 $token = $user->createToken('API Token')->accessToken;
                 //добавление опроса
-                foreach ($answers as $answer) {
-                    $surveyResult = new SurveyResult();
-                    $surveyResult->survey_questions_id = $answer['survey_questions_id'];
-                    $surveyResult->survey_answers_id = $answer['survey_answers_id'];
-                    $surveyResult->users_id = $answer['users_id'];
-                    $surveyResult->save();
+                if($answers){
+                    foreach ($answers as $answer) {
+                        $surveyResult = new SurveyResult();
+                        $surveyResult->survey_questions_id = $answer['survey_questions_id'];
+                        $surveyResult->survey_answers_id = $answer['survey_answers_id'];
+                        $surveyResult->users_id = $answer['users_id'];
+                        $surveyResult->save();
+                    }
                 }
                 $user->save();
                 return response()->json(['message' => 'Registration successful', 'status' => true,'token'=>$token,'user'=>$user], 200);

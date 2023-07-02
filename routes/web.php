@@ -348,6 +348,16 @@ Route::group(['middleware' => 'auth'], function() {
             Route::delete('{surveyResult}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'delete'])->name('surveyResult.delete');
             Route::get('/{id}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'show'])->name('surveyResult.show');
         });
+
+        Route::group(['prefix' => 'tasksResult'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\TaskResultController::class, 'index'])->name('tasksResult.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\TaskResultController::class, 'create'])->name('tasksResult.create');
+            Route::post('/',[\App\Http\Controllers\Admin\TaskResultController::class, 'store'])->name('tasksResult.store');
+            Route::get('/{tasksResult}/edit',[\App\Http\Controllers\Admin\TaskResultController::class, 'edit'])->name('tasksResult.edit');
+            Route::patch('{tasksResult}',[\App\Http\Controllers\Admin\TaskResultController::class, 'update'])->name('tasksResult.update');
+            Route::delete('{tasksResult}',[\App\Http\Controllers\Admin\TaskResultController::class, 'delete'])->name('tasksResult.delete');
+            Route::get('/{id}',[\App\Http\Controllers\Admin\TaskResultController::class, 'show'])->name('tasksResult.show');
+        });
     });
 //moder stuff
 

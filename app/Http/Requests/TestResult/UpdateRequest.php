@@ -31,6 +31,7 @@ class UpdateRequest extends FormRequest
             'questions_correct' => 'required',
             'is_passed' => 'required',
             'passing_time' => 'required',
+            'passed_percent'=>'nullable'
         ];
     }
 }

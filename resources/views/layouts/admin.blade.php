@@ -130,23 +130,79 @@
                                                 </p>
                                             </a>
                                         </li>
-
                                         <li class="nav-item">
                                             <a href="{{ route('photo.index') }}" class="nav-link">
                                                 <i class="nav-icon fas fa-chalkboard"></i>
                                                 <p>Фото</p>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a href="{{route('task.index')}}" class="nav-link">
-                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                        <li class="nav-item has-treeview">
+                                            <a href="#" class="nav-link active">
+                                                <i class="nav-icon fas fa-cogs"></i>
                                                 <p>
-                                                    Задания
+                                                    Тесты
+                                                    <i class="right fas fa-angle-left"></i>
                                                 </p>
                                             </a>
+                                            <ul class="nav nav-treeview">
+                                                <li class="nav-item">
+                                                    <a href="{{route('test.index')}}" class="nav-link">
+                                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                                        <p>
+                                                            Тесты
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{{route('question.index')}}" class="nav-link">
+                                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                                        <p>
+                                                            Вопросы
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{{route('answer.index')}}" class="nav-link">
+                                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                                        <p>
+                                                            Ответы
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('task.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Задания</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item has-treeview">
+                                            <a href="#" class="nav-link active">
+                                                <i class="nav-icon fas fa-cogs"></i>
+                                                <p>
+                                                    Результаты курса
+                                                    <i class="right fas fa-angle-left"></i>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
+                                                <li class="nav-item">
+                                                    <a href="{{route('testsResult.index')}}" class="nav-link">
+                                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                                        <p>
+                                                            Тесты
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{{ route('tasksResult.index') }}" class="nav-link">
+                                                        <i class="nav-icon fas fa-chalkboard"></i>
+                                                        <p>Задания</p>
+                                                    </a>
+                                                </li>
 
-
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item has-treeview">
@@ -209,47 +265,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link active">
-                                        <i class="nav-icon fas fa-cogs"></i>
-                                        <p>
-                                            Тесты
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="{{route('test.index')}}" class="nav-link">
-                                                <i class="nav-icon fas fa-chalkboard"></i>
-                                                <p>
-                                                    Тесты
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="{{ route('testsResult.index') }}" class="nav-link">
-                                                <i class="nav-icon fas fa-chalkboard"></i>
-                                                <p>Результаты тестов</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="{{route('question.index')}}" class="nav-link">
-                                                <i class="nav-icon fas fa-chalkboard"></i>
-                                                <p>
-                                                    Вопросы
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="{{route('answer.index')}}" class="nav-link">
-                                                <i class="nav-icon fas fa-chalkboard"></i>
-                                                <p>
-                                                    Ответы
-                                                </p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link active">
                                         <i class="nav-icon fas fa-cogs"></i>

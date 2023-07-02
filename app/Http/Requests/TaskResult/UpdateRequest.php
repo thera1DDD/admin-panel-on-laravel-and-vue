@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\TestResult;
+namespace App\Http\Requests\TaskResult;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,10 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'tests_id' => 'nullable',
+            'tasks_id' => 'nullable',
             'users_id'=>'nullable',
-            'questions_total' => 'nullable',
-            'questions_correct' => 'nullable',
             'is_passed' => 'nullable',
             'passing_time' => 'nullable',
-            'passed_percent'=>'nullable'
         ];
     }
 }

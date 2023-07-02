@@ -21,6 +21,7 @@
                     <th>Кол-во вопросов</th>
                     <th>Кол-во правильных ответов</th>
                     <th>Время прохождения теста</th>
+                    <th>Процент прохождения теста</th>
                     <th>Прохождение</th>
                     <th>Дата прохождения</th>
                     <th>Действие</th>
@@ -37,6 +38,7 @@
                         <td>{{ $testsResult->questions_total }}</td>
                         <td>{{ $testsResult->questions_correct }}</td>
                         <td>{{ $testsResult->passing_time }}</td>
+                        <td>{{ $testsResult->passed_percent }}</td>
                         <td>@if($testsResult->is_passed == 1){{'Пройден'}} @else{{'Не пройден'}}@endif</td>
                         <td>{{ $testsResult->created_at }}</td>
                         <td>
