@@ -136,6 +136,12 @@
                                                 <p>Фото</p>
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('task.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>Задания</p>
+                                            </a>
+                                        </li>
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link active">
                                                 <i class="nav-icon fas fa-cogs"></i>
@@ -171,12 +177,7 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="nav-item">
-                                            <a href="{{ route('task.index') }}" class="nav-link">
-                                                <i class="nav-icon fas fa-chalkboard"></i>
-                                                <p>Задания</p>
-                                            </a>
-                                        </li>
+
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link active">
                                                 <i class="nav-icon fas fa-cogs"></i>
@@ -200,7 +201,6 @@
                                                         <p>Задания</p>
                                                     </a>
                                                 </li>
-
                                             </ul>
                                         </li>
                                     </ul>
