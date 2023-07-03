@@ -26,8 +26,8 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-//        $currentUser = User::select('id')->where('email',$this->email)->first();
-//        $currentUser = $currentUser['id'];
+        $currentUser = User::select('id')->where('email',$this->email)->first();
+        $currentUser = $currentUser['id'];
         return [
             'name' => 'required|string',
             'surname' => 'nullable|string',
@@ -35,7 +35,7 @@ class UpdateRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->ignore(auth()->id()),
+                Rule::unique('users')->ignore($currentUser),
             ],
             'photo' => 'nullable',
             'password' => 'nullable|string',

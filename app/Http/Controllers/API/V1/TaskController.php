@@ -6,9 +6,11 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskResult\StoreRequest;
+use App\Http\Resources\Course\TaskResource;
 use App\Http\Resources\Test\TestResource;
 use App\Http\Resources\Teacher\TeacherResource;
 use App\Models\Course;
+use App\Models\Task;
 use App\Models\Teacher;
 use App\Models\Test;
 use App\Models\TaskResult;
@@ -18,23 +20,14 @@ class TaskController extends MainApiController
 {
 
     public function show($code){
-        $test = Test::with('question.answer')->where('code',$code)->first();
-        if (!$test) {
-          return $this->error('not found',404);
+        $task = Task::select('id','name','description','word','number','poster','code')->where('code',$code)->first();
+        if (!$task) {
+          return $this->error('There is no task with '.$code, 404);
         }
         else{
-            return new TestResource($test);
+            return response()->json(['data'=>$task]);
         }
     }
-
-    public function getAll(){
-        $test = Test::with('question.answer')->get();
-        if (!$test) {
-            return response()->json(['message' => 'Test not found'], 404);
-        }
-        return TestResource::collection($test);
-    }
-
     public function resultPost(StoreRequest $request){
         $data = $request->validated();
         if($data){

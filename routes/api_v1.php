@@ -56,9 +56,14 @@ Route::group(['prefix' => 'task'], function (){
 //    //вывод всех тестов
 //    Route::get('/all', [\App\Http\Controllers\API\V1\TestController::class,'getAll']);
 //    //получение теста по коду
-//    Route::get('/{code}', [\App\Http\Controllers\API\V1\TestController::class,'show']);
-//    //отправка результатов теста
+    Route::get('/{code}', [\App\Http\Controllers\API\V1\TaskController::class,'show']);
     Route::post('/result/post',[\App\Http\Controllers\API\V1\TaskController::class,'resultPost']);
+});
+Route::group(['prefix' => 'video'], function (){
+//    //вывод всех тестов
+//    Route::get('/all', [\App\Http\Controllers\API\V1\TestController::class,'getAll']);
+//    //получение теста по коду
+    Route::get('/{code}', [\App\Http\Controllers\API\V1\VideoController::class,'show']);
 });
 
 Route::group(['prefix' => 'favourite'], function (){
