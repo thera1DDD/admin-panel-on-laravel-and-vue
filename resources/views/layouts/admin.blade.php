@@ -340,7 +340,7 @@
                                             <a href="{{route('comment.index')}}" class="nav-link">
                                                 <i class="nav-icon fas fa-chalkboard"></i>
                                                 <p>
-                                                    Комментарии
+                                                    Отзывы
                                                 </p>
                                             </a>
                                         </li>

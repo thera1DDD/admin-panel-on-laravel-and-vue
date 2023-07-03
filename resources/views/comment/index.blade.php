@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
 @section('title')
-    Комментарии
+    Отзывы/Комментарии
 @endsection
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Комментарии</h3>
+            <h3 class="card-title">Отзывы</h3>
 
             <div class="card-tools">
                 <a href="{{ route('comment.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new comment</a>
@@ -18,8 +18,9 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Текс</th>
-                    <th>Пользователи</th>
+                    <th>Текст</th>
+                    <th>Пользователь</th>
+                    <th>Видео-отзыв</th>
                     <th>Источник</th>
                     <th>Дата загрузки</th>
                     <th>Действие</th>
@@ -30,13 +31,13 @@
                     <tr>
                         <td>{{ $comment->id }}</td>
                         <td>{{ $comment->text }}</td>
-                        <td>{{ $comment->user->name }}</td>
+                        <td>{{ $comment->username }}</td>
+                        <td><a href="{{$comment->video_link }}">Отзыв</a></td>
                         <td>{{ $comment->commentable->name }}</td>
                         <td>{{ $comment->created_at }}</td>
                         <td>
                             <a style="width: 110px"  href="{{ route('comment.edit', $comment->id) }}" class="btn btn-sm btn-warning">Edit</a>
                             <br>
-
                             <form action="{{route('comment.delete',$comment->id) }}" method="post">
                                 @csrf
                                 @method('delete')

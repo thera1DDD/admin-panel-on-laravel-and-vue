@@ -129,6 +129,19 @@ Route::group(['prefix' => 'cabinet'], function (){
 });
 
 
+Route::group(['prefix' => 'reviews'], function (){
+    Route::get('/all', [\App\Http\Controllers\API\V1\ReviewsController::class,'getAll']);
+    Route::get('/user/{id}', [\App\Http\Controllers\API\V1\CabinetController::class,'show']);
+});
+
+Route::group(['prefix' => 'feedback'], function (){
+    Route::post('/post', [\App\Http\Controllers\API\V1\FeedbackController::class,'postFeedback']);
+//    Route::get('/user/{id}', [\App\Http\Controllers\API\V1\CabinetController::class,'show']);
+});
+
+
+
+
 
 
 

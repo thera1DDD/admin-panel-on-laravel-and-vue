@@ -26,8 +26,10 @@ class StoreRequest extends FormRequest
         return [
             'text' => 'required',
             'commentable_type'=>'required|string',
-            'users_id'=>'required',
+//            'users_id'=>'required',
             'commentable_id'=>'nullable',
+            'username'=>'nullable',
+            'video_link'=>'nullable',
         ];
     }
 }

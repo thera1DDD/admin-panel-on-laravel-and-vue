@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
 @section('title')
-    Create Comment
+    Добавить отзыв
 @endsection
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Add new Comment</h3>
+            <h3 class="card-title">Добавить новый отзыв</h3>
             <div class="card-tools">
                 <a href="{{ route('comment.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Comment</a>
             </div>
@@ -14,7 +14,7 @@
         <form method="POST" action="{{ route('comment.store') }}">
             @csrf
             <div class="form-group">
-                <label for="name">Text</label>
+                <label for="name">Текст</label>
                 <textarea  type="text" name="text"  id="text" class="form-control @error('text') is-invalid @enderror" value="{{ old('text') }}" required placeholder="Comment" > </textarea>
                 @error('text')
                 <span class="invalid-feedback" role="alert">
@@ -23,22 +23,22 @@
                 @enderror
             </div>
 
+{{--            <div class="form-group">--}}
+{{--                <label for="users_id">User</label>--}}
+{{--                <select name="users_id"  id="users_id" class="form-control select2" data-placeholder="Выберите Пользователя" style="width: 100%;">--}}
+{{--                    @foreach($users as $user)--}}
+{{--                        <option value="{{$user->id}}">{{$user->name}}</option>--}}
+{{--                    @endforeach()--}}
+{{--                </select>--}}
+{{--                @error('user_id')--}}
+{{--                <span class="invalid-feedback" role="alert">--}}
+{{--                        <strong>{{ $message }}</strong>--}}
+{{--                    </span>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
             <div class="form-group">
-                <label for="users_id">User</label>
-                <select name="users_id"  id="users_id" class="form-control select2" data-placeholder="Выберите Пользователя" style="width: 100%;">
-                    @foreach($users as $user)
-                        <option value="{{$user->id}}">{{$user->name}}</option>
-                    @endforeach()
-                </select>
-                @error('user_id')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="name">Model type</label>
-                <select  name="commentable_type"  id="commentable_type" class="form-control select2" data-placeholder="Выберите Модуль" style="width: 100%;">
+                <label for="name">Объект комментирования</label>
+                <select  name="commentable_type"  id="commentable_type" class="form-control select2"  style="width: 100%;">
                     <option value="Module">Module</option>
                     <option value="Course">Course</option>
                     <option value="Video">Video</option>
@@ -50,7 +50,25 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="commentable_id">Records</label>
+                <label for="username">Пользователь </label>
+                <input type="text" name="username"  id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required placeholder="Название">
+                @error('username')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="username">Видео-отзыв </label>
+                <input type="text" name="video_link"  id="video_link" class="form-control @error('video_link') is-invalid @enderror" value="{{ old('video_link') }}" required placeholder="Название">
+                @error('video_link')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="commentable_id">Записи</label>
                 <select name="commentable_id" id="commentable_id" class="form-control select2" style="width: 100%;">
                     @foreach($records as $record)
                         <option value="{{$record->id}}">{{$record->name}}</option>
