@@ -120,7 +120,7 @@ class RegisterController extends MainApiController
 
         // Отправка уведомления с кодом подтверждения
         $user->notify(new VerificationCodeNotification($verificationCode));
-
+        
         return response()->json(['user' => $user,], 201);
     }
 
