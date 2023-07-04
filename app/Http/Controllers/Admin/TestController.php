@@ -96,7 +96,4 @@ class TestController extends Controller
         $test->save();
         return redirect()->route('test.index')->with('success','Test updated');
     }
-
-
-
 }

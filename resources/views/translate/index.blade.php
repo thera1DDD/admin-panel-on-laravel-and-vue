@@ -17,19 +17,17 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Язык</th>
                     <th>Перевод</th>
-                    <th>Дата добавления</th>
-                    <th>Action</th>
+                    <th>Язык</th>
+                    <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse ($translates as $translate)
                     <tr>
                         <td>{{ $translate->id }}</td>
-                        <td>{{$translate->language->name ?? ''}}</td>
                         <td>{{$translate->translate}}</td>
-                        <td>{{ $translate->created_at }}</td>
+                        <td>{{$translate->language->name ?? ''}}</td>
                         <td>
                             <a style="width: 105px" href="{{ route('translate.edit', $translate->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>

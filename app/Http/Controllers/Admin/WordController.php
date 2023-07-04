@@ -45,7 +45,7 @@ class WordController extends Controller
                 $language = Language::firstOrCreate(['name' => $languageName]);
                 $word = Word::firstOrCreate(['name' => $wordName]);
 
-                if (!Translate::where('words_id', $word->id)->where('languages_id', $language->id)->exists()) {
+                if (!Translate::where('words_id', $word->id)->where('languages_id', $language->id)->where('translate',$wordTranslate)->exists()) {
                     Translate::create([
                         'words_id' => $word->id,
                         'translate' => $wordTranslate,

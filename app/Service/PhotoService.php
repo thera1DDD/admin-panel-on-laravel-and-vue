@@ -9,7 +9,6 @@ use App\Models\Question;
 class PhotoService extends Controller
 {
     public function store($data){
-
         $photo = new Photo();
         $photo->filename = $data['filename'];
         $photo->photoable_id = $data['photoable_id'];
