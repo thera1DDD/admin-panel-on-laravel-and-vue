@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Word\ImportRequest;
 use App\Http\Requests\Word\StoreRequest;
 use App\Http\Requests\Word\UpdateRequest;
+use App\Imports\TranslationsImport;
 use App\Imports\WordImport;
+use App\Models\Language;
 use App\Models\Translate;
 use App\Models\Word;
 use App\Service\WordService;
@@ -36,10 +38,23 @@ class WordController extends Controller
 
     public function import(ImportRequest $request)
     {
-        $data = $request->validated();
-        Excel::import(new WordImport, $data['file']);
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $rows = Excel::toCollection(null, $file)->flatten(1);
+            foreach ($rows as [$wordName, $wordTranslate, $languageName]) {
+                $language = Language::firstOrCreate(['name' => $languageName]);
+                $word = Word::firstOrCreate(['name' => $wordName]);
 
-        return redirect()->back()->with('success', 'Слова успешно импортированы.');
+                if (!Translate::where('words_id', $word->id)->where('languages_id', $language->id)->exists()) {
+                    Translate::create([
+                        'words_id' => $word->id,
+                        'translate' => $wordTranslate,
+                        'languages_id' => $language->id,
+                    ]);
+                }
+            }
+        }
+        return redirect()->back()->with('success', 'Импорт данных успешно выполнен.');
     }
 
     public function create(){
