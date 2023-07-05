@@ -16,7 +16,7 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="name">Имя</label>
-                <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Язык">
+                <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Имя">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Фамилия</label>
-                <input type="text" name="surname"  id="surname" class="form-control @error('surname') is-invalid @enderror" value="{{ old('surname') }}" required placeholder="Язык">
+                <input type="text" name="surname"  id="surname" class="form-control @error('surname') is-invalid @enderror" value="{{ old('surname') }}" required placeholder="Фамилия">
                 @error('surname')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Пароль</label>
-                <input type="text" name="password"  id="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required placeholder="Язык">
+                <input type="text" name="password"  id="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required placeholder="Пароль">
                 @error('password')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                        <label class="custom-file-label" for="exampleInputFile">Выберите фото</label>
                     </div>
                     <div class="input-group-append">
                         <span class="input-group-text">Загрузка</span>
@@ -91,7 +91,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Телефон</label>
-                <input type="text" name="phone"  id="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required placeholder="Язык">
+                <input type="text" name="phone"  id="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required placeholder="Телефон">
                 @error('phone')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

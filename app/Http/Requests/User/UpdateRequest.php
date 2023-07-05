@@ -4,6 +4,7 @@ namespace App\Http\Requests\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -26,8 +27,7 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $currentUser = User::select('id')->where('email',$this->email)->first();
-        $currentUser = $currentUser['id'];
+        $userId = Auth::id();
         return [
             'name' => 'required|string',
             'surname' => 'nullable|string',
@@ -35,7 +35,7 @@ class UpdateRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->ignore($currentUser),
+                Rule::unique('users')->ignore($userId),
             ],
             'photo' => 'nullable',
             'password' => 'nullable|string',

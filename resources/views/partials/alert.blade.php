@@ -56,7 +56,7 @@
 
         <button type="button" class="close" data-dismiss="alert">×</button>
 
-        <i class="icon fas fa-ban"></i> Please check the form below for errors
+        <i class="icon fas fa-ban"></i>Пожалуйста, проверьте форму ниже на наличие ошибок
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
