@@ -42,13 +42,12 @@
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td>
-                            <a style="width: 110px" href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
+                            <a style="width: 130px"  href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-user-edit"></i> Редактировать</a>
                             <br>
-
                             <form action="{{route('users.delete',$user->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <input style="width: 110px;"  type="submit" value="Удалить" class="btn btn-danger">
+                                <button style="width: 130px"  class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Удалить </button>
                             </form>
                         </td>
                     </tr>
