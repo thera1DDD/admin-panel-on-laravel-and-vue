@@ -34,10 +34,7 @@ class SurveyAnswersController extends Controller
     public function store(StoreRequest $request){
 
         $data = $request->validated();
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images/surveyAnswer', 'public');
-            $data['image'] = Storage::disk('public')->url($path);
-        }
+
         $this->surveyAnswersService->store($data);
         return redirect()->route('surveyQuestion.show',$data['survey_questions_id'])->with('success','SurveyAnswer created');
     }
@@ -49,10 +46,6 @@ class SurveyAnswersController extends Controller
 
     public function update(UpdateRequest $request,SurveyAnswer $surveyAnswer){
         $data = $request->validated();
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images/surveyAnswer', 'public');
-            $data['image'] = Storage::disk('public')->url($path);
-        }
         $this->surveyAnswersService->update($data,$surveyAnswer);
         return redirect()->route('surveyQuestion.show',$surveyAnswer['survey_questions_id'])->with('success','SurveyAnswer updated');
     }

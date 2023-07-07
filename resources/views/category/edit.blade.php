@@ -24,6 +24,7 @@
                         <label for="location">Местоположение</label>
                         <select  name="location" id="location" class="form-control select2" style="width: 100%;">
                             <option value="header" {{ $category->location == 'header' ? 'selected' : '' }}>Header</option>
+                            <option value="headerAdditional" {{ $category->location == 'headerAdditional' ? 'selected' : '' }}>HeaderAdditional</option>
                             <option value="footer" {{ $category->location == 'footer' ? 'selected' : '' }}>Footer</option>
                             <option value="menu" {{ $category->location == 'menu' ? 'selected' : '' }}>Menu</option>
                             <option value="underMenu" {{ $category->location == 'underMenu' ? 'selected' : '' }}>UnderMenu</option>

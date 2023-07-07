@@ -37,6 +37,7 @@
                 <select  name="location" id="location" class="form-control select2" style="width: 100%;">
                     <option value="footer">Footer</option>
                     <option value="header">Header</option>
+                    <option value="headerAdditional">HeaderAdditional</option>
                     <option value="menu">Menu</option>
                     <option value="underMenu">Under Menu</option>
                 </select>

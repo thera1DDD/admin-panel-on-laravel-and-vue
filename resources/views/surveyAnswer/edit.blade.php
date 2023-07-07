@@ -32,15 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Постер</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input name="image" type="file" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Загрузка</span>
-                            </div>
-                        </div>
+                        <textarea id="image" name="image"  style="width: 500px" class="form-control" rows="15"></textarea>
                         @error('image')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

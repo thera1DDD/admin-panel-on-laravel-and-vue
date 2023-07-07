@@ -20,13 +20,25 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 class CategoryController extends MainApiController
 {
     public function getAll($location){
-        if($location == 'header' or $location =='menu' or $location == 'underMenu'){
+        if($location =='menu' or $location == 'underMenu'){
             $categories = Category::select('id', 'name', 'path','poster','location')
                 ->where('location', $location)
                 ->get();
             return new CategoryResource([
                 'data' => $categories,
                 'additional' => $categories
+            ]);
+        }
+       elseif($location == 'header'){
+            $categories = Category::select('id', 'name', 'path','poster','location')
+                ->where('location', $location)
+                ->get();
+           $categoriesAdditional = Category::select('id', 'name', 'path','poster','location')
+               ->where('location', 'headerAdditional')
+               ->get();
+            return new CategoryResource([
+                'data' => $categories,
+                'additional' => $categoriesAdditional
             ]);
         }
         else{
