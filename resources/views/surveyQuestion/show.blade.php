@@ -29,7 +29,7 @@
                     <tr>
                         <td>{{ $surveyAnswer->id }}</td>
                         <td>{{ $surveyAnswer->name }}</td>
-                        <td><img src="{{getImage($surveyAnswer->image)}}" style="width: 100px"></td>
+                        <td> {!!$surveyAnswer->image !!} </td>
                         <td>{{ $surveyAnswer->created_at }}</td>
                         <td>
                             <a style="width: 110px"  href="{{ route('surveyAnswer.edit', $surveyAnswer->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
