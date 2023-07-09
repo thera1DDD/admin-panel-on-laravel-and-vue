@@ -21,8 +21,10 @@ class CommentController extends Controller
         $this->commentService = $commentService;
     }
     public function create(){
-        $comments = Comment::all(); $users = User::all(); $records = Module::all();
-        return view('comment.create',compact('comments','users','records'));
+        return view('comment.create')
+            ->with('comments', Comment::all())
+            ->with('users', User::all())
+            ->with('records', Module::all());
     }
 
     //ajax request

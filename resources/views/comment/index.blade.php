@@ -33,7 +33,7 @@
                         <td>{{ $comment->text }}</td>
                         <td>{{ $comment->username }}</td>
                         <td><a href="{{$comment->video_link }}">Отзыв</a></td>
-                        <td>{{ $comment->commentable->name }}</td>
+                        <td>{{ $comment->commentable->name ?? 'Удаленный источник' }}</td>
                         <td>{{ $comment->created_at }}</td>
                         <td>
                             <a style="width: 110px"  href="{{ route('comment.edit', $comment->id) }}" class="btn btn-sm btn-warning">Edit</a>

@@ -61,17 +61,7 @@ class TestController extends Controller
             $path = $request->file('poster')->store('images/tests/posters', 'public');
             $data['poster'] = Storage::disk('public')->url($path);
         }
-        $testable_id = $data['testable_id'];
-        $testable_type = "App\Models\\" . $data['testable_type'];
-        $test = Test::create([
-            'name' => $data['name'],
-            'code' => $data['code'],
-            'number' =>$data['number'],
-            'poster' =>$data['poster'],
-        ]);
-        $model = $testable_type::findOrFail($testable_id);
-        $test->testable()->associate($model);
-        $test->save();
+        $this->testService->store($data);
         return redirect()->route('test.index')->with('success','Test created');
     }
     public function update(UpdateRequest $request,Test $test){
@@ -80,20 +70,7 @@ class TestController extends Controller
             $path = $request->file('poster')->store('images/tests/posters', 'public');
             $data['poster'] = Storage::disk('public')->url($path);
         }
-        else{
-            $data['poster'] = $test->poster;
-        }
-        $testable_id = $data['testable_id'];
-        $testable_type = "App\Models\\" . $data['testable_type'];
-        $test->update([
-            'name' => $data['name'],
-            'code' => $data['code'],
-            'number' =>$data['number'],
-            'poster' =>$data['poster'],
-        ]);
-        $model = $testable_type::findOrFail($testable_id);
-        $test->testable()->associate($model);
-        $test->save();
+        $this->testService->update($data,$test);
         return redirect()->route('test.index')->with('success','Test updated');
     }
 }

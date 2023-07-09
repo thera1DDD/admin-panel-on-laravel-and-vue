@@ -33,7 +33,7 @@
                         <td>{{ $test->code }}</td>
                         <td><a href="{{route('test.show', $test->id)}}">{{$test->name}}</a></td>
                         <td>{{ $test->number }}</td>
-                        <td>{{ $test->testable->name ?? 'none'}}</td>
+                        <td>{{ $test->testable->name ?? 'Удаленный источник'}}</td>
                         <td> <img src="{{getImage($test->poster)}}" style="width: 200px" >  </td>
                         <td>{{ $test->created_at }}</td>
                         <td>

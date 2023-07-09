@@ -39,7 +39,6 @@ class RegisterController extends MainApiController
 //        }
 //    }
 
-
     public function passwordResetSend(Request $request){
         $user = User::where('email', $request->input('email'))->first();
         if($user){
@@ -120,7 +119,7 @@ class RegisterController extends MainApiController
 
         // Отправка уведомления с кодом подтверждения
         $user->notify(new VerificationCodeNotification($verificationCode));
-        
+
         return response()->json(['user' => $user,], 201);
     }
 
@@ -221,16 +220,4 @@ class RegisterController extends MainApiController
         return SurveyQuestionResource::collection($survey);
     }
 
-//    public function getAll($location){
-//        if($location == 'header' or $location =='menu'){
-//            $categories = Category::where('location',$location)->get();
-//            return CategoryResource::collection($categories);
-//        }
-//        else{
-//            $columns = Column::with(['category' => function ($query) use ($location) {
-//                $query->where('location', $location);
-//            }])->get();
-//            return ColumnResource::collection($columns);
-//        }
-//    }
 }
