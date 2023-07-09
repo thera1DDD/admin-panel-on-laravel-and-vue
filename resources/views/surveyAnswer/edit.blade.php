@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Постер</label>
-                        <textarea id="image" name="image"  style="width: 500px" class="form-control" rows="15"></textarea>
+                        <textarea id="image" name="image"  style="width: 500px" class="form-control" rows="15">{{$surveyAnswer->image}}</textarea>
                         @error('image')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
