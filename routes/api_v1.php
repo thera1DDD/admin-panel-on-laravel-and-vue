@@ -45,7 +45,7 @@ Route::group(['prefix' => 'teacher'], function (){
 });
 Route::group(['prefix' => 'test'], function (){
     //вывод всех тестов
-    Route::get('/all', [\App\Http\Controllers\API\V1\TestController::class,'getAll']);
+    Route::get('/all', [\App\Http\Controllers\API\V1\TestController::class,'getAllTest']);
     //получение теста по коду
     Route::get('/{code}', [\App\Http\Controllers\API\V1\TestController::class,'show']);
     //отправка результатов теста

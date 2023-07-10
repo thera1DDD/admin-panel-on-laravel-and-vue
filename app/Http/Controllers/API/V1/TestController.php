@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestResult\StoreRequest;
+use App\Http\Resources\Test\SingleTestResource;
 use App\Http\Resources\Test\TestResource;
 use App\Http\Resources\Teacher\TeacherResource;
 use App\Models\Course;
@@ -33,6 +34,14 @@ class TestController extends MainApiController
             return response()->json(['message' => 'Test not found'], 404);
         }
         return TestResource::collection($test);
+    }
+
+    public function getAllTest(){
+        $test = Test::all();
+        if (!$test) {
+            return response()->json(['message' => 'Test not found'], 404);
+        }
+        return SingleTestResource::collection($test);
     }
 
     public function resultPost(StoreRequest $request){
