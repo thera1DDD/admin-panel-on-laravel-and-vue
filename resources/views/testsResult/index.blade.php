@@ -36,7 +36,7 @@
                     <tr>
                         <td>{{$testsResult->users_id}}</td>
                         <td><a href="{{ route('testsResult.show', $testsResult->users_id) }}">{{( $testsResult->user->name). ' ' . ($testsResult->user->surname?? null) }}</a></td>
-                        <td><img src="{{getImage($testsResult->user->photo ?? null)}}"style="width: 100px" >  </td>
+                        <td><img src="{{getImage($testsResult->user->photo ?? 'Удаленное фото')}}"style="width: 100px" >  </td>
                     </tr>
                 @empty
 

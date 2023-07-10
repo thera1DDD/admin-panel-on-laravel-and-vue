@@ -29,8 +29,8 @@
                 @forelse ($surveyResults as $surveyResult)
                     <tr>
                         <td>{{ $surveyResult->id }}</td>
-                        <td>{{ $surveyResult->survey_question->name }}</td>
-                        <td>{{ $surveyResult->survey_answer->name }}</td>
+                        <td>{{ $surveyResult->survey_question->name ?? 'Удаленный вопрос'}}</td>
+                        <td>{{ $surveyResult->survey_answer->name ?? 'Удаленный ответ'}}</td>
                         <td>{{ $surveyResult->user->name ?? 'Удаленный пользователь'}}</td>
                         <td>{{ $surveyResult->created_at }}</td>
                         <td>

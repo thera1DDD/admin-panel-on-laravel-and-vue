@@ -345,7 +345,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::post('/',[\App\Http\Controllers\Admin\SurveyResultController::class, 'store'])->name('surveyResult.store');
             Route::get('/{surveyResult}/edit',[\App\Http\Controllers\Admin\SurveyResultController::class, 'edit'])->name('surveyResult.edit');
             Route::patch('{surveyResult}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'update'])->name('surveyResult.update');
-            Route::delete('{surveyResult}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'delete'])->name('surveyResult.delete');
+            Route::delete('{id}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'delete'])->name('surveyResult.delete');
             Route::get('/{id}',[\App\Http\Controllers\Admin\SurveyResultController::class, 'show'])->name('surveyResult.show');
         });
 

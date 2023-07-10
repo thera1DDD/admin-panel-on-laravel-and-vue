@@ -34,11 +34,11 @@
                 <tbody>
                 @forelse ($surveyResults as $surveyResult)
                     <tr>
-                        <td>{{$surveyResult->users_id}}</td>
+                        <td>{{$surveyResult->users_id ?? 'Удаленный пользователь'}}</td>
                         <td><a href="{{ route('surveyResult.show', $surveyResult->users_id) }}">{{( $surveyResult->user->name). ' ' . ($surveyResult->user->surname?? null) }}</a></td>
-                        <td><img src="{{getImage($surveyResult->user->photo ?? null)}}"style="width: 100px" >  </td>
+                        <td><img src="{{getImage($surveyResult->user->photo ?? 'Удаленное фото')}}"style="width: 100px" >  </td>
                         <td>
-                            <form action="{{route('surveyResult.delete',$surveyResult->id) }}" method="post">
+                            <form action="{{route('surveyResult.delete',$surveyResult) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button style="width: 130px"  class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Удалить </button>

@@ -65,7 +65,7 @@ class SurveyResultController extends Controller
 
 
     public function delete(SurveyResult $surveyResult){
-        $surveyResult->delete();
+        SurveyResult::where('users_id',$surveyResult->users_id)->delete();
         return redirect()->route('surveyResult.index')->with('success','Результаты пользователя удалены');
     }
 
