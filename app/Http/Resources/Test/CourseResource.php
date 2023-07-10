@@ -20,7 +20,7 @@ class CourseResource extends JsonResource
             'name'=>$this->name,
             'main_image'=>$this->main_image,
             'sort'=>$this->sort,
-            'module' => ModuleResource::collection($this->whenLoaded('module')),
+            'modules' => ModuleResource::collection($this->whenLoaded('module')),
         ];
     }
 }
