@@ -54,7 +54,7 @@ class SurveyResultController extends Controller
     public function store(StoreRequest $request){
         $data = $request->validated();
         $this->surveyResultService->store($data);
-        return redirect()->route('surveyResult.index')->with('успешно','Избранное пользователя добавлено');
+        return redirect()->route('surveyResult.index')->with('успешно','Результаты пользователя добавлены');
     }
 
 
@@ -66,13 +66,13 @@ class SurveyResultController extends Controller
 
     public function delete(SurveyResult $surveyResult){
         $surveyResult->delete();
-        return redirect()->route('surveyResult.index')->with('success','Избранное пользователя удалено');
+        return redirect()->route('surveyResult.index')->with('success','Результаты пользователя удалены');
     }
 
     public function update(UpdateRequest $request, SurveyResult $surveyResult){
         $data = $request->validated();
         $this->surveyResultService->update($data,$surveyResult);
-        return redirect()->route('surveyResult.index')->with('success','Избранное пользователя обновлено');
+        return redirect()->route('surveyResult.index')->with('success','Результаты пользователя обновлены');
     }
 
 }

@@ -10,6 +10,7 @@ use App\Http\Resources\Test\SingleTestResource;
 use App\Http\Resources\Test\TestResource;
 use App\Http\Resources\Teacher\TeacherResource;
 use App\Models\Course;
+use App\Models\Module;
 use App\Models\Teacher;
 use App\Models\Test;
 use App\Models\TestResult;
@@ -37,7 +38,7 @@ class TestController extends MainApiController
     }
 
     public function getAllTest(){
-        $test = Test::all();
+        $test = Course::with('module.test');
         if (!$test) {
             return response()->json(['message' => 'Test not found'], 404);
         }

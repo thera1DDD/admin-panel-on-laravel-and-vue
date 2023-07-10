@@ -18,7 +18,8 @@ class SingleTestResource extends JsonResource
             'id'=>$this->id,
             'code'=>$this->code,
             'name'=>$this->name,
-            'testable_type'=>$this->testable_type
+            'testable_type'=>$this->testable_type,
+            'module'=> $this->module
         ];
     }
 }

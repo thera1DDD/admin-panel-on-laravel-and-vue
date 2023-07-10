@@ -190,6 +190,13 @@ class RegisterController extends MainApiController
         if($request->input('email') == null or $request->input('password') == null){
             return $this->error('Fields is empty!');
         }
+        $user = User::where('email', $request->input('email'))->first();
+        if($user){
+            if($user->verification_code !=null) {
+               $user->forceDelete();
+               return $this->error('Invalid credentials or user does not exist',401);
+            }
+        }
         // Аутентификация пользователя
         if (Auth::attempt($credentials)) {
             // Аутентификация успешна
@@ -206,7 +213,7 @@ class RegisterController extends MainApiController
                 'status' => true
             ], 200);
         } else {
-            return response()->json(['error' => 'Invalid credentials'], 401);
+            return response()->json(['error' => 'Invalid credentials or user does not exist'], 401);
         }
     }
 
