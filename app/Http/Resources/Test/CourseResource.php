@@ -4,7 +4,7 @@ namespace App\Http\Resources\Test;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SingleTestResource extends JsonResource
+class CourseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,6 +18,9 @@ class SingleTestResource extends JsonResource
             'id'=>$this->id,
             'code'=>$this->code,
             'name'=>$this->name,
+            'main_image'=>$this->main_image,
+            'sort'=>$this->sort,
+            'module' => ModuleResource::collection($this->whenLoaded('module')),
         ];
     }
 }

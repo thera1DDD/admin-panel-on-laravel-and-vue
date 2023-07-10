@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestResult\StoreRequest;
+use App\Http\Resources\Test\CourseResource;
 use App\Http\Resources\Test\SingleTestResource;
 use App\Http\Resources\Test\TestResource;
 use App\Http\Resources\Teacher\TeacherResource;
@@ -38,11 +39,8 @@ class TestController extends MainApiController
     }
 
     public function getAllTest(){
-        $test = Course::with('module.test');
-        if (!$test) {
-            return response()->json(['message' => 'Test not found'], 404);
-        }
-        return SingleTestResource::collection($test);
+        $test = Course::with('module.test')->get();
+        return CourseResource::collection($test);
     }
 
     public function resultPost(StoreRequest $request){
