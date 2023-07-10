@@ -74,5 +74,4 @@ class SurveyResultController extends Controller
         $this->surveyResultService->update($data,$surveyResult);
         return redirect()->route('surveyResult.index')->with('success','Результаты пользователя обновлены');
     }
-
 }
