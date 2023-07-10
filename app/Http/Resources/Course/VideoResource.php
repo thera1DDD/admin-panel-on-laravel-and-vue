@@ -21,6 +21,7 @@ class VideoResource extends JsonResource
             'description'=>$this->description,
             'poster'=>$this->poster,
             'code'=>$this->code,
+            'type'=>'video',
             'video_file'=>$this->video_file,
             'passed' => isset($this->passed) ? $this->passed : false,
 
