@@ -28,6 +28,7 @@
                     <th>ID</th>
                     <th>Пользователь</th>
                     <th>Фото</th>
+                    <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,13 @@
                         <td>{{$surveyResult->users_id}}</td>
                         <td><a href="{{ route('surveyResult.show', $surveyResult->users_id) }}">{{( $surveyResult->user->name). ' ' . ($surveyResult->user->surname?? null) }}</a></td>
                         <td><img src="{{getImage($surveyResult->user->photo ?? null)}}"style="width: 100px" >  </td>
+                        <td>
+                            <form action="{{route('surveyResult.delete',$surveyResult->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button style="width: 130px"  class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Удалить </button>
+                            </form>
+                        </td>
                     </tr>
                 @empty
 
