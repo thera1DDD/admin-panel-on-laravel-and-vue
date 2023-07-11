@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Demovideo;
 use App\Service\DemovideoService;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DemovideoController extends Controller
 {
@@ -32,10 +33,7 @@ class DemovideoController extends Controller
 
     public function update(UpdateRequest $request, Demovideo $demovideo){
         $data = $request->validated();
-        if ($request->hasFile('video_file')) {
-            $path = $request->file('video_file')->store('video', 'public');
-            $data['video_file'] = Storage::disk('public')->url($path);
-        }
+        $data['video_file'] = $request->hasFile('video_file') ? url(Storage::url($request->file('video_file')->storeAs('public/video', Str::uuid() . '.' . $request->file('video_file')->getClientOriginalExtension()))):null;
         if ($request->hasFile('poster')) {
             $path = $request->file('poster')->store('video/posters', 'public');
             $data['poster'] = Storage::disk('public')->url($path);
@@ -57,10 +55,7 @@ class DemovideoController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        if ($request->hasFile('video_file')) {
-            $data['video_file'] = $request->file('video_file')->storeAs('public/video', 'demovideo_' . \Illuminate\Support\Str::uuid() . '.m3u8');
-            $data['video_file'] = Storage::disk('public')->url($data['video_file']);
-        }
+        $data['video_file'] = $request->hasFile('video_file') ? url(Storage::url($request->file('video_file')->storeAs('public/video', Str::uuid() . '.' . $request->file('video_file')->getClientOriginalExtension()))):null;
         $this->demovideoService->store($data);
         return redirect()->route('demovideo.index')->with('success','Демовидео созданно');
     }
