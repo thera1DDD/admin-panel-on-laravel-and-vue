@@ -27,7 +27,9 @@ class VideoController extends Controller
 
     public function update(UpdateRequest  $request, Video $video){
         $data = $request->validated();
-        $data['video_file'] = $request->hasFile('video_file') ? url(Storage::url($request->file('video_file')->storeAs('public/video', Str::uuid() . '.' . $request->file('video_file')->getClientOriginalExtension()))):null;
+        if ($request->hasFile('video_file')) {
+            $data['video_file'] = url(Storage::url($request->file('video_file')->storeAs('public/video', Str::uuid() . '.' . $request->file('video_file')->getClientOriginalExtension())));
+        }
         if ($request->hasFile('poster')) {
             $path = $request->file('poster')->store('module/video/posters', 'public');
             $data['poster'] = Storage::disk('public')->url($path);
@@ -51,7 +53,9 @@ class VideoController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        $data['video_file'] = $request->hasFile('video_file') ? url(Storage::url($request->file('video_file')->storeAs('public/video', Str::uuid() . '.' . $request->file('video_file')->getClientOriginalExtension()))):null;
+        if ($request->hasFile('video_file')) {
+            $data['video_file'] = url(Storage::url($request->file('video_file')->storeAs('public/video', Str::uuid() . '.' . $request->file('video_file')->getClientOriginalExtension())));
+        }
         if ($request->hasFile('poster')) {
             $path = $request->file('poster')->store('video/posters', 'public');
             $data['poster'] = Storage::disk('public')->url($path);
