@@ -56,6 +56,10 @@ class DemovideoController extends Controller
     {
         $data = $request->validated();
         $data['video_file'] = $request->hasFile('video_file') ? url(Storage::url($request->file('video_file')->storeAs('public/video', Str::uuid() . '.' . $request->file('video_file')->getClientOriginalExtension()))):null;
+        if ($request->hasFile('poster')) {
+            $path = $request->file('poster')->store('video/posters', 'public');
+            $data['poster'] = Storage::disk('public')->url($path);
+        }
         $this->demovideoService->store($data);
         return redirect()->route('demovideo.index')->with('success','Демовидео созданно');
     }
