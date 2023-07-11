@@ -41,8 +41,8 @@ class ResetVerificationCodeNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('АССАЛАМУ АЛЕЙКУМ УА РАХМАТУЛЛАХИ УА БАРАКАТУХ')
-            ->line('Ваш код для сброса пароля: ' . $this->verificationCode);
+            ->subject('Подтверждение кода верификации')
+            ->view('emails.verificationCode', ['verification_code' => $this->verificationCode]);
     }
 
     /**

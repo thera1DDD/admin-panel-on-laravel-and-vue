@@ -41,9 +41,8 @@ class VerificationCodeNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('АССАЛАМУ АЛЕЙКУМ УА РАХМАТУЛЛАХИ УА БАРАКАТУХ')
-                    ->line('Your verification code is: ' . $this->verificationCode)
-                    ->line('Please use this code to complete your registration.');
+            ->subject('Подтверждение кода верификации')
+            ->view('emails.verificationCode', ['verification_code' => $this->verificationCode]);
     }
 
     /**
