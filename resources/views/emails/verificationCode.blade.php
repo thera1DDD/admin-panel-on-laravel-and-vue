@@ -30,7 +30,7 @@
 
 <p>Ваш верификационный код:</p>
 
-<p><strong>Код: </strong> {{$this->verificationCode}}</p>
+<p><strong>Код: </strong> {{$verification_code}}</p>
 
 <p>Спасибо за внимание!</p>
 </body>
