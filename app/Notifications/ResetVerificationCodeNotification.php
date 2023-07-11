@@ -42,7 +42,7 @@ class ResetVerificationCodeNotification extends Notification
     {
         return (new MailMessage)
             ->subject('Подтверждение кода верификации')
-            ->view('emails.verificationCode', ['verification_code' => $this->verificationCode]);
+            ->view('emails.verificationCodeReset', ['verification_code' => $this->verificationCode]);
     }
 
     /**

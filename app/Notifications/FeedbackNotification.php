@@ -51,10 +51,6 @@ class FeedbackNotification extends Notification
         return (new MailMessage)
             ->subject('Обратная связь')
             ->view('emails.feedback', ['data' => $this->data]);
-//                    ->subject('Обратная связь')
-//                    ->line('Имя пользователя: ' . $this->name)
-//                    ->line('Телефон пользователя: ' . $this->phone)
-//                    ->line('Вопрос: '. $this->question);
     }
 
     /**

@@ -44,6 +44,7 @@ class RegisterController extends MainApiController
         if($user){
             if($user->verification_code !=null) {
                 $user->forceDelete();
+                return $this->error('User does not exist or not verified',404);
             }
             $verificationCode = $this->generateVerificationCode(); // функция для генерации кода
             $user->verification_code = $verificationCode;
