@@ -1,21 +1,21 @@
 @extends('layouts.admin')
 
 @section('title')
-Create Video
+    Добавить видео
 @endsection
 @section('content')
 <div class="card card-primary">
     <div class="card-header">
-        <h3 class="card-title">Add new Video</h3>
+        <h3 class="card-title">Добавить новое видео</h3>
         <div class="card-tools">
-            <a href="{{ route('video.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Videos</a>
+            <a href="{{ route('video.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> Просмотреть все видео</a>
         </div>
     </div>
     <form method="POST" action="{{ route('video.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Название</label>
                 <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Название">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@ Create Video
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Description</label>
+                <label for="name">Описание</label>
                 <input type="text" name="description"  id="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" required placeholder="Описание">
                 @error('description')
                 <span class="invalid-feedback" role="alert">
@@ -51,8 +51,8 @@ Create Video
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Module</label>
-                <select name="modules_id"  id="modules_id" class="form-control select2" data-placeholder="Выберите курс" style="width: 100%;">
+                <label for="name">Модуль</label>
+                <select name="modules_id"  id="modules_id" class="form-control select2"  style="width: 100%;">
                     @foreach($modules as $module)
                         <option value="{{$module->id}}">{{$module->name}}</option>
                     @endforeach()
@@ -64,11 +64,11 @@ Create Video
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Video</label>
+                <label for="name">Видео</label>
                 <div class="input-group">
                     <div class="custom-file">
                         <input name="video_file" type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                        <label class="custom-file-label" for="exampleInputFile">Выберите видео</label>
                     </div>
                     <div class="input-group-append">
                         <span class="input-group-text">Загрузка</span>
@@ -76,7 +76,7 @@ Create Video
                 </div>
             </div>
             <div class="form-group">
-                <label for="name">Poster</label>
+                <label for="name">Постер</label>
                 <div class="input-group">
                     <div class="custom-file">
                         <input name="poster" type="file" class="custom-file-input" id="exampleInputFile">
@@ -85,7 +85,7 @@ Create Video
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                        <label class="custom-file-label" for="exampleInputFile">Выберите фото</label>
                     </div>
                     <div class="input-group-append">
                         <span class="input-group-text">Загрузка</span>
@@ -94,7 +94,7 @@ Create Video
             </div>
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create Video</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Создать</button>
         </div>
     </form>
 </div>

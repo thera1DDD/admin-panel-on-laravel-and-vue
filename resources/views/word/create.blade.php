@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-Добавить слово
+    Добавить слово
 @endsection
 @section('content')
 <div class="card card-primary">
@@ -15,8 +15,8 @@
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label for="name">Слово</label>
-                <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Word">
+                <label for="name">Слово на русском</label>
+                <input type="text" name="name"  id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="Слово">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

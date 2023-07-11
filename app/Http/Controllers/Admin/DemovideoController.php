@@ -41,7 +41,7 @@ class DemovideoController extends Controller
             $data['poster'] = Storage::disk('public')->url($path);
         }
         $this->demovideoService->update($data,$demovideo);
-        return redirect()->route('demovideo.index')->with('success','Demovideo updated');
+        return redirect()->route('demovideo.index')->with('success','Демовидео обновленно');
     }
 
     public function edit(Demovideo $demovideo){
@@ -51,7 +51,7 @@ class DemovideoController extends Controller
 
     public function delete(Demovideo $demovideo){
         $demovideo->delete();
-        return redirect()->route('demovideo.index')->with('success','Demovideo deleted');
+        return redirect()->route('demovideo.index')->with('success','Демовидео удаленно');
     }
 
     public function store(StoreRequest $request)
@@ -66,7 +66,7 @@ class DemovideoController extends Controller
             $data['poster'] = Storage::disk('public')->url($path);
         }
         $this->demovideoService->store($data);
-        return redirect()->route('demovideo.index')->with('success','Demovideo created');
+        return redirect()->route('demovideo.index')->with('success','Демовидео созданно');
     }
 
     public function play($id)

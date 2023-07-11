@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Demo Videos
+    Демовидео
 @endsection
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Demo Videos</h3>
+            <h3 class="card-title">Демовидео</h3>
 
             <div class="card-tools">
-                <a href="{{ route('demovideo.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new demovideo</a>
+                <a href="{{ route('demovideo.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить демовидео</a>
             </div>
         </div>
         <!-- /.card-header -->
@@ -18,13 +18,13 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Course</th>
-                    <th>Video_file</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Курс</th>
+                    <th>Видео</th>
                     <th>Постер</th>
-                    <th>Date Posted</th>
-                    <th>Action</th>
+                    <th>Дата создания</th>
+                    <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,12 +38,12 @@
                         <td><img src="{{getImage($demovideo->poster)}}" style="width: 200px"></td>
                         <td>{{ $demovideo->created_at }}</td>
                         <td>
-                            <a style="width: 66px"  href="{{ route('demovideo.edit', $demovideo->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a style="width: 130px"  href="{{ route('demovideo.edit', $demovideo->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-user-edit"></i> Редактировать</a>
                             <br>
                             <form action="{{route('demovideo.delete',$demovideo->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
+                                <button style="width: 130px"  class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Удалить </button>
                             </form>
                         </td>
                     </tr>

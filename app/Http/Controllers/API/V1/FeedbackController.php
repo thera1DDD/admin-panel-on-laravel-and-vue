@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Notification;
 
 class FeedbackController extends MainApiController
 {
-    protected $email = 'tagir566666@gmail.com';
+    protected $email = 'inbox@djigit-language.ru'; //почта для получения писем обратной связи
 
     public function postFeedback(\App\Http\Requests\API\Feedback\StoreRequest $request){
         $data = $request->validated();

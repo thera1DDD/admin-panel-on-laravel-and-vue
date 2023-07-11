@@ -38,7 +38,7 @@
                             document.getElementById('logout-form').submit();">
                         <p>
                             <i class="nav-icon fas fa-power-off"></i>
-                            Logout
+                            Выход
                         </p>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -77,7 +77,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-cogs"></i>
                                 <p>
-                                    Admin
+                                    Администратор
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>

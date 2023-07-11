@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Videos
+    Видео
 @endsection
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Videos</h3>
+            <h3 class="card-title">Видео</h3>
 
             <div class="card-tools">
-                <a href="{{ route('video.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new video</a>
+                <a href="{{ route('video.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить новое видео</a>
             </div>
         </div>
         <!-- /.card-header -->

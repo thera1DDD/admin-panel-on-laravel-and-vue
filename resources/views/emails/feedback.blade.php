@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-<h2>Feedback Notification</h2>
+<h2>Обратная связь</h2>
 
 <p>Ассаламу алейкум!</p>
 

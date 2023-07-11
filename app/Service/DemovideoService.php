@@ -12,8 +12,7 @@ class DemovideoService
         Demovideo::firstOrCreate($data);
     }
 
-    public function update($data,Demovideo $demovideo)
-    {
+    public function update($data,Demovideo $demovideo) {
         $demovideo->update($data);
     }
 }

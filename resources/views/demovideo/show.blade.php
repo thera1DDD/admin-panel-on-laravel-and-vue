@@ -9,7 +9,7 @@
         <div class="card-header">
             <h3 class="card-title"> Демонстративное видео</h3>
             <div class="card-tools">
-                <a href="{{ route('demovideo.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить видео</a>
+                <a href="{{ route('demovideo.create') }}" class="btn btn-primary"> <i class="fas fa-plus-circle"></i> Добавить видео</a>
             </div>
         </div>
         <!-- /.card-header -->
@@ -17,13 +17,11 @@
         <div class="card-body table-responsive p-0">
             <video id="video" controls></video>
         </div>
-
     </div>
 @endsection
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 
 <script>
     $(document).ready(function() {
