@@ -24,7 +24,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Fruitcake\Cors\HandleCors::class,
-        \App\Http\Middleware\CorsMiddleware::class,
+
     ];
 
     /**
@@ -72,7 +72,7 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'admin'=>AdminMiddleware::class,
         'moderator'=>ModeratorMiddleware::class,
-        'cors' => \App\Http\Middleware\CorsMiddleware::class,
+        'cors' => \App\Http\Middleware\Cors::class,
 
     ];
 }
