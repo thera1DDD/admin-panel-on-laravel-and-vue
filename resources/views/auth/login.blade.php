@@ -50,7 +50,6 @@
                 </div>
                 <!-- /.col -->
             </div>
-        </form>
         <p class="mb-0">
             <a href="{{route('register')}}" class="text-center">Создать новый аккаунт</a>
         </p>
