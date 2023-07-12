@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 });
+Route::group(['middleware' => 'cors'], function () {
 
     Route::group(['prefix' => 'course'], function (){
         //вывод всех курсов
@@ -138,4 +139,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::post('/post', [\App\Http\Controllers\API\V1\FeedbackController::class,'postFeedback']);
 //    Route::get('/user/{id}', [\App\Http\Controllers\API\V1\CabinetController::class,'show']);
     });
-
+});
