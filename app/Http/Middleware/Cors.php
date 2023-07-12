@@ -8,9 +8,9 @@ class Cors
 {
     public function handle($request, Closure $next)
     {
-        $response = $next($request);
-        $response->header('Access-Control-Allow-Origin', 'https://djigit-language.ru');
-        $response->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        return $response;
+        return $next($request)
+            ->header('Access-Control-Allow-Origin', "*")
+            ->header('Access-Control-Allow-Methods', "GET, POST, PUT, DELETE, OPTIONS")
+            ->header('Access-Control-Allow-Headers', "Accept,Authorization,Content-Type");
     }
 }
