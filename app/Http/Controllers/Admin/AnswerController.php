@@ -36,8 +36,8 @@ class AnswerController extends Controller
     }
 
     public function index(){
-      $answers =  Answer::all();
-      return view('answer.index',compact('answers'));
+      $answers =  Answer::all(); return view('answer.index',compact('answers'));
+
     }
 
     public function update(UpdateRequest $request,Answer $answer){
