@@ -99,6 +99,7 @@ Route::group(['middleware' => 'cors'], function () {
         //
     });
 
+
     Route::group(['prefix' => 'popularQuestions'], function (){
         Route::get('/all', [\App\Http\Controllers\API\V1\PopularQuestionController::class,'getAll']);
     });
