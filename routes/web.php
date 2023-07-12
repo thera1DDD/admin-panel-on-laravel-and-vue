@@ -16,8 +16,9 @@
     |
     */
     Route::get('/', function () {
-        return view('nothing');
+        return view('auth.login');
     });
+
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/403', [\App\Http\Controllers\Admin\HomeController::class, 'errorPage'])->name('403Page');
     Route::group(['middleware' => 'admin'], function() {
