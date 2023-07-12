@@ -139,6 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
         Laravel\Passport\PassportServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
@@ -163,6 +164,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
 
 
         /*

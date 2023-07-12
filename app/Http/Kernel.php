@@ -70,6 +70,8 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'admin'=>AdminMiddleware::class,
-        'moderator'=>ModeratorMiddleware::class
+        'moderator'=>ModeratorMiddleware::class,
+        'cors' => \App\Http\Middleware\CorsMiddleware::class,
+
     ];
 }

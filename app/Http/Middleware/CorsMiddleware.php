@@ -19,8 +19,9 @@ class CorsMiddleware
         $response = $next($request);
 
         $response->headers->set('Access-Control-Allow-Origin', 'https://djigit-language.ru');
-        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+        $response->headers->set('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
+        $response->headers->set('Access-Control-Expose-Headers', 'Content-Length, Content-Range');
         return $response;
     }
 }
