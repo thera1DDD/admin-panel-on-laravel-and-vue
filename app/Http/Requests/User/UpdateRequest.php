@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $userId = Auth::id();
+        $userId = User::where('email',$this->email)->first();
         return [
             'name' => 'required|string',
             'surname' => 'nullable|string',
@@ -35,7 +35,7 @@ class UpdateRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->ignore($userId),
+                Rule::unique('users')->ignore($userId->id ?? null),
             ],
             'photo' => 'nullable',
             'password' => 'nullable|string',
