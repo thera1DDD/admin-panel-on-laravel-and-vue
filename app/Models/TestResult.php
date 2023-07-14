@@ -25,7 +25,7 @@ class TestResult extends Model
     {
         $existingResult = self::where('tests_id', $data['tests_id'])
             ->where('users_id',$data['users_id'])
-            ->where('is_passed', 1)
+            ->where('is_passed', 1 or 0)
             ->first();
         if ($existingResult) {
             $existingResult->update($data);
