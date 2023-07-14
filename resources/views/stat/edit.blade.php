@@ -23,6 +23,7 @@
                                 <option value="{{ $user->id }}" {{ $user->id == $stat->users_id ? 'selected' : '' }}>
                                     {{ $user->name }}
                                 </option>
+                                <option></option>
                             @endforeach
                         </select>
                         @error('user_id')
@@ -38,6 +39,7 @@
                                 <option value="{{ $course->id }}" {{ $course->id == $stat->courses_id ? 'selected' : '' }}>
                                     {{ $course->name }}
                                 </option>
+                                <option></option>
                             @endforeach
                         </select>
                         @error('courses_id')
@@ -101,6 +103,7 @@
                                 <option value="{{ $module->id }}" {{ $module->id == $stat->passed_modules_id ? 'selected' : '' }}>
                                     {{ $module->name }}
                                 </option>
+                                <option></option>
                             @endforeach
                             <option></option>
                         </select>

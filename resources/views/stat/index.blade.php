@@ -21,8 +21,6 @@
                     <th>Курс</th>
                     <th>Пользователь</th>
                     <th>Пройденный Модуль</th>
-                    <th>Пройденный Тест</th>
-                    <th>Пройденное Задание</th>
                     <th>Просмотренное Видео</th>
                     <th>Пройденный Курс</th>
                     <th>Дата создания</th>
@@ -33,15 +31,13 @@
 
                 @forelse ($stats as $stat)
                     <tr>
-                        <td>{{ $stat->id }}</td>
-                        <td>@if(isset($stat->course->name)){{ $stat->course->name }}@else{{''}}@endif</td>
-                        <td>@if(isset($stat->user->name)){{ $stat->user->name }}@else{{''}}@endif</td>
-                        <td>@if(isset($stat->module->name)){{ $stat->module->name }}@else{{''}}@endif</td>
-                        <td>@if(isset($stat->test->name)){{ $stat->test->name }}@else{{''}}@endif</td>
-                        <td>@if(isset($stat->task->name)){{ $stat->task->name }}@else{{''}}@endif</td>
-                        <td>@if(isset($stat->video->name)){{ $stat->video->name }}@else{{''}}@endif</td>
-                        <td>@if(isset($stat->course->name)){{ $stat->course->name }}@else{{''}}@endif</td>
-                        <td>{{ $stat->created_at }}</td>
+                        <td>{{ $stat->id ?? null }}</td>
+                        <td>{{ $stat->course->name ?? null }}</td>
+                        <td>{{ $stat->user->name ?? null }}</td>
+                        <td>{{ $stat->passed_modules->name ?? null }}</td>
+                        <td>{{ $stat->passed_videos->name ?? null }}</td>
+                        <td>{{ $stat->passed_courses->name ?? null }}</td>
+                        <td>{{ $stat->created_at ?? null }}</td>
                         <td>
                             <a style="width: 66px" href="{{ route('stat.edit', $stat->id) }}" class="btn btn-sm btn-warning">Edit</a>
                             <br>
