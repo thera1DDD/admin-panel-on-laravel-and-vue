@@ -30,7 +30,7 @@ class StoreRequest extends FormRequest
             'users_id' => 'nullable|integer',
             'passed_tests_id' => 'nullable|integer',
             'passed_tasks_id' => 'nullable|integer',
-
+            'courses_id'=>'nullable|integer',
         ];
     }
 }
