@@ -19,4 +19,18 @@ class TestResult extends Model
     public function course(){
         return $this->belongsTo(Course::class,'courses_id','id');
     }
+
+
+    public static function addOrUpdateResult($data)
+    {
+        $existingResult = self::where('tests_id', $data['tests_id'])
+            ->where('users_id',$data['users_id'])
+            ->where('is_passed', 1)
+            ->first();
+        if ($existingResult) {
+            $existingResult->update($data);
+        } else {
+            self::create($data);
+        }
+    }
 }

@@ -46,7 +46,7 @@ class TestController extends MainApiController
     public function resultPost(StoreRequest $request){
         $data = $request->validated();
         if($data){
-            TestResult::firstOrCreate($data);
+            TestResult::addOrUpdateResult($data);
             return response()->json(['data'=>$data,'status'=>true]);
         }
         else{
