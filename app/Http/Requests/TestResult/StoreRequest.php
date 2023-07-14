@@ -30,7 +30,8 @@ class StoreRequest extends FormRequest
             'questions_correct' => 'nullable',
             'is_passed' => 'nullable',
             'passing_time' => 'nullable',
-            'passed_percent'=>'nullable'
+            'passed_percent'=>'nullable',
+            'courses_id'=>'nullable'
         ];
     }
 }
