@@ -43,10 +43,10 @@ class CourseController extends MainApiController
         $course = Course::where('code', $code)->first();
         //получение количества просмотренных видео курса
         $passed_videos = Stat::where('courses_id', $courseId)->where('users_id', $userId)->whereNotNull('passed_videos_id')->count();
-        $passed_tasks = Stat::where('courses_id', $courseId)->where('users_id', $userId)->whereNotNull('passed_tasks_id')->count();
+        $passed_tests = TestResult::where('courses_id', $courseId)->where('users_id', $userId)->where('is_passed',1)->count();
         //
         //подсчет имеющихся видео, тестов, заданий в курсе
-        if (isset($course, $passed_tasks, $passed_videos)) {
+        if (isset($course,  $passed_tests, $passed_videos)) {
             $totalVideos = $course->module->flatMap(function ($module) {
                 return $module->video;
             })->count();
@@ -59,7 +59,7 @@ class CourseController extends MainApiController
             $courseResource->totalTests = $totalTests;
             $courseResource->totalExam = $totalExam;
             $courseResource->passedVideos = $passed_videos;
-            $courseResource->passedTasks = $passed_tasks;
+            $courseResource->passedTests = $passed_tests;
             //
             //проверка на модулей на пройденность
             $modules = $course->module;
