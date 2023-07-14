@@ -53,14 +53,10 @@ class CourseController extends MainApiController
             $totalTests = $course->module->flatMap(function ($module) {
                 return $module->test;
             })->count();
-            $totalTasks = $course->module->flatMap(function ($module) {
-                return $module->task;
-            })->count();
             $totalExam = $course->test()->count();
             $courseResource = new CourseResource($course->loadCount('module'));
             $courseResource->totalVideos = $totalVideos;
             $courseResource->totalTests = $totalTests;
-            $courseResource->totalTasks = $totalTasks;
             $courseResource->totalExam = $totalExam;
             $courseResource->passedVideos = $passed_videos;
             $courseResource->passedTasks = $passed_tasks;
@@ -103,22 +99,6 @@ class CourseController extends MainApiController
                 });
             } else {
                 $moduleResource->videos = collect([]);
-            }
-
-            // Проверка модуля на пройденность заданий
-            $tasks = $module->task;
-            if ($tasks) {
-                $userStatsTasks = Stat::where('users_id', $userId)
-                    ->whereIn('passed_tasks_id', $tasks->pluck('id'))
-                    ->pluck('passed_tasks_id')
-                    ->toArray();
-
-                $moduleResource->tasks = $tasks->map(function ($task) use ($userStatsTasks) {
-                    $task->passed = in_array($task->id, $userStatsTasks);
-                    return $task;
-                });
-            } else {
-                $moduleResource->tasks = collect([]);
             }
 
             // Проверка модуля на пройденность тестов
