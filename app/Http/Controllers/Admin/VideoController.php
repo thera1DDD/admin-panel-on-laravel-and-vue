@@ -66,7 +66,8 @@ class VideoController extends Controller
 
     public function play($id)
     {
-        $video = Video::findOrFail($id); $video_file_path = $video->video_file;
+        $video = Video::findOrFail($id);
+        $video_file_path = $video->video_file;
         return view('video.show', compact('video_file_path'));
     }
 
