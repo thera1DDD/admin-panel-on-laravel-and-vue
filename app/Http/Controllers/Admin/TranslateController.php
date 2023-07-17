@@ -33,6 +33,30 @@ class TranslateController extends Controller
         $words_id = $id;
         return view('translate.index', compact('translates','words_id'));
     }
+    public function allTranslate(Request $request)
+    {
+        $query = $request->input('query');
+        $languageId = $request->input('language');
+
+        if ($request->has('reset')) {
+            $query = null;
+            $languageId = null;
+        }
+
+        $translates = Translate::query()
+            ->when($languageId, function ($query, $languageId) {
+                return $query->where('languages_id', $languageId);
+            })
+            ->when($query, function ($query, $search) {
+                return $query->where('translate', 'like', '%' . $search . '%');
+            })
+            ->with('word')
+            ->get();
+
+        $languages = Language::pluck('name', 'id');
+
+        return view('translate.allTranslate', compact('translates', 'languages', 'query', 'languageId'));
+    }
 
 
     public function store(StoreRequest $request){

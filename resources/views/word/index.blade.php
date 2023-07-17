@@ -12,6 +12,7 @@
         </form>
         <div class="card-tools">
             <a href="{{ route('word.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Добавить новое слово </a>
+            <a href="{{ route('translate.allTranslates') }}" class="btn btn-primary"> Все переводы </a>
             <form action="{{ route('word.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" accept=".xlsx,.xls">

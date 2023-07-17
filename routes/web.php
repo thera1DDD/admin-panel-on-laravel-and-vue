@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function() {
         });
 
         Route::group(['prefix' => 'translate'], function (){
+            Route::get('/allTranslates', [\App\Http\Controllers\Admin\TranslateController::class,'allTranslate'])->name('translate.allTranslates');
             Route::get('{id}',[\App\Http\Controllers\Admin\TranslateController::class, 'index'])->name('translate.index');
             Route::get('{id}/create',[\App\Http\Controllers\Admin\TranslateController::class, 'create'])->name('translate.create');
             Route::post('/',[\App\Http\Controllers\Admin\TranslateController::class, 'store'])->name('translate.store');
@@ -53,6 +54,11 @@ Route::group(['middleware' => 'auth'], function() {
             Route::patch('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'update'])->name('translate.update');
             Route::delete('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'delete'])->name('translate.delete');
         });
+
+
+
+
+
 
 
 
@@ -394,6 +400,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/{translate}/edit',[\App\Http\Controllers\Admin\TranslateController::class, 'edit'])->name('translate.edit');
             Route::patch('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'update'])->name('translate.update');
             Route::delete('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'delete'])->name('translate.delete');
+
         });
 
 
