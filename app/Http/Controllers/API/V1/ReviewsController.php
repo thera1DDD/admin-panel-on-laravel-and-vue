@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\API\MainApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestResult\StoreRequest;
+use App\Http\Resources\Reviews\ReviewResource;
 use App\Http\Resources\Test\TestResource;
 use App\Http\Resources\Teacher\TeacherResource;
 use App\Models\Comment;
@@ -23,7 +24,7 @@ class ReviewsController extends MainApiController
         if (!$reviews) {
             return response()->json(['message' => 'Reviews not found'], 404);
         }
-        return response()->json(['reviews'=>$reviews]);
+        return ReviewResource::collection($reviews);
     }
 
 //    public function resultPost(StoreRequest $request){
