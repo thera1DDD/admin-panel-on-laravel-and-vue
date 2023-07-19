@@ -11,9 +11,10 @@ class AboutUsController extends MainApiController
 {
     public function getAll(){
         $quotes = AboutUs::select('id', 'firstQuote', 'secondQuote', 'image')->get();
-        if($quotes){
-            response()->json(['data'=>$quotes]);
+        if(!$quotes){
+            return $this->error('there is not quotes',404);
         }
-        return $this->error('there is not quotes',404);
+        return response()->json(['data'=>$quotes]);
+
     }
 }
