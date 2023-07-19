@@ -41,10 +41,9 @@ class ClearVerificationCodes extends Command
     {
         $weekAgo = now()->subSeconds(40);
 
-//        User::whereNotNull('verification_code')
-//            ->where('created_at', '<=', $weekAgo)
-//            ->forceDelete();
-            TestResult::query()->forceDelete();
+        User::whereNotNull('verification_code')
+            ->where('created_at', '<=', $weekAgo)
+            ->forceDelete();
         $this->info('Verification codes cleared successfully.');
     }
 }

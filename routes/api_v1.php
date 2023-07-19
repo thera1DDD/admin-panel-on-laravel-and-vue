@@ -139,4 +139,8 @@ Route::group(['middleware' => 'cors'], function () {
         Route::post('/post', [\App\Http\Controllers\API\V1\FeedbackController::class,'postFeedback']);
 //    Route::get('/user/{id}', [\App\Http\Controllers\API\V1\CabinetController::class,'show']);
     });
+    Route::group(['prefix' => 'aboutUs'], function (){
+        Route::post('/all', [\App\Http\Controllers\API\V1\AboutUsController::class,'getAll']);
+//    Route::get('/user/{id}', [\App\Http\Controllers\API\V1\CabinetController::class,'show']);
+    });
 });

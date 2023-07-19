@@ -55,12 +55,14 @@ Route::group(['middleware' => 'auth'], function() {
             Route::delete('{translate}',[\App\Http\Controllers\Admin\TranslateController::class, 'delete'])->name('translate.delete');
         });
 
-
-
-
-
-
-
+        Route::group(['prefix' => 'aboutUs'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\AboutUsController::class, 'index'])->name('aboutUs.index');
+            Route::get('/create',[\App\Http\Controllers\Admin\AboutUsController::class, 'create'])->name('aboutUs.create');
+            Route::post('/',[\App\Http\Controllers\Admin\AboutUsController::class, 'store'])->name('aboutUs.store');
+            Route::get('/{aboutUs}/edit',[\App\Http\Controllers\Admin\AboutUsController::class, 'edit'])->name('aboutUs.edit');
+            Route::patch('{aboutUs}',[\App\Http\Controllers\Admin\AboutUsController::class, 'update'])->name('aboutUs.update');
+            Route::delete('{aboutUs}',[\App\Http\Controllers\Admin\AboutUsController::class, 'delete'])->name('aboutUs.delete');
+        });
 
         Route::group(['prefix' => 'course'], function (){
             Route::get('/',[\App\Http\Controllers\Admin\CourseController::class, 'index'])->name('course.index');
