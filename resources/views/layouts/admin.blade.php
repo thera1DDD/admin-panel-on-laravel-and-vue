@@ -353,6 +353,14 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
+                                            <a href="{{route('aboutUs.index')}}" class="nav-link">
+                                                <i class="nav-icon fas fa-chalkboard"></i>
+                                                <p>
+                                                    О нас
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a href="{{ route('user.profile') }}" class="nav-link">
                                                 <i class="nav-icon fas fa-user"></i>
                                                 <p>
