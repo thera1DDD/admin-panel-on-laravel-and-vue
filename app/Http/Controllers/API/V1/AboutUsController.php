@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AboutUsController extends MainApiController
 {
     public function getAll(){
-        $quotes = AboutUs::select('id', 'firstQuote, secondQuote, image')->get();
+        $quotes = AboutUs::select('id', 'firstQuote', 'secondQuote', 'image')->get();
         if($quotes){
             response()->json(['data'=>$quotes]);
         }
