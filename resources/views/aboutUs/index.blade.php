@@ -20,7 +20,9 @@
                     <th>ID</th>
                     <th>Первая цитата</th>
                     <th>Вторая цитата</th>
-                    <th>Фото</th>
+                    <th>SVG фото</th>
+                    <th>Главное фото</th>
+                    <th>Основной текст</th>
                     <th>Дата загрузки</th>
                     <th>Действие</th>
                 </tr>
@@ -32,6 +34,8 @@
                         <td>{{ $aboutUs->firstQuote }}</td>
                         <td>{{ $aboutUs->secondQuote }}</td>
                         <td>{!!$aboutUs->image !!} </td>
+                        <td> <img src="{{getImage($aboutUs->big_image)}}" style="width: 200px" ></td>
+                        <td>{{ $aboutUs->text_content }}</td>
                         <td>{{ $aboutUs->created_at }}</td>
                         <td>
                             <a style="width: 110px" href="{{ route('aboutUs.edit', $aboutUs->id) }}" class="btn btn-sm btn-warning">Редактировать</a>

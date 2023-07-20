@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 class AboutUsController extends MainApiController
 {
     public function getAll(){
-        $quotes = AboutUs::select('id', 'firstQuote', 'secondQuote', 'image')->get();
+        $quotes = AboutUs::select('id', 'firstQuote', 'secondQuote', 'image','big_image','text_content')->get();
+//        $other = AboutUs::select('big_image','text_content')->whereNotNull('big_image')->get();
         if(!$quotes){
             return $this->error('there is not quotes',404);
         }

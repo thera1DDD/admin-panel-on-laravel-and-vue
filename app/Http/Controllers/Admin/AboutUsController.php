@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AboutUs\StoreRequest;
 use App\Http\Requests\AboutUs\UpdateRequest;
 use App\Models\AboutUs;
 use App\Service\AboutUsService;
-use Illuminate\Support\Env;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
 
 class AboutUsController extends Controller
 {
@@ -33,6 +31,10 @@ class AboutUsController extends Controller
 
     public function store(StoreRequest $request){
         $data = $request->validated();
+        if ($request->hasFile('big_image')) {
+            $path = $request->file('big_image')->store('images/aboutUs', 'public');
+            $data['big_image'] = Storage::disk('public')->url($path);
+        }
         $this->aboutUsService->store($data);
         return redirect()->route('aboutUs.index')->with('success','Успешно созданно');
     }
@@ -51,6 +53,10 @@ class AboutUsController extends Controller
 
     public function update(UpdateRequest $request, AboutUs $aboutUs){
         $data = $request->validated();
+        if ($request->hasFile('big_image')) {
+            $path = $request->file('big_image')->store('images/aboutUs', 'public');
+            $data['big_image'] = Storage::disk('public')->url($path);
+        }
         $this->aboutUsService->update($data,$aboutUs);
         return redirect()->route('aboutUs.index')->with('success','Успешно обновленно');
     }

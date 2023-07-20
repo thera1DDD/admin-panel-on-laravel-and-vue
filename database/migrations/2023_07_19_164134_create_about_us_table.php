@@ -18,6 +18,8 @@ class CreateAboutUsTable extends Migration
             $table->text('image')->nullable();
             $table->text('firstQuote')->nullable();
             $table->text('secondQuote')->nullable();
+            $table->string('big_image')->nullable();
+            $table->text('text_content')->nullable();
             $table->integer('status')->default(1);
             $table->integer('sort')->default(500);
             $table->timestamps();

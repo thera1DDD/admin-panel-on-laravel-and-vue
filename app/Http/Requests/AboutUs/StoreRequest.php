@@ -24,9 +24,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required',
-            'firstQuote' => 'required',
-            'secondQuote' => 'required',
+            'image' => 'nullable',
+            'firstQuote' => 'nullable',
+            'secondQuote' => 'nullable',
+            'big_image' => 'nullable',
+            'text_content' => 'nullable',
         ];
     }
 }
