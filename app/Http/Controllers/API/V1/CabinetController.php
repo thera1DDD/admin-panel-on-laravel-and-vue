@@ -23,20 +23,18 @@ class CabinetController extends MainApiController
         if ($user) {
             if (isset($data['email'])) {
                 $existingUser = User::where('email', $data['email'])->where('id', '!=', $data['userId'])->first();
-                if (isset($existingUser)) {
-                    return response()->json(['success' => false, 'message' => 'Электронная почта уже существует'], 422);
-                }
-                else{
-                    if(isset($data['password'])){
-                        $data['password'] = bcrypt( $data['password']);
+                    if (isset($existingUser)) {
+                        return response()->json(['success' => false, 'message' => 'Электронная почта уже существует'], 422);
                     }
-                    $user->update($data);
-                    return response()->json([
-                        'user' => $data,
-                        'status' => true
-                    ]);
                 }
-            }
+                if(isset($data['password'])){
+                    $data['password'] = bcrypt( $data['password']);
+                }
+                $user->update($data);
+                return response()->json([
+                    'user' => $data,
+                    'status' => true
+                ]);
         }
         else{
             return $this->error('Пользователь не найден', 404);
