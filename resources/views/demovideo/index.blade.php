@@ -34,9 +34,9 @@
                         <td>{{ $demovideo->id }}</td>
                         <td>{{ $demovideo->name }}</td>
                         <td>{{ $demovideo->description }}</td>
-                        <td>{{ $demovideo->course_card_description }}</td>
+                        <td>{{ Str::limit($demovideo->course_card_description, 150) }}</td>
                         <td>{{ $demovideo->course->name}}</td>
-                        <td><a href="{{route('demovideo.play', $demovideo->id)}}">{{$demovideo->video_file}}</a></td>
+                        <td><a href="{{route('demovideo.play', $demovideo->id)}}">Видео</a> </td>
                         <td><img src="{{getImage($demovideo->poster)}}" style="width: 200px"></td>
                         <td>{{ $demovideo->created_at }}</td>
                         <td>
