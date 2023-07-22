@@ -20,6 +20,7 @@ class CourseController extends MainApiController
     {
         $course = Course::with('demovideo')->get();
         if (isset($course)) {
+
             return SingleCourseResource::collection($course);
         } else {
             return $this->error('course not found', 404);
@@ -30,11 +31,34 @@ class CourseController extends MainApiController
     public function show($code)
     {
         $course = Course::with('demovideo')->where('code', $code)->first();
-        if (isset($course)) {
-            return new SingleCourseResource($course);
-        } else {
-            return $this->error('course not found', 404);
+
+        if ($course === null) {
+            return response()->json(['error' => 'Course not found'], 404);
         }
+        // Получаем количество видео и тестов
+        $totalVideos = $this->getTotalVideos($course);
+        $totalTests = $this->getTotalTests($course);
+
+        $courseResource = new SingleCourseResource($course);
+        $courseResource->totalVideos = $totalVideos;
+        $courseResource->totalTests = $totalTests;
+
+        // Возвращаем ресурс с заполненными свойствами
+        return $courseResource;
+    }
+
+    private function getTotalVideos($course)
+    {
+        return $course->module->flatMap(function ($module) {
+            return $module->video;
+        })->count();
+    }
+
+    private function getTotalTests($course)
+    {
+        return $course->module->flatMap(function ($module) {
+            return $module->test;
+        })->count();
     }
 
     public function courseWithProgress($courseId, $userId, $code)
@@ -47,13 +71,10 @@ class CourseController extends MainApiController
         //
         //подсчет имеющихся видео, тестов, заданий в курсе
         if (isset($course,  $passed_tests, $passed_videos)) {
-            $totalVideos = $course->module->flatMap(function ($module) {
-                return $module->video;
-            })->count();
-            $totalTests = $course->module->flatMap(function ($module) {
-                return $module->test;
-            })->count();
+            $totalVideos = $this->getTotalVideos($course);
+            $totalTests = $this->getTotalTests($course);
             $totalExam = $course->test()->count();
+
             $courseResource = new CourseResource($course->loadCount('module'));
             $courseResource->totalVideos = $totalVideos;
             $courseResource->totalTests = $totalTests;

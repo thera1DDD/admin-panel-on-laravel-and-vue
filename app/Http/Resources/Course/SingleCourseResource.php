@@ -20,6 +20,8 @@ class SingleCourseResource extends JsonResource
             'name'=>$this->name,
             'main_image'=>$this->main_image,
             'sort'=>$this->sort,
+            'total_videos' => $this->totalVideos ?? null,
+            'total_tests' => $this->totalTests ?? null,
             'demovideo' => DemoVideoResource::collection($this->whenLoaded('demovideo')),
         ];
     }
