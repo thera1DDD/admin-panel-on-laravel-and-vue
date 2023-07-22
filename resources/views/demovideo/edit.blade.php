@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Описание</label>
-                        <textarea id="description" name="description"  style="width: 500px" class="form-control" rows="7"></textarea>
+                        <textarea id="description" name="description"  style="width: 500px" class="form-control" rows="7">{{$demovideo->description}} </textarea>
                         @error('description')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group">
                         <label for="course_card_description">Описание №2</label>
-                        <textarea id="course_card_description" name="course_card_description"  style="width: 500px" class="form-control" rows="7"></textarea>
+                        <textarea id="course_card_description" name="course_card_description"  style="width: 500px" class="form-control" rows="7">{{$demovideo->course_card_description}} </textarea>
                         @error('course_card_description')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
