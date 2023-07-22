@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Edit Demo Video
+    Редактировать демо видео
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,20 +16,17 @@
                 <form action="{{route('demovideo.update',$demovideo->id)}}" method="post" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
-                    <label for="name">Name</label>
+                    <label for="name">Название</label>
                     <div class="form-group">
                         <input type="text" value="{{ $demovideo->name ?? old('name') }}" name="name" class="form-control" placeholder="Name">
                     </div>
-                    <label for="description">Description</label>
-                    <div class="form-group">
-                        <input type="text" value="{{ $demovideo->description ?? old('description') }}" name="description" class="form-control" placeholder="Description">
-                    </div>
-                    <label for="demovideo_file">Demo Video</label>
+
+                    <label for="demovideo_file">Демо видео</label>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input name="video_file" type="file" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                                <label class="custom-file-label" for="exampleInputFile">Выберите видео</label>
                             </div>
                             <div class="input-group-append">
                                 <span class="input-group-text">Загрузка</span>
@@ -37,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="courses_id">Course</label>
+                        <label for="courses_id">Курс</label>
                         <select  name="courses_id"  id="courses_id"  class="form-control select2" data-placeholder="Module" style="width: 100%;">
                             @foreach($courses as $course)
                                 <option value="{{ $course->id }}" {{ $course->id == $demovideo->courses_id ? 'selected' : '' }}>
@@ -56,7 +53,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="course_card_description">Описание 2</label>
+                        <label for="course_card_description">Описание №2</label>
                         <textarea id="course_card_description" name="course_card_description"  style="width: 500px" class="form-control" rows="7"></textarea>
                         @error('course_card_description')
                         <span class="invalid-feedback" role="alert">
