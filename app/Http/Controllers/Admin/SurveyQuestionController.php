@@ -9,8 +9,6 @@ use App\Http\Requests\SurveyQuestion\UpdateRequest;
 use App\Models\SurveyAnswer;
 use App\Models\SurveyQuestion;
 use App\Service\SurveyQuestionService;
-use Illuminate\Support\Env;
-use Illuminate\Support\Facades\Config;
 
 class SurveyQuestionController extends Controller
 {

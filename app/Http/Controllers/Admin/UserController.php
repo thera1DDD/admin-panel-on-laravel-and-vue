@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
 
-    protected $userService;
+    protected UserService $userService;
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;

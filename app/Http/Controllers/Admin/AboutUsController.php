@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class AboutUsController extends Controller
 {
 
-    protected $aboutUsService;
+    protected AboutUsService $aboutUsService;
     public function __construct(AboutUsService $aboutUsService)
     {
         $this->aboutUsService = $aboutUsService;

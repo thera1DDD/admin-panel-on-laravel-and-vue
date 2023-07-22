@@ -18,8 +18,8 @@
     Route::get('/', function () {
         return view('auth.login');
     });
-
 Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', function () {  return view('home'); });
     Route::get('/403', [\App\Http\Controllers\Admin\HomeController::class, 'errorPage'])->name('403Page');
     Route::group(['middleware' => 'admin'], function() {
 
@@ -44,7 +44,6 @@ Route::group(['middleware' => 'auth'], function() {
             Route::post('/import',[\App\Http\Controllers\Admin\WordController::class, 'import'])->name('word.import');
 
         });
-
         Route::group(['prefix' => 'translate'], function (){
             Route::get('/allTranslates', [\App\Http\Controllers\Admin\TranslateController::class,'allTranslate'])->name('translate.allTranslates');
             Route::get('{id}',[\App\Http\Controllers\Admin\TranslateController::class, 'index'])->name('translate.index');

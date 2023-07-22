@@ -7,7 +7,6 @@ use App\Http\Requests\SurveyResult\StoreRequest;
 use App\Http\Requests\SurveyResult\UpdateRequest;
 use App\Models\Course;
 use App\Models\SurveyResult;
-use App\Models\TestResult;
 use App\Models\User;
 use App\Service\SurveyResultService;
 use Illuminate\Http\Request;

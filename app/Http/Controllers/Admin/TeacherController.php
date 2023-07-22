@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teacher\StoreRequest;
 use App\Http\Requests\Teacher\UpdateRequest;

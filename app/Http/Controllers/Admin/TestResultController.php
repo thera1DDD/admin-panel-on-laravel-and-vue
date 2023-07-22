@@ -6,16 +6,13 @@ use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestResult\StoreRequest;
 use App\Http\Requests\TestResult\UpdateRequest;
-use App\Models\Category;
 use App\Models\Column;
 use App\Models\Test;
 use App\Models\TestResult;
 use App\Models\User;
 use App\Service\CategoryService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use SebastianBergmann\CodeCoverage\Report\Xml\Tests;
 
 class TestResultController extends Controller
 {

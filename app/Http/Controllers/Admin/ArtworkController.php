@@ -9,7 +9,6 @@ use App\Models\Artwork;
 use App\Models\Language;
 use App\Service\ArtworkService;
 use App\Traits\ImageUploadTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ArtworkController extends Controller

@@ -10,11 +10,10 @@ use App\Models\Translate;
 use App\Models\Word;
 use App\Service\TranslateService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class TranslateController extends Controller
 {
-    protected $translateService;
+    protected TranslateService $translateService;
 
     public function __construct(TranslateService $translateService)
     {

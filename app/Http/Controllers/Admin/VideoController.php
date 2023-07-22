@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 class VideoController extends Controller
 {
-    protected $videoService;
+    protected VideoService $videoService;
     public function __construct(VideoService $videoService)
     {
         $this->videoService = $videoService;

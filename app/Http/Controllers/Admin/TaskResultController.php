@@ -2,21 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\UserAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TaskResult\StoreRequest;
 use App\Http\Requests\TaskResult\UpdateRequest;
-use App\Models\Category;
-use App\Models\Column;
 use App\Models\Task;
-use App\Models\Test;
 use App\Models\TaskResult;
 use App\Models\User;
-use App\Service\CategoryService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use SebastianBergmann\CodeCoverage\Report\Xml\Tests;
 
 class TaskResultController extends Controller
 {

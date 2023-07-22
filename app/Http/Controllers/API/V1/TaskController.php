@@ -1,20 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\API\V1;
-
-
 use App\Http\Controllers\API\MainApiController;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskResult\StoreRequest;
-use App\Http\Resources\Course\TaskResource;
-use App\Http\Resources\Test\TestResource;
-use App\Http\Resources\Teacher\TeacherResource;
-use App\Models\Course;
 use App\Models\Task;
-use App\Models\Teacher;
-use App\Models\Test;
 use App\Models\TaskResult;
-use Illuminate\Http\Request;
+
 
 class TaskController extends MainApiController
 {

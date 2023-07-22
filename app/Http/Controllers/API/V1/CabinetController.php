@@ -6,8 +6,6 @@ use App\Http\Controllers\API\MainApiController;
 use App\Http\Requests\API\Cabinet\StoreRequest;
 use App\Http\Resources\Cabinet\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class CabinetController extends MainApiController

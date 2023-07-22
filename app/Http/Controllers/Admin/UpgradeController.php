@@ -11,7 +11,7 @@ use App\Service\UpgradeService;
 class UpgradeController extends Controller
 {
 
-    protected $upgradeService;
+    protected UpgradeService $upgradeService;
     public function __construct(UpgradeService $upgradeService)
     {
         $this->upgradeService = $upgradeService;

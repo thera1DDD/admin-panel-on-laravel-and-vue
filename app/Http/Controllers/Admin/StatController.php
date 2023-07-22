@@ -13,7 +13,7 @@ use App\Models\Test;
 use App\Models\User;
 use App\Models\Video;
 use App\Service\StatService;
-use Illuminate\Http\Request;
+
 
 class StatController extends Controller
 {

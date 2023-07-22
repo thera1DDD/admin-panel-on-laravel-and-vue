@@ -6,20 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Word\ImportRequest;
 use App\Http\Requests\Word\StoreRequest;
 use App\Http\Requests\Word\UpdateRequest;
-use App\Imports\TranslationsImport;
-use App\Imports\WordImport;
 use App\Models\Language;
 use App\Models\Translate;
 use App\Models\Word;
 use App\Service\WordService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 
 class WordController extends Controller
 {
-    protected $wordService;
+    protected WordService $wordService;
     public function __construct(WordService $wordService)
     {
         $this->wordService = $wordService;

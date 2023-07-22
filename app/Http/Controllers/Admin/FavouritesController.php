@@ -9,7 +9,6 @@ use App\Models\Course;
 use App\Models\Favourite;
 use App\Models\User;
 use App\Service\FavouriteService;
-use Illuminate\Http\Request;
 
 class FavouritesController extends Controller
 {

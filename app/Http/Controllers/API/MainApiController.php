@@ -10,8 +10,6 @@ use App\Http\Resources\Dictionary\WordResource;
 use App\Models\Translate;
 use App\Models\Word;
 use App\Traits\HttpResponse;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 
 class MainApiController extends Controller

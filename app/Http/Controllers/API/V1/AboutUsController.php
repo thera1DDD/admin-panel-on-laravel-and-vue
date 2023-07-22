@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\API\MainApiController;
-use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
-use Illuminate\Http\Request;
 
 class AboutUsController extends MainApiController
 {
@@ -16,6 +14,5 @@ class AboutUsController extends MainApiController
             return $this->error('there is no quotes',404);
         }
         return response()->json(['data'=>$quotes]);
-
     }
 }

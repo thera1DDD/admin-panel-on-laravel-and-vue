@@ -6,12 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Photo\StoreRequest;
 use App\Http\Requests\Photo\UpdateRequest;
 use App\Models\Module;
-use App\Models\Question;
 use App\Models\Photo;
 use App\Service\PhotoService;
 use App\Traits\ImageUploadTrait;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class PhotoController extends Controller
 {
