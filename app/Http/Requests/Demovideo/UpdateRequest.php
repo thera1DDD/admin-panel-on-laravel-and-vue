@@ -29,6 +29,7 @@ class UpdateRequest extends FormRequest
             'courses_id'=> 'required',
             'video_file' => 'nullable',
             'poster' => 'nullable',
+            'course_card_description' => 'nullable',
         ];
     }
 }

@@ -24,12 +24,21 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Описание</label>
-                <input type="text" name="description"  id="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" required placeholder="Название">
+                <label for="description">Описание</label>
+                <textarea id="description" name="description"  style="width: 500px" class="form-control" rows="7"></textarea>
                 @error('description')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
-                </span>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="course_card_description">Описание 2</label>
+                <textarea id="course_card_description" name="course_card_description"  style="width: 500px" class="form-control" rows="7"></textarea>
+                @error('course_card_description')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                 @enderror
             </div>
             <div class="form-group">

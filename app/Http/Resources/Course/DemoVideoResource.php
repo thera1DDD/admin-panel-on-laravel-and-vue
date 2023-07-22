@@ -4,7 +4,7 @@ namespace App\Http\Resources\Course;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VideoResource extends JsonResource
+class DemoVideoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,13 +19,11 @@ class VideoResource extends JsonResource
             'name'=>$this->name,
             'number'=>$this->number,
             'description'=>$this->description,
-
+            'course_card_description'=>$this->course_card_description,
             'poster'=>$this->poster,
             'code'=>$this->code,
-            'type'=>'video',
+            'type'=>'demo_video',
             'video_file'=>$this->video_file,
-            'passed' => isset($this->passed) ? $this->passed : false,
-
         ];
     }
 }
