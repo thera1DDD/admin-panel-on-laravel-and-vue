@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\StoreRequest;
 use App\Http\Requests\Course\UpdateRequest;
@@ -62,6 +63,7 @@ class CourseController extends Controller
         return view('course.edit',compact('course','languages'));
     }
     public function delete(Course $course){
+        event(new UserAction(auth()->user()->id, 'Удаление','Курсы',$course['name']));
         $course->delete();
         return redirect()->route('course.index')->with('success','Курс удален');
     }

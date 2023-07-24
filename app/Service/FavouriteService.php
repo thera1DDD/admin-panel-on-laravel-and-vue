@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Favourite;

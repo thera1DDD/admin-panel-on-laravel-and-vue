@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Module\StoreRequest;
 use App\Http\Requests\Module\UpdateRequest;
@@ -59,6 +60,7 @@ class ModuleController extends Controller
     }
 
     public function delete(Module $module){
+        event(new UserAction(auth()->user()->id, 'Удаление','Модули',$module['name']));
         $module->delete();
         return redirect()->route('module.index')->with('success','Модуль удалён');
     }

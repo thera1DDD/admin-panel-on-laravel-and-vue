@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
@@ -46,6 +47,7 @@ class UserController extends Controller
 
 
     public function delete(User $user){
+        event(new UserAction(auth()->user()->id, 'Обновление','Пользователи',$user['name']));
         $user->forceDelete();
         return redirect()->route('users.index')->with('success','User deleted');
     }
