@@ -235,6 +235,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::patch('{log}',[\App\Http\Controllers\Admin\LogController::class, 'update'])->name('log.update');
             Route::delete('{log}',[\App\Http\Controllers\Admin\LogController::class, 'delete'])->name('log.delete');
             Route::get('/{id}',[\App\Http\Controllers\Admin\LogController::class, 'show'])->name('log.show');
+            Route::delete('/',[\App\Http\Controllers\Admin\LogController::class, 'allDelete'])->name('log.allDelete');
         });
 
         Route::group(['prefix' => 'teacher'], function (){

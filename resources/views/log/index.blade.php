@@ -12,6 +12,11 @@
                     <input type="text" name="query" placeholder="Поиск по действию...">
                     <button type="submit">Найти/Очистить</button>
                 </form>
+                <form action="{{ route('log.allDelete') }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit">Удалить всё</button>
+                </form>
             </div>
         </div>
 

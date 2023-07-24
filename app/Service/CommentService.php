@@ -16,7 +16,6 @@ class CommentService extends Controller
     public function update($data, $comment)
     {
         if (isset($data['commentable_type'])) {
-
             $data['commentable_type'] = "App\Models\\" . $data['commentable_type'];
             $comment->commentable()->associate($data['commentable_type']::findOrFail($data['commentable_id']));
         }

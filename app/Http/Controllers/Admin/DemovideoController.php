@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Demovideo\StoreRequest;
 use App\Http\Requests\Demovideo\UpdateRequest;
@@ -50,6 +51,7 @@ class DemovideoController extends Controller
     }
 
     public function delete(Demovideo $demovideo){
+        event(new UserAction(auth()->user()->id, 'Обновление','Демовидео',$demovideo['name']));
         $demovideo->delete();
         return redirect()->route('demovideo.index')->with('success','Демовидео удаленно');
     }

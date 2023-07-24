@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Test\StoreRequest;
 use App\Http\Requests\Test\UpdateRequest;
@@ -49,6 +50,7 @@ class TestController extends Controller
         return view('test.edit',compact('test','recordsOfModel'));
     }
     public function delete(Test $test){
+        event(new UserAction(auth()->user()->id, 'Обновление','Пользователи',$test['name']));
         $test->delete();
         return redirect()->route('test.index')->with('success','Test deleted');
     }
