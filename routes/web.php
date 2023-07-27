@@ -23,6 +23,14 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/403', [\App\Http\Controllers\Admin\HomeController::class, 'errorPage'])->name('403Page');
     Route::group(['middleware' => 'admin'], function() {
 
+
+        Route::group(['prefix' => 'dict'], function (){
+            Route::get('/',[\App\Http\Controllers\Admin\DictController::class, 'index'])->name('dict.index');
+            Route::post('/import',[\App\Http\Controllers\Admin\DictController::class, 'import'])->name('dict.import');
+        });
+
+
+
         Route::get('/home', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
 
         Route::get('/profile', 'UserController@profile')->name('user.profile');
