@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class DictController extends Controller
 {
    public function index(){
-       $dicts = Dict::all();
+       $dicts = Dict::paginate(40);
        return view('dict.index',compact('dicts'));
    }
 
@@ -26,8 +26,7 @@ class DictController extends Controller
         $file = $request->file('file');
         $filePath = $file->path();
 
-        // Обрабатываем файл по указанному пути
-        // Например, можно использовать Maatwebsite\Excel для импорта данных из файла
+
         Excel::import(new DictTestImport(), $filePath);
 
         return redirect()->back()->with('success', 'Файл успешно импортирован.');

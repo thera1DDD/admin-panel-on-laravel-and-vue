@@ -48,6 +48,12 @@
             </tbody>
         </table>
     </div>
+    <div class="card-footer"  style="width:150px ">
+        <div class="pagination">
+            {{ $dicts->links() }}
+        </div>
+    </div>
     <!-- /.card-body -->
   </div>
 @endsection
+

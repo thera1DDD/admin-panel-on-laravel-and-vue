@@ -28,7 +28,7 @@ class WordController extends Controller
             $query = $request->input('query');
             $words->where('name', 'like', "%{$query}%");
         }
-        $words = $words->get();
+        $words = $words->paginate(40);
         return view('word.index', ['words' => $words]);
     }
 
