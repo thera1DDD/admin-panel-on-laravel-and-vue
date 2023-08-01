@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => 'dict'], function (){
             Route::get('/',[\App\Http\Controllers\Admin\DictController::class, 'index'])->name('dict.index');
             Route::post('/import',[\App\Http\Controllers\Admin\DictController::class, 'import'])->name('dict.import');
+            Route::get('/search',[\App\Http\Controllers\Admin\DictController::class, 'search'])->name('dict.search');
+            Route::delete('{dict}',[\App\Http\Controllers\Admin\DictController::class, 'delete'])->name('dict.delete');
         });
 
 

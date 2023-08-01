@@ -16,8 +16,13 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class DictController extends Controller
 {
-   public function index(){
-       $dicts = Dict::paginate(40);
+   public function index(Request $request){
+       $dicts = Dict::query();
+       if ($request->has('query')) {
+           $query = $request->input('query');
+           $dicts->where('text', 'like', "%{$query}%");
+       }
+       $dicts = $dicts->paginate(40);
        return view('dict.index',compact('dicts'));
    }
 
@@ -59,5 +64,10 @@ class DictController extends Controller
         } else {
             return back()->withError('Некорректный файл. Пожалуйста, загрузите файл с расширением .xlsx');
         }
+    }
+
+    public function delete(Dict $dict){
+        $dict->delete();
+        return redirect()->route('dict.index')->with('success','Dict удаленно');
     }
 }

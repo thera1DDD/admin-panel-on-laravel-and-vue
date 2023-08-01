@@ -30,6 +30,7 @@
                     <th>text</th>
                     <th>locale</th>
                     <th>ids</th>
+                    <th>Действие</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +42,13 @@
                         <td>{{ $dict->locale }}</td>
                         <td>{{ $dict->ids }}</td>
                         <td>{{ $dict->created_at }}</td>
+                        <td>
+                            <form action="{{route('dict.delete',$dict->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button style="width: 130px"  class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Удалить </button>
+                            </form>
+                        </td>
                     </tr>
                 @empty
                 @endforelse

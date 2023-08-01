@@ -53,6 +53,7 @@ class TransferDictData extends Command
             return Language::where('name', $languageNames[$name])->first();
         }
 
+
         return null;
     }
 }
