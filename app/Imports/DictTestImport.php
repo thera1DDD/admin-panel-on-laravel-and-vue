@@ -3,26 +3,21 @@
 namespace App\Imports;
 
 use App\Models\Dict;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class DictTestImport implements ToCollection
+class DictTestImport implements ToModel
 {
-    /**
-    * @param Collection $collection
-    */
-    public function collection(Collection $rows)
+    public function model(array $row)
     {
-        foreach ($rows as $row) {
-
-            Dict::firstOrCreate([
-                'text' => $row[1],
-                'locale' => $row[2],
-                'ids' => $row[3],
-
-            ]);
-        }
+        // Здесь задайте соответствия столбцов в Excel-файле и полям в модели Dict
+        return new Dict([
+            'text' => $row[1],
+            'locale' => $row[2],
+            'ids' => $row[3],
+        ]);
     }
 }

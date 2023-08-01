@@ -16,7 +16,6 @@ class TransferDictData extends Command
     {
         $dictItems = DB::table('dicts')->get();
 
-        // Миграция данных в таблицу words и translates
         foreach ($dictItems as $item) {
             if ($item->locale === 'ru') {
                 Word::firstOrCreate([
@@ -26,19 +25,35 @@ class TransferDictData extends Command
             } else {
                 $translationIds = explode(',', $item->ids);
                 foreach ($translationIds as $translationId) {
-                    $language = Language::where('name', $item->locale === 'lz' ? 'Лезгинский' : 'Аварский')->first();
+                    $language = $this->getLanguageByName($item->locale);
                     if ($language) {
                         Translate::create([
                             'id' => $item->id,
-                            'words_id' => $translationId,
+                            'words_id' => $translationId ?? null,
                             'translate' => $item->text,
                             'languages_id' => $language->id,
                         ]);
-
                     }
                 }
             }
         }
-        $this->info('Данные успешно перемещенны');
+        $this->info('Данные успешно перенесенны');
+    }
+
+    private function getLanguageByName($name)
+    {
+        $languageNames = [
+            'lz' => 'Лезгинский',
+            'av' => 'Аварский',
+            'lk' => 'Лакский',
+            'km' => 'Кумыкский',
+        ];
+
+        if (isset($languageNames[$name])) {
+            return Language::where('name', $languageNames[$name])->first();
+        }
+
+        return null;
     }
 }
+
