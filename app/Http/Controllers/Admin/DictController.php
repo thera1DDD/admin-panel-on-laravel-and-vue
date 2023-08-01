@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Imports\DictTestImport;
 use App\Models\Dict;
+use App\Models\Translate;
+use App\Models\Word;
 use Illuminate\Http\Request;
 use App\Jobs\ProcessUploadedFile;
 use Illuminate\Support\Facades\DB;

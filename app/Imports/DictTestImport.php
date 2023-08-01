@@ -13,7 +13,6 @@ class DictTestImport implements ToModel
 {
     public function model(array $row)
     {
-        // Здесь задайте соответствия столбцов в Excel-файле и полям в модели Dict
         return new Dict([
             'text' => $row[1],
             'locale' => $row[2],
