@@ -55,7 +55,7 @@ class DictController extends Controller
                 return back()->withError('Произошла ошибка при импорте данных: ' . $e->getMessage());
             }
 
-            return redirect()->route('home')->withSuccess('Данные успешно импортированы');
+            return redirect()->route('dict.index')->withSuccess('Данные успешно импортированы');
         } else {
             return back()->withError('Некорректный файл. Пожалуйста, загрузите файл с расширением .xlsx');
         }
