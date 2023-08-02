@@ -37,6 +37,7 @@ class TransferDictData extends Command
                 }
             }
         }
+        DB::table('dicts')->delete();
         $this->info('Данные успешно перенесенны');
     }
 
