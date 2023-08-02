@@ -20,7 +20,7 @@ class DictController extends Controller
        $dicts = Dict::query();
        if ($request->has('query')) {
            $query = $request->input('query');
-           $dicts->where('text', 'like', "%{$query}%");
+           $dicts->where('id', 'like', "%{$query}%");
        }
        $dicts = $dicts->paginate(40);
        return view('dict.index',compact('dicts'));
