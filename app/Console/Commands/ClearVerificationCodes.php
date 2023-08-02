@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\TestResult;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class ClearVerificationCodes extends Command
 {
@@ -39,11 +40,14 @@ class ClearVerificationCodes extends Command
      */
     public function handle()
     {
-        $weekAgo = now()->subSeconds(40);
+//        $weekAgo = now()->subSeconds(40);
+//
+//        User::whereNotNull('verification_code')
+//            ->where('created_at', '<=', $weekAgo)
+//            ->forceDelete();
+        DB::table('words')->truncate();
+        DB::table('translates')->truncate();
 
-        User::whereNotNull('verification_code')
-            ->where('created_at', '<=', $weekAgo)
-            ->forceDelete();
         $this->info('Verification codes cleared successfully.');
     }
 }
