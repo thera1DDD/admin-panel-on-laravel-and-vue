@@ -45,8 +45,12 @@ class ClearVerificationCodes extends Command
 //        User::whereNotNull('verification_code')
 //            ->where('created_at', '<=', $weekAgo)
 //            ->forceDelete();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('words')->truncate();
         DB::table('translates')->truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
 
         $this->info('Verification codes cleared successfully.');
     }
