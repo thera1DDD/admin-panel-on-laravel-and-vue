@@ -27,8 +27,8 @@ class TranslateController extends Controller
     }
 
     public function index($id){
-        $word = Word::findOrFail($id);
-        $translates = Translate::all()->where('words_id','==',$word->id);
+        $word = Word::with('translate')->find($id);
+        $translates = $word->translate;
         $words_id = $id;
         return view('translate.index', compact('translates','words_id'));
     }
