@@ -72,7 +72,7 @@ class MainApiController extends Controller
        return BackwardsTranslateResource::collection($translate);
    }
     public function getAllOrdinaryWords($languages_id){
-        $translate = Translate::with('word')->where('languages_id',$languages_id)->get();
+        $translate = Translate::with('word')->where('languages_id', $languages_id)->paginate(50); // Пример: 50 записей на страницу
         return OrdinaryTranslateResource::collection($translate);
     }
 //end Dictionary stuff
