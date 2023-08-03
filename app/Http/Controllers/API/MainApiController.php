@@ -29,10 +29,9 @@ class MainApiController extends Controller
 
     public function search($word,$languages_id){
         if ($word) {
-            $data = Word::where('name', 'like', "%{$word}%")->get();
-
+            $query = Word::query();
+            $data = $query->where('name', 'like', "%{$word}%")->get();
             $result = [];
-
             foreach ($data as $word) {
                 $translate = $word->translate()
                     ->where('languages_id', $languages_id)
@@ -45,7 +44,6 @@ class MainApiController extends Controller
                     'translate' => count($translate) > 0 ? implode(', ', $translate) : null,
                 ];
             }
-
             return response()->json(['data'=>$result]);
         }
     }
