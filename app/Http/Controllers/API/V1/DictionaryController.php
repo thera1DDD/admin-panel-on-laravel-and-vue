@@ -19,16 +19,6 @@ class DictionaryController extends MainApiController
         }
     }
 
-//    public function getTranslate(string $dictionaryType,int $id){
-//        return match ($dictionaryType) {
-//            'ru-lez' => $this->translate($id,'Лезгинский'),
-//                'ru-avar' => $this->translate(  $id,'Аварский'),
-//                    'lez-ru' => $this->translateBackward($id,'Лезгинский'),
-//                        'avar-ru' => $this->translateBackward($id,'Аварский') ,
-//                             default => $this->error('wrong dictionary type', 404),
-//        };
-//    }
-
     public function getSearch(string $dictionaryType,int $languages_id, string $word){
         switch ($dictionaryType){
             case(str_starts_with($dictionaryType,'ru'));
@@ -48,4 +38,21 @@ class DictionaryController extends MainApiController
             return $this->error('switches not found',404);
         }
     }
+
+
+
+
+
+
+
+//    public function getTranslate(string $dictionaryType,int $id){
+//        return match ($dictionaryType) {
+//            'ru-lez' => $this->translate($id,'Лезгинский'),
+//                'ru-avar' => $this->translate(  $id,'Аварский'),
+//                    'lez-ru' => $this->translateBackward($id,'Лезгинский'),
+//                        'avar-ru' => $this->translateBackward($id,'Аварский') ,
+//                             default => $this->error('wrong dictionary type', 404),
+//        };
+//    }
+
 }

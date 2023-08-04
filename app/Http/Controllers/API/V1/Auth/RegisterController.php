@@ -16,28 +16,6 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends MainApiController
 {
-//    protected function register(StoreRequest $request)
-//    {
-//        $data = $request->validated();
-//        // проверка на сущетсвование пользователя
-//        $existingUser = User::where('email', $data['email'])->first();
-//        if ($existingUser) {
-//            return $this->error('Пользователь c такой почтой уже существует',409);
-//        }
-//        else{
-//            if($request->password){
-//                $data['password']= bcrypt($data['password']);
-//            }
-//            $user = User::firstOrCreate($data);
-//
-//            $token = $user->createToken('API Token')->accessToken;
-//            return response()->json([
-//                'token' => $token,
-//                'user' => $user,
-//                'status' => false
-//            ]);
-//        }
-//    }
 
     public function passwordResetSend(Request $request){
         $user = User::where('email', $request->input('email'))->first();
@@ -125,8 +103,6 @@ class RegisterController extends MainApiController
     }
 
 
-
-
     public function verifyCode(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -184,7 +160,6 @@ class RegisterController extends MainApiController
         return rand(1000, 9999);
     }
 
-
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -218,8 +193,6 @@ class RegisterController extends MainApiController
         }
     }
 
-
-
     public function getSurvey(){
         $survey = SurveyQuestion::with('survey_answer')->get();
         if(!$survey){
@@ -227,5 +200,33 @@ class RegisterController extends MainApiController
         }
         return SurveyQuestionResource::collection($survey);
     }
+
+
+
+
+
+
+    //    protected function register(StoreRequest $request)
+//    {
+//        $data = $request->validated();
+//        // проверка на сущетсвование пользователя
+//        $existingUser = User::where('email', $data['email'])->first();
+//        if ($existingUser) {
+//            return $this->error('Пользователь c такой почтой уже существует',409);
+//        }
+//        else{
+//            if($request->password){
+//                $data['password']= bcrypt($data['password']);
+//            }
+//            $user = User::firstOrCreate($data);
+//
+//            $token = $user->createToken('API Token')->accessToken;
+//            return response()->json([
+//                'token' => $token,
+//                'user' => $user,
+//                'status' => false
+//            ]);
+//        }
+//    }
 
 }
