@@ -64,18 +64,11 @@ class MainApiController extends Controller
             return response()->json(['data' => $result]);
         }
     }
-    public function searchBackward($word, $languages_id)
-    {
-        $word = trim(htmlspecialchars($word));
-        $cacheKey = "search_backward_{$word}_{$languages_id}";
+    public function searchBackward($word,$languages_id){
+        $translate = Translate::query();
         if ($word) {
-            $data = Cache::remember($cacheKey, now()->addMinutes(5), function () use ($word, $languages_id) {
-                return Translate::with('word')
-                    ->where('translate', 'like', "%{$word}%")
-                    ->where('languages_id', $languages_id)
-                    ->get(['id', 'translate', 'words_id']);
-            });
-            return BackwardsTranslateResource::collection($data);
+            $data =  $translate->with('word')->where('translate', 'like', "%{$word}%")->where('languages_id',$languages_id)->get();
+            return  BackwardsTranslateResource::collection($data);
         }
     }
 
@@ -99,3 +92,18 @@ class MainApiController extends Controller
     }
 //end Dictionary stuff
 }
+
+//public function searchBackward($word, $languages_id)
+//{
+//    $word = trim(htmlspecialchars($word));
+//    $cacheKey = "search_backward_{$word}_{$languages_id}";
+//    if ($word) {
+//        $data = Cache::remember($cacheKey, now()->addMinutes(5), function () use ($word, $languages_id) {
+//            return Translate::with('word')
+//                ->where('translate', 'like', "%{$word}%")
+//                ->where('languages_id', $languages_id)
+//                ->get(['id', 'translate', 'words_id']);
+//        });
+//        return BackwardsTranslateResource::collection($data);
+//    }
+//}
