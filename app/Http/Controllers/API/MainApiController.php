@@ -29,21 +29,22 @@ class MainApiController extends Controller
 
     public function search($word,$languages_id){
         if ($word) {
-            $result = Word::where('name', 'like', "%{$word}%")
-                ->with(['translate' => function ($query) use ($languages_id) {
-                    $query->where('languages_id', $languages_id)
-                        ->select('translate');
-                }])
-                ->select('id', 'name')
-                ->get()
-                ->map(function ($word) use ($languages_id) {
-                    return [
-                        'id' => $word->id,
-                        'word' => $word->name,
-                        'translate' => $word->translate->isNotEmpty() ? $word->translate->pluck('translate')->implode(', ') : null,
-                    ];
-                });
-            return response()->json(['data' => $result]);
+            $query = Word::query();
+            $data = $query->where('name', 'like', "%{$word}%")->get();
+            $result = [];
+            foreach ($data as $word) {
+                $translate = $word->translate()
+                    ->where('languages_id', $languages_id)
+                    ->pluck('translate')
+                    ->toArray();
+
+                $result[] = [
+                    'id' => $word->id,
+                    'word' => $word->name,
+                    'translate' => count($translate) > 0 ? implode(', ', $translate) : null,
+                ];
+            }
+            return response()->json(['data'=>$result]);
         }
     }
     public function searchBackward($word,$languages_id){
