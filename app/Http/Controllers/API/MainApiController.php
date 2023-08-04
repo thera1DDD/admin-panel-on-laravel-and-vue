@@ -10,6 +10,8 @@ use App\Http\Resources\Dictionary\WordResource;
 use App\Models\Translate;
 use App\Models\Word;
 use App\Traits\HttpResponse;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 
 class MainApiController extends Controller
@@ -27,22 +29,39 @@ class MainApiController extends Controller
        }
    }
 
-    public function search($word,$languages_id){
+    public function search($word,$languages_id)
+    {
         if ($word) {
-            $data = Word::where('name', 'like', "%{$word}%")->get();
-            $result = [];
-            foreach ($data as $word) {
-                $translate = $word->translate()
+            $cacheKey = 'word_ids_' . $word;
+
+            $wordIds = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($word) {
+                return Word::where('name', 'like', "%{$word}%")->pluck('id')->toArray();
+            });
+
+            $cacheKey = 'word_translation_' . implode('_', $wordIds) . '_' . $languages_id;
+
+            $result = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($wordIds, $languages_id) {
+                $translations = Translate::whereIn('words_id', $wordIds)
                     ->where('languages_id', $languages_id)
-                    ->pluck('translate')
-                    ->toArray();
-                $result[] = [
-                    'id' => $word->id,
-                    'word' => $word->name,
-                    'translate' => count($translate) > 0 ? implode(', ', $translate) : null,
-                ];
-            }
-            return response()->json(['data'=>$result]);
+                    ->select('words_id', 'translate')
+                    ->get()
+                    ->groupBy('words_id');
+
+                return collect($wordIds)->map(function ($wordId) use ($translations) {
+                    $translates = $translations->get($wordId);
+                    $translate = $translates ? $translates->pluck('translate')->implode(', ') : null;
+
+                    $word = Word::find($wordId);
+
+                    return [
+                        'id' => $word->id,
+                        'word' => $word->name,
+                        'translate' => $translate,
+                    ];
+                });
+            });
+
+            return response()->json(['data' => $result]);
         }
     }
     public function searchBackward($word,$languages_id){
