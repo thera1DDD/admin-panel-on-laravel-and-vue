@@ -50,7 +50,7 @@ class TranslateController extends Controller
                 return $query->where('translate', 'like', '%' . $search . '%');
             })
             ->with('word')
-            ->get();
+            ->paginate(30);
 
         $languages = Language::pluck('name', 'id');
 
