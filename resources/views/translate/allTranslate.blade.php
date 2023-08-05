@@ -73,6 +73,11 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer"  style="width:150px ">
+            <div class="pagination">
+                {{ $translate->links() }}  <!-- Это отобразит ссылки пагинации -->
+            </div>
+        </div>
         <!-- /.card-body -->
     </div>
 @endsection
