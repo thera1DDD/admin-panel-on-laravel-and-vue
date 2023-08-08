@@ -72,15 +72,6 @@ class MainApiController extends Controller
         }
     }
 
-   public function translateBackward(int $id,string $languages_id){
-       $translate = Translate::where('languages_id',$languages_id)->where('id',$id)->first();
-       if($translate){
-           return new WordResource($translate->word);
-       }
-       else{
-           return $this->error('there is no translate',404);
-       }
-   }
 
    public function getAllBackwardWords($languages_id){
        $translate = Translate::with('word')->where('languages_id',$languages_id)->paginate(40);
@@ -92,6 +83,20 @@ class MainApiController extends Controller
     }
 //end Dictionary stuff
 }
+
+
+
+
+
+//public function translateBackward(int $id,string $languages_id){
+//    $translate = Translate::where('languages_id',$languages_id)->where('id',$id)->first();
+//    if($translate){
+//        return new WordResource($translate->word);
+//    }
+//    else{
+//        return $this->error('there is no translate',404);
+//    }
+//}
 
 //public function searchBackward($word, $languages_id)
 //{
@@ -107,3 +112,5 @@ class MainApiController extends Controller
 //        return BackwardsTranslateResource::collection($data);
 //    }
 //}
+
+
