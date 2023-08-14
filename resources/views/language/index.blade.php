@@ -28,7 +28,7 @@ Languages
                     <tr>
                         <td>{{ $language->id }}</td>
                         <td>{{ $language->name }}</td>
-                        <td>{{ $language->created_at }}</td>
+                        <td>{{  \Carbon\Carbon::parse($language->created_at)->diffForHumans() ?? null }}</td>
                         <td>
                             <a style="width: 110px" href="{{ route('language.edit', $language->id) }}" class="btn btn-sm btn-warning">Редактировать</a>
                             <br>

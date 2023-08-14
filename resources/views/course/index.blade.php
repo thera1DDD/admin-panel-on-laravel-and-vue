@@ -22,7 +22,6 @@
                     <th>Название</th>
                     <th>Описание</th>
                     <th>Язык</th>
-                    <th>Slug</th>
                     <th>Дата загрузки</th>
                     <th>Главное фото</th>
                     <th>Действие</th>
@@ -36,8 +35,7 @@
                         <td>{{ $course->name }}</td>
                         <td>{{ $course->description }}</td>
                         <td>{{ $course->language->name}}</td>
-                        <td>{{ $course->slug }}</td>
-                        <td>{{ $course->created_at }}</td>
+                        <td>{{  \Carbon\Carbon::parse($course->created_at)->diffForHumans() ?? null }}</td>
                         <td><img src="{{getImage($course->main_image)}}" style="width: 200px"></td>
                         <td>
                             <a style="width: 110px" href="{{ route('course.edit', $course->id) }}" class="btn btn-sm btn-warning">Редактировать</a>

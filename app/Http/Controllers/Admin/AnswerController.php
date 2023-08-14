@@ -11,8 +11,6 @@ use App\Service\AnswerService;
 
 class AnswerController extends Controller
 {
-
-
     protected $answerService;
 
     public function __construct(AnswerService $answerService)

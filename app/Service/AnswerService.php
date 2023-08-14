@@ -8,6 +8,7 @@ use App\Models\Answer;
 
 class AnswerService extends Controller
 {
+
     public function store($data){
         event(new UserAction(auth()->user()->id, 'Добавление','Ответы теста',$data['name']));
         Answer::firstOrCreate($data);

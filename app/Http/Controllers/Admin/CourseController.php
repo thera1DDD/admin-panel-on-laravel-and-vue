@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\Language;
 use App\Service\CourseService;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
@@ -22,9 +23,10 @@ class CourseController extends Controller
         $this->courseService = $courseService;
     }
 
-    public function  index(){
-        $courses = Course::all();
-        return view('course.index',compact('courses'));
+    public function  index()
+    {
+        Carbon::setLocale('ru');
+        return view('course.index',['courses' => Course::all()]);
     }
 
     public function store(StoreRequest $request){
