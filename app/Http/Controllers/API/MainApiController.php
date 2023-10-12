@@ -35,7 +35,7 @@ class MainApiController extends Controller
             $cacheKey = 'word_ids_' . $word;
 
             $wordIds = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($word) {
-                return Word::where('name', 'like', "%{$word}%")->pluck('id')->toArray();
+                return Word::where('name', 'like', "$word%")->pluck('id')->toArray();
             });
 
             $cacheKey = 'word_translation_' . implode('_', $wordIds) . '_' . $languages_id;
@@ -79,6 +79,7 @@ class MainApiController extends Controller
             return response()->json(['data' => $result]);
         }
     }
+
 
 
     public function searchBackward($word, $languages_id)
