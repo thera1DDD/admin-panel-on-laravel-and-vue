@@ -96,10 +96,11 @@ class MainApiController extends Controller
                 ->selectRaw(
                     "*,
                 CASE
-                    WHEN `translate` = '{$word}' THEN 1
-                    WHEN `translate` LIKE '{$word}%' THEN 2
+                    WHEN `translate` = ? THEN 1
+                    WHEN `translate` LIKE ? THEN 2
                     ELSE 3
-                END AS rank"
+                END AS rank",
+                    [$word, $word.'%']
                 )
                 ->where(function ($query) use ($languages_id, $word) {
                     $query->where('translate', 'like', "%{$word}%")
@@ -117,6 +118,7 @@ class MainApiController extends Controller
             return response()->json(['message' => 'Введите более 1 символа для поиска.']);
         }
     }
+
 
 
 
