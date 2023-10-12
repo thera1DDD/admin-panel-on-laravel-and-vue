@@ -89,28 +89,33 @@ class MainApiController extends Controller
 
     public function searchBackward($word, $languages_id)
     {
-        $cacheKey = 'backward_search_' . $word . '_' . $languages_id;
-
-        $result = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($word, $languages_id) {
+        if (mb_strlen($word) >= 1) {
             $translate = Translate::query();
-            if ($word) {
-                $data = $translate->with('word')
-                    ->where(function ($query) use ($languages_id, $word) {
-                        $query->where('translate', 'like', "%{$word}%")
-                            ->where('languages_id', $languages_id);
-                    })
-                    ->orWhereHas('word', function ($query) use ($word) {
-                        $query->where('name', 'like', "%{$word}%");
-                    })
-                    ->get();
 
-                return BackwardsTranslateResource::collection($data);
-            }
+            $data = $translate->with('word')
+                ->selectRaw(
+                    "*,
+                CASE
+                    WHEN `translate` = '{$word}' THEN 1
+                    WHEN `translate` LIKE '{$word}%' THEN 2
+                    ELSE 3
+                END AS rank"
+                )
+                ->where(function ($query) use ($languages_id, $word) {
+                    $query->where('translate', 'like', "%{$word}%")
+                        ->where('languages_id', $languages_id);
+                })
+                ->orWhereHas('word', function ($query) use ($word) {
+                    $query->where('name', 'like', "%{$word}%");
+                })
+                ->orderBy('rank')
+                ->orderBy('translate')
+                ->paginate(10);
 
-            return null; // Возвращайте null или пустой результат, если $word пуст
-        });
-
-        return response()->json(['data' => $result]);
+            return BackwardsTranslateResource::collection($data);
+        } else {
+            return response()->json(['message' => 'Введите более 1 символа для поиска.']);
+        }
     }
 
 
