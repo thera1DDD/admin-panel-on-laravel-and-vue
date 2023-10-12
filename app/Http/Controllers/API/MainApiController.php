@@ -89,21 +89,30 @@ class MainApiController extends Controller
 
     public function searchBackward($word, $languages_id)
     {
-        $translate = Translate::query();
-        if ($word) {
-            $data = $translate->with('word')
-                ->where(function ($query) use ($languages_id, $word) {
-                    $query->where('translate', 'like', "%{$word}%")
-                        ->where('languages_id', $languages_id);
-                })
-                ->orWhereHas('word', function ($query) use ($word) {
-                    $query->where('name', 'like', "%{$word}%");
-                })
-                ->get();
+        $cacheKey = 'backward_search_' . $word . '_' . $languages_id;
 
-            return BackwardsTranslateResource::collection($data);
-        }
+        $result = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($word, $languages_id) {
+            $translate = Translate::query();
+            if ($word) {
+                $data = $translate->with('word')
+                    ->where(function ($query) use ($languages_id, $word) {
+                        $query->where('translate', 'like', "%{$word}%")
+                            ->where('languages_id', $languages_id);
+                    })
+                    ->orWhereHas('word', function ($query) use ($word) {
+                        $query->where('name', 'like', "%{$word}%");
+                    })
+                    ->get();
+
+                return BackwardsTranslateResource::collection($data);
+            }
+
+            return null; // Возвращайте null или пустой результат, если $word пуст
+        });
+
+        return response()->json(['data' => $result]);
     }
+
 
 
    public function getAllBackwardWords($languages_id){
