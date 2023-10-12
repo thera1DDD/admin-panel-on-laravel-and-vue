@@ -51,15 +51,15 @@ class MainApiController extends Controller
                     ->whereIn('id', $wordIds)
                     ->first();
 
-                $searchedWordData = [
+                $searchedWordData = $searchedWord ? [
                     'id' => $searchedWord->id,
                     'word' => $searchedWord->name,
                     'translate' => $translations->get($searchedWord->id)->pluck('translate')->implode(', '),
-                ];
+                ] : null;
 
                 $otherWords = collect($wordIds)
                     ->reject(function ($wordId) use ($searchedWord) {
-                        return $wordId === $searchedWord->id;
+                        return $wordId === ($searchedWord ? $searchedWord->id : null);
                     })
                     ->map(function ($wordId) use ($translations) {
                         $word = Word::find($wordId);
@@ -73,12 +73,17 @@ class MainApiController extends Controller
                         ];
                     });
 
-                return collect([$searchedWordData])->concat($otherWords);
+                if ($searchedWordData) {
+                    return collect([$searchedWordData])->concat($otherWords);
+                }
+
+                return collect($otherWords);
             });
 
             return response()->json(['data' => $result]);
         }
     }
+
 
 
 
