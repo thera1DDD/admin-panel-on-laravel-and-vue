@@ -92,8 +92,10 @@ class MainApiController extends Controller
         $translate = Translate::query();
         if ($word) {
             $data = $translate->with('word')
-                ->where('translate', 'like', "%{$word}%")
-                ->where('languages_id', $languages_id)
+                ->where(function ($query) use ($languages_id, $word) {
+                    $query->where('translate', 'like', "%{$word}%")
+                        ->where('languages_id', $languages_id);
+                })
                 ->orWhereHas('word', function ($query) use ($word) {
                     $query->where('name', 'like', "%{$word}%");
                 })
