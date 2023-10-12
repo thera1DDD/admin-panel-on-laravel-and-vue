@@ -120,7 +120,8 @@ class MainApiController extends Controller
 
 
 
-   public function getAllBackwardWords($languages_id){
+
+    public function getAllBackwardWords($languages_id){
        $translate = Translate::with('word')->where('languages_id',$languages_id)->paginate(40);
        return BackwardsTranslateResource::collection($translate);
    }
