@@ -89,35 +89,28 @@ class MainApiController extends Controller
 
     public function searchBackward($word, $languages_id)
     {
-        if (mb_strlen($word) >= 1) {
+        if ($word) {
             $translate = Translate::query();
 
             $data = $translate->with('word')
-                ->selectRaw(
-                    "*,
-                CASE
-                    WHEN `translate` = ? THEN 1
-                    WHEN `translate` LIKE ? THEN 2
-                    ELSE 3
-                END AS rank",
-                    [$word, $word.'%']
-                )
-                ->where(function ($query) use ($languages_id, $word) {
-                    $query->where('translate', 'like', "%{$word}%")
-                        ->where('languages_id', $languages_id);
+                ->select('translate', 'languages_id', 'words_id')
+                ->where('languages_id', $languages_id)
+                ->where(function ($query) use ($word) {
+                    $query->where('translate', 'like', "{$word}%")
+                        ->orWhereHas('word', function ($query) use ($word) {
+                            $query->where('name', 'like', "{$word}%");
+                        });
                 })
-                ->orWhereHas('word', function ($query) use ($word) {
-                    $query->where('name', 'like', "%{$word}%");
-                })
-                ->orderBy('rank')
-                ->orderBy('translate')
+                ->orderByRaw("CASE
+                WHEN `translate` = ? THEN 1
+                ELSE 2
+            END, `translate`", [$word])
                 ->paginate(10);
 
             return BackwardsTranslateResource::collection($data);
-        } else {
-            return response()->json(['message' => 'Введите более 1 символа для поиска.']);
         }
     }
+
 
 
 
