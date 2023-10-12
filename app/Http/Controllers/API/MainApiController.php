@@ -29,7 +29,7 @@ class MainApiController extends Controller
        }
    }
 
-    public function search($word,$languages_id)
+    public function search($word, $languages_id)
     {
         if ($word) {
             $cacheKey = 'word_ids_' . $word;
@@ -40,30 +40,47 @@ class MainApiController extends Controller
 
             $cacheKey = 'word_translation_' . implode('_', $wordIds) . '_' . $languages_id;
 
-            $result = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($wordIds, $languages_id) {
+            $result = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($word, $wordIds, $languages_id) {
                 $translations = Translate::whereIn('words_id', $wordIds)
                     ->where('languages_id', $languages_id)
                     ->select('words_id', 'translate')
                     ->get()
                     ->groupBy('words_id');
 
-                return collect($wordIds)->map(function ($wordId) use ($translations) {
-                    $translates = $translations->get($wordId);
-                    $translate = $translates ? $translates->pluck('translate')->implode(', ') : null;
+                $searchedWord = Word::where('name', $word)
+                    ->whereIn('id', $wordIds)
+                    ->first();
 
-                    $word = Word::find($wordId);
+                $searchedWordData = [
+                    'id' => $searchedWord->id,
+                    'word' => $searchedWord->name,
+                    'translate' => $translations->get($searchedWord->id)->pluck('translate')->implode(', '),
+                ];
 
-                    return [
-                        'id' => $word->id,
-                        'word' => $word->name,
-                        'translate' => $translate,
-                    ];
-                });
+                $otherWords = collect($wordIds)
+                    ->reject(function ($wordId) use ($searchedWord) {
+                        return $wordId === $searchedWord->id;
+                    })
+                    ->map(function ($wordId) use ($translations) {
+                        $word = Word::find($wordId);
+                        $translates = $translations->get($wordId);
+                        $translate = $translates ? $translates->pluck('translate')->implode(', ') : null;
+
+                        return [
+                            'id' => $word->id,
+                            'word' => $word->name,
+                            'translate' => $translate,
+                        ];
+                    });
+
+                return collect([$searchedWordData])->concat($otherWords);
             });
 
             return response()->json(['data' => $result]);
         }
     }
+
+
     public function searchBackward($word,$languages_id){
         $translate = Translate::query();
         if ($word) {

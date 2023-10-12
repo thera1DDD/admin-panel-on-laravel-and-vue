@@ -24,12 +24,14 @@ class AboutUsController extends Controller
     }
 
 
-    public function create(){
+    public function create()
+    {
         return view('aboutUs.create');
     }
 
 
-    public function store(StoreRequest $request){
+    public function store(StoreRequest $request)
+    {
         $data = $request->validated();
         if ($request->hasFile('big_image')) {
             $path = $request->file('big_image')->store('images/aboutUs', 'public');

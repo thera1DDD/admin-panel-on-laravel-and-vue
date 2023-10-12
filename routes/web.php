@@ -52,7 +52,6 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/{id}',[\App\Http\Controllers\Admin\WordController::class, 'show'])->name('word.show');
             Route::get('/search',[\App\Http\Controllers\Admin\WordController::class, 'search'])->name('word.search');
             Route::post('/import',[\App\Http\Controllers\Admin\WordController::class, 'import'])->name('word.import');
-
         });
         Route::group(['prefix' => 'translate'], function (){
             Route::get('/allTranslates', [\App\Http\Controllers\Admin\TranslateController::class,'allTranslate'])->name('translate.allTranslates');
