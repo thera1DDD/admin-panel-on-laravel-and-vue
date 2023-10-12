@@ -81,11 +81,19 @@ class MainApiController extends Controller
     }
 
 
-    public function searchBackward($word,$languages_id){
+    public function searchBackward($word, $languages_id)
+    {
         $translate = Translate::query();
         if ($word) {
-            $data =  $translate->with('word')->where('translate', 'like', "%{$word}%")->where('languages_id',$languages_id)->get();
-            return  BackwardsTranslateResource::collection($data);
+            $data = $translate->with('word')
+                ->where('translate', 'like', "%{$word}%")
+                ->where('languages_id', $languages_id)
+                ->orWhereHas('word', function ($query) use ($word) {
+                    $query->where('name', 'like', "%{$word}%");
+                })
+                ->get();
+
+            return BackwardsTranslateResource::collection($data);
         }
     }
 
