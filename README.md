@@ -1,4 +1,3 @@
-
 composer update
 
 cp .env.example .env
